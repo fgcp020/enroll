@@ -1,0 +1,11 @@
+<div id="bell">
+    <div class="top_header">
+        <a href="#/{{_HOME && _HOME || 'login'}}" class="logo"><img
+                src="{{ctxPath}}/res/img/logo.png"></a>
+
+        <div class="back"><a class="layui-btn" onclick="javascript:history.go(-1)">杩斿洖涓婁竴椤�</a></div>
+    </div>
+    <div class="page_main_html">
+        <div class="child_view" ui-view=""></div>
+    </div>
+</div>

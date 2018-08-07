@@ -1,0 +1,436 @@
+package com.nercel.enroll.core.service.impl;
+
+import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import com.nercel.enroll.common.utils.Base64Utils;
+import com.nercel.enroll.common.utils.MD5Util;
+import com.nercel.enroll.core.service.SchoolDegreeService;
+import com.nercel.enroll.core.service.UserSerice;
+import com.nercel.enroll.core.service.utils.DateUtil;
+import com.nercel.enroll.dao.impl.ApplyInfoDao;
+import com.nercel.enroll.dao.impl.PlanTimeDao;
+import com.nercel.enroll.dao.impl.UserDao;
+import com.nercel.enroll.dao.impl.UserExtendedInfoDao;
+import com.nercel.enroll.dao.impl.UserGuardianInfoDao;
+import com.nercel.enroll.dao.impl.UserHouseInfoDao;
+import com.nercel.enroll.dao.impl.UserPhotoInfoDao;
+import com.nercel.enroll.domain.common.CustomeException;
+import com.nercel.enroll.domain.model.beans.PlanTime;
+import com.nercel.enroll.domain.model.beans.User;
+import com.nercel.enroll.domain.model.beans.UserExtendedInfo;
+import com.nercel.enroll.domain.model.beans.UserGuardianInfo;
+import com.nercel.enroll.domain.model.beans.UserHouseInfo;
+import com.nercel.enroll.domain.model.beans.UserPhotoInfo;
+import com.nercel.enroll.domain.vo.UserVo;
+
+/**
+ * UserSerice接口实现类
+ * 
+ * @author yishui
+ * @date 2018年6月13日
+ * @version 0.0.1
+ */
+@Service
+public class UserSericeImpl extends BaseService implements UserSerice {
+	private final static Logger LOG = LoggerFactory.getLogger(UserSerice.class);
+
+	/**
+	 * 学生的角色(1幼升小、2小升初、3学校、4教育局),故角色ID>2的才是管理员
+	 */
+	private final static Integer ROLE_LIMIT = 3;
+	/**
+	 * 文件的上传路径
+	 */
+	private final static String UPLOAD_PATH = "upload\\";
+
+	/**
+	 * 文件的预览路径
+	 */
+	private final static String UPLOAD_PRE_PATH = "upload/";
+	/**
+	 * 默认的参数名字
+	 */
+	private final static String DEFAULT_TOKEN_NAME = "recordId";
+	/**
+	 * base64的标志
+	 */
+	private final static String BASE64_FLAG = ";base64,";
+	/**
+	 * 用户基础信息操作接口
+	 */
+	@Autowired
+	private UserDao userDao;
+	/**
+	 * 用户的扩展信息操作接口
+	 */
+	@Autowired
+	private UserExtendedInfoDao userExtendedInfoDao;
+	/**
+	 * 用户的监护人信息操作接口
+	 */
+	@Autowired
+	private UserGuardianInfoDao userGuardianInfoDao;
+	/**
+	 * 用户的房产信息操作接口
+	 */
+	@Autowired
+	private UserHouseInfoDao userHouseInfoDao;
+	/**
+	 * 用户的照片信息操作接口
+	 */
+	@Autowired
+	private UserPhotoInfoDao userPhotoInfoDao;
+	/**
+	 * 时间计划表
+	 */
+	@Autowired
+	private PlanTimeDao planTimeDao;
+	/**
+	 * 学位分配逻辑
+	 */
+	@Autowired
+	private SchoolDegreeService schoolDegreeService;
+	@Autowired
+	private ApplyInfoDao applyInfoDao;
+	/**
+	 * 注册的年龄限制时间
+	 */
+	@Value("${limitTime}")
+	private String limitTime;
+
+	@Override
+	public Boolean save(UserVo userVo) throws CustomeException, ParseException {
+		// 保存之前对参数进行校验
+		this.checkBeforeSave(userVo);
+		User user = userVo.getUser();
+		// 对密码进行Md5加密
+		user.setPwd(MD5Util.getMD5(user.getPwd()));
+		// 插入用户基本信息
+		userDao.save(user);
+		// 根据身份证号查询出用户信息(这里主要是为了获取到记录的id)
+		List<User> users = userDao.queryUserByIdCard(userVo.getUser().getIdCard());
+		if (users != null && users.size() > 0) {
+			// 插入用户扩展信息
+			UserExtendedInfo userExtendedInfo = userVo.getUserExtendedInfo();
+			userExtendedInfo.setUserId(users.get(0).getId());
+			userExtendedInfoDao.save(userExtendedInfo);
+			// 插入用户房产信息
+			UserHouseInfo userHouseInfo = userVo.getUserHouseInfo();
+			userHouseInfo.setUserId(users.get(0).getId());
+			userHouseInfoDao.save(userHouseInfo);
+			// 插入用户监护人信息
+			if (userVo.getUserGuardianInfos() != null && userVo.getUserGuardianInfos().size() > 0) {
+				for (UserGuardianInfo userGuardianInfo : userVo.getUserGuardianInfos()) {
+					userGuardianInfo.setUserId(users.get(0).getId());
+					userGuardianInfoDao.save(userGuardianInfo);
+				}
+			}
+			// 插入用户的照片信息
+			if (userVo.getUserPhotoInfos() != null && userVo.getUserPhotoInfos().size() > 0) {
+				for (UserPhotoInfo userPhotoInfo : userVo.getUserPhotoInfos()) {
+					userPhotoInfo.setUserId(users.get(0).getId());
+					userPhotoInfoDao.save(userPhotoInfo);
+				}
+			}
+			// 完成学位分配服务
+			schoolDegreeService.saveSchoolDegree(users.get(0), userVo);
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * 保存之前对参数进行校验
+	 * 
+	 * @param userVo
+	 * @throws CustomeException
+	 * @throws ParseException
+	 */
+	private void checkBeforeSave(UserVo userVo) throws CustomeException, ParseException {
+		checkTimeBeforeSave();
+
+		if (userVo == null || userVo.getUser() == null) {
+			throw new CustomeException("保存参数不能为空");
+		}
+
+		List<User> users = userDao.queryUserByIdCard(userVo.getUser().getIdCard());
+		if (users != null && users.size() > 0) {
+			throw new CustomeException("该用户已经注册过，不能重复注册!");
+		}
+		if (!DateUtil.compare(userVo.getUser().getIdCard(), limitTime)) {
+			throw new CustomeException(String.format("出生日期必须在%s之前的才能注册", limitTime));
+		}
+		if (StringUtils.isBlank(userVo.getUser().getPwd())) {
+			throw new CustomeException("密码不能为空");
+		}
+
+	}
+
+	/**
+	 * 检查操作时间是否制定范围内
+	 * 
+	 * @throws CustomeException
+	 */
+	private void checkTimeBeforeSave() throws CustomeException {
+		LOG.info(new SimpleDateFormat("yyyy-MM-dd HH:MM:ss")
+				.format(planTimeDao.queryAllPlanTime().get(0).getRegisterStartTime())
+				+ "-------------------- 开始时间为 " + planTimeDao.queryAllPlanTime().get(0).getRegisterEndTime());
+		LOG.info(new SimpleDateFormat("yyyy-MM-dd HH:MM:ss")
+				.format(planTimeDao.queryAllPlanTime().get(0).getRegisterEndTime())
+				+ "-------------------- 结束时间为 " + planTimeDao.queryAllPlanTime().get(0).getRegisterEndTime());
+		LOG.info(new SimpleDateFormat("yyyy-MM-dd HH:MM:ss").format(new Date(System.currentTimeMillis()))
+				+ "-------------------- 当前时间为 " + System.currentTimeMillis());
+
+		PlanTime planTime = planTimeDao.queryAllPlanTime().get(0);
+
+		if (planTime.getRegisterStartTime().getTime() - System.currentTimeMillis() > 0
+				|| planTimeDao.queryAllPlanTime().get(0).getRegisterEndTime().getTime() - System.currentTimeMillis() < 0) {
+			throw new CustomeException("不在注册时间范围内");
+		}
+
+	}
+
+	@Override
+	public User qeuryUserByCardOrName(User user) {
+		if (user != null) {
+			List<User> users = userDao.queryUserByIdCardAndName(user.getIdCard(), MD5Util.getMD5(user.getPwd()));
+
+			if (users != null && users.size() > 0) {
+				return users.get(0);
+			}
+		}
+
+		return null;
+	}
+
+	@Override
+	public UserVo queryUserByToken(String token, String path) throws CustomeException {
+		Integer userId = checkToken(token);
+		return this.queryUserInfo(userId, path);
+	}
+
+	/**
+	 * 根据用户的id查询出改用户所有的信息
+	 * 
+	 * @param userId
+	 *            用户id
+	 * @param path
+	 *            照片存储路径
+	 * @return
+	 */
+	private UserVo queryUserInfo(Integer userId, String path) {
+
+		User user = userDao.queryUserById(userId);
+		// 扩展信息
+		List<UserExtendedInfo> userExtendedInfos = userExtendedInfoDao.queryUserExtendedInfoByUserId(userId);
+		// 监护人信息
+		List<UserGuardianInfo> userGuardianInfos = userGuardianInfoDao.queryUserGuardianInfoByUserId(userId);
+		// 房产信息
+		List<UserHouseInfo> userHouseInfos = userHouseInfoDao.queryUserHouseInfoByUserId(userId);
+		// 照片
+		List<UserPhotoInfo> userPhotoInfos = userPhotoInfoDao.queryUserPhotoInfo(userId);
+		// 按照照片的类型进行排序
+		Collections.sort(userPhotoInfos, new Comparator<UserPhotoInfo>() {
+			@Override
+			public int compare(UserPhotoInfo photo1, UserPhotoInfo photo2) {
+				return photo1.getPhotoType() - photo2.getPhotoType();
+			}
+		});
+		if (user != null && StringUtils.isNotBlank(user.getIdCard())) {
+			this.queryPhotoInfo(path, user, userPhotoInfos);
+		}
+		return new UserVo(user,
+				(userExtendedInfos != null && userExtendedInfos.size() > 0) ? userExtendedInfos.get(0) : null,
+				userGuardianInfos, (userHouseInfos != null && userHouseInfos.size() > 0) ? userHouseInfos.get(0) : null,
+				userPhotoInfos);
+	}
+
+	/**
+	 * 获取到用户的照片信息
+	 * 
+	 * @param path
+	 *            照片存储路径
+	 * @param user
+	 *            所属的用户
+	 * @param userPhotoInfos
+	 *            照片信息
+	 */
+	private void queryPhotoInfo(String path, User user, List<UserPhotoInfo> userPhotoInfos) {
+		for (UserPhotoInfo userPhotoInfo : userPhotoInfos) {
+			// 保存的路径为 servlet路径+"/upload/"+身份证号+照片类型
+			File file = new File(path + UPLOAD_PATH);
+			if (file.exists()) {
+				// 若当前路径不存在，则生成当前路径
+				file.mkdirs();
+			}
+			// 这里为什么只能通过id查询才能获取到base64???? 后期需要排查优化
+			String imageUrI = convertBase64ToImage(
+					userPhotoInfoDao.queryUserPhotoInfoById(userPhotoInfo.getId()).getBase64(), path,
+					user.getIdCard() + userPhotoInfo.getPhotoType());
+
+			if (StringUtils.isNotBlank(imageUrI)) {
+				userPhotoInfo.setPhotoUrl(imageUrI);
+			}
+
+		}
+	}
+
+	/**
+	 * 把base64字符集转为图片
+	 * 
+	 * @param base64Content
+	 *            base64字符集
+	 * @param path
+	 *            文件存储的根路径
+	 * @return 成功则返回URI地址，否则为null
+	 */
+	private String convertBase64ToImage(String base64Content, String path, String middlePath) {
+		if (StringUtils.isBlank(base64Content)) {
+			return null;
+		}
+		// 设置默认的文件后缀为jpg
+		StringBuilder stringBuilder = new StringBuilder(".jpg");
+		if (StringUtils.contains(base64Content, BASE64_FLAG)) {
+			// 包含了base64的头部信息,
+			// 获取到文件的后缀名
+			String type = StringUtils.substringBetween(base64Content, "data:image/", BASE64_FLAG);
+			stringBuilder = new StringBuilder(type);
+			// 去掉base64头部信息
+			base64Content = StringUtils.substringAfter(base64Content, BASE64_FLAG);
+		}
+		Boolean result = Base64Utils.base64ToImage(base64Content,
+				path + UPLOAD_PATH + middlePath + "." + stringBuilder.toString());
+		if (result) {
+			return UPLOAD_PRE_PATH + middlePath + "." + stringBuilder.toString();
+		}
+		return null;
+	}
+
+	@Override
+	public Boolean updateUserInfo(String token, UserVo userVo) throws CustomeException {
+		this.checkTimeBeforeSave();
+		Integer userId = checkToken(token);
+		if (userVo != null && userVo.getUser() != null) {
+			// 用户信息
+			User user = userVo.getUser();
+			user.setId(userId);
+			// 扩展信息
+			UserExtendedInfo userExtendedInfo = userVo.getUserExtendedInfo();
+			// 监护人信息
+			List<UserGuardianInfo> userGuardianInfos = userVo.getUserGuardianInfos();
+			// 房产信息
+			UserHouseInfo userHouseInfo = userVo.getUserHouseInfo();
+			// 照片信息
+			List<UserPhotoInfo> userPhotoInfos = userVo.getUserPhotoInfos();
+			// 更新的时间
+			Long current = System.currentTimeMillis();
+			this.updateUserInfo(userVo, userId, user, userExtendedInfo, userGuardianInfos, userHouseInfo,
+					userPhotoInfos, current);
+			return true;
+		}
+
+		return false;
+
+	}
+	
+
+	/**
+	 * 更新用户信息
+	 * 
+	 * @param userVo
+	 *            用户信息集合
+	 * @param userId
+	 *            用户id
+	 * @param user
+	 *            用户的基础信息
+	 * @param userExtendedInfo
+	 *            用户的扩展信息
+	 * @param userGuardianInfos
+	 *            用户的监护人信息
+	 * @param userHouseInfo
+	 *            用户的房产信息
+	 * @param userPhotoInfos
+	 *            用户的照片信息
+	 * @param current
+	 *            当前时间的毫秒数
+	 */
+	private void updateUserInfo(UserVo userVo, Integer userId, User user, UserExtendedInfo userExtendedInfo,
+			List<UserGuardianInfo> userGuardianInfos, UserHouseInfo userHouseInfo, List<UserPhotoInfo> userPhotoInfos,
+			Long current) {
+		// 只更新用户基本信息中的户口地址,其他的基本信息不能更新
+		userDao.updateUserById(new User(userId, user.getPermanentAddress(), null));
+		// 更新扩展信息
+		if (userExtendedInfo != null) {
+			userExtendedInfo.setUpdateTime(current);
+			userExtendedInfoDao.updateUserExtendedInfoById(userExtendedInfo);
+		}
+
+		// 更新监护人信息
+		if (userGuardianInfos != null && userGuardianInfos.size() > 0) {
+			for (UserGuardianInfo userGuardianInfo : userGuardianInfos) {
+				userGuardianInfo.setUpdateTime(current);
+				userGuardianInfoDao.updateUserGuardianInfoById(userGuardianInfo);
+			}
+		}
+		// 更新房产信息
+		if (userHouseInfo != null) {
+			userHouseInfo.setUpdateTime(current);
+			userHouseInfoDao.updateUserHouseInfoById(userHouseInfo);
+		}
+		this.updateUserPohtoInfo(userPhotoInfos, current);
+		// 更新学位申请信息
+		schoolDegreeService.updateSchoolDegree(user, userVo);
+	}
+
+	/**
+	 * 更新用户的照片信息
+	 * 
+	 * @param userPhotoInfos
+	 *            照片信息
+	 * @param current
+	 *            当前时间的毫秒数
+	 */
+	private void updateUserPohtoInfo(List<UserPhotoInfo> userPhotoInfos, Long current) {
+		// 更新照片信息
+		if (userPhotoInfos != null && userPhotoInfos.size() > 0) {
+			for (UserPhotoInfo userPhotoInfo : userPhotoInfos) {
+				if (userPhotoInfo.getId() != null) {
+					// 更新照片
+					userPhotoInfo.setUpdateTime(current);
+					userPhotoInfoDao.updateUserPhotoInfoById(userPhotoInfo);
+				} else {
+					// 新加的照片
+					userPhotoInfoDao.save(new UserPhotoInfo(userPhotoInfo.getUserId(), System.currentTimeMillis(),
+							userPhotoInfo.getPhotoType(), System.currentTimeMillis(), userPhotoInfo.getBase64()));
+				}
+
+			}
+		}
+	}
+
+	@Override
+	public UserVo queryStudentInfo(String token, Integer studentId, String path) throws CustomeException {
+		// 获取到请求用户的id
+		Integer userId = checkToken(token);
+		User user = userDao.queryUserById(userId);
+		if (user == null || user.getRole() < ROLE_LIMIT) {
+			throw new CustomeException("对不起，你无权执行此操作！");
+		}
+
+		return this.queryUserInfo(studentId, path);
+	}
+
+}

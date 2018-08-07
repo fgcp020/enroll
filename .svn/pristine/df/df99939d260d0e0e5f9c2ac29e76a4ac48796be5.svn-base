@@ -1,0 +1,105 @@
+myApp.controller('registerStatusController', function ($rootScope, $scope, services, $window, $sce, $stateParams) {
+    element_init = false;
+    $scope.services = services;
+    //小升初，进入学位申报时查询
+    services["getApplyStatus"] = function (param) {
+        return $rootScope.serverAction('/apply/queryDegreeApplyInfo', param, "GET");
+    };
+    
+    $scope.pageTitle = "申请资料审核状态";
+    
+    if(1 == $rootScope._USERINFO.role || 2 == $rootScope._USERINFO.role) {
+    	$rootScope._ALLMENU = [{
+			children: [{
+				res_name: "查看审核状态",
+				res_url: "#status",
+				res_id: "#status"
+			},{
+				res_name: "查看修改申请资料",
+				res_url: "#registerMsg#review",
+				res_id: "#registerMsg#review"
+			},{
+				res_name: "打印录取通知书",
+				res_url: "#notifier",
+				res_id: "#notifier"
+			}]
+		}];
+    }
+    $rootScope.curentSel = "#status";
+    $rootScope.setContent = function(url) {
+    	if(-1 < url.indexOf("#registerMsg")) {
+    		window.open(encodeURI(encodeURI('/pages/index.html#/registers#review?id=' + $rootScope._USERINFO.id)));
+    		window.location.href = "/pages/index.html#/status";
+    		return;
+    	} else {
+    		$rootScope.curentSel = url;
+    		if(-1 < url.indexOf("#notifier")) {
+    			layer.alert("未到录取通知书打印时间");
+    			return;
+    		}
+    	}
+    }
+    //$scope.load = function () {
+	    services.getApplyStatus('token').success(function(res) {
+			if ('OK' == res.result) {
+				if(res.msg) {
+					$scope.registerInfo = dealData(res.msg);
+				}
+			} else {
+				layer.alert(res.msg);
+			}
+		});
+    //}
+    function dealData(msg) {
+    	if(msg.applyStatus || 0 == msg.applyStatus) {
+    		//审核状态(0未审核、1审核通过、2审核失败、3驳回补充材料、4注册时户口信息不完整)
+    		if(0 == msg.applyStatus) {
+    			msg.status = "未审核";
+    		} else if(1 == msg.applyStatus) {
+    			msg.status = "审核通过";
+    		} else if(2 == msg.applyStatus) {
+    			msg.status = "审核失败";
+    		} else if(3 == msg.applyStatus) {
+    			msg.status = "驳回补充材料";
+    		} else if(4 == msg.applyStatus) {
+    			msg.status = "注册时户口信息不完整";
+    		} else {
+    			msg.status = "未审核";
+    		}
+    		
+    	}
+    	msg.studentType_text = "";
+    	if(msg.studentType) {
+    		if(1 == msg.studentType) {
+    			msg.studentType_text = "一类";
+        	} else if(2 == msg.studentType) {
+        		msg.studentType_text = "二类";
+        	} else if(3 == msg.studentType) {
+        		msg.studentType_text = "三类";
+        	}
+    	}
+    	msg.schoolType_text = "";
+    	if(msg.schoolType) {
+    		if(1 == msg.schoolType) {
+    			msg.schoolType_text = "小学";
+        	} else if(2 == msg.schoolType) {
+        		msg.schoolType_text = "中学";
+        	}
+    	}
+    	
+    	msg.applyTime_text = "";
+    	if(msg.applyTime) {
+    		var pt = new Date(msg.applyTime);
+    		msg.applyTime_text = pt.toLocaleDateString().replace(/\//g, "-") + " " + pt.toTimeString().substr(0, 8);
+    	}
+    	
+    	msg.approveTime_text = "";
+    	if(msg.approveTime) {
+    		var apt = new Date(msg.approveTime);
+    		msg.approveTime_text = apt.toLocaleDateString().replace(/\//g, "-") + " " + apt.toTimeString().substr(0, 8);
+    	}
+    	
+    	return msg;
+    }
+    //$scope.load();
+});

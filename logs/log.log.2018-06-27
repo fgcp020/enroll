@@ -1,0 +1,260 @@
+2018-06-27 17:50:02.983 [restartedMain] INFO  com.nercel.enroll.App -
+				Starting App on lijw with PID 14176 (F:\code\enroll4\enroll-webapp\target\classes started by Administrator in F:\code\enroll4\enroll-webapp)
+2018-06-27 17:50:02.991 [restartedMain] DEBUG com.nercel.enroll.App -
+				Running with Spring Boot v1.5.9.RELEASE, Spring v4.3.13.RELEASE
+2018-06-27 17:50:02.991 [restartedMain] INFO  com.nercel.enroll.App -
+				No active profile set, falling back to default profiles: default
+2018-06-27 17:50:04.891 [restartedMain] DEBUG org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration -
+				Searching for mappers annotated with @Mapper
+2018-06-27 17:50:04.892 [restartedMain] DEBUG org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration -
+				Using auto-configuration base package 'com.nercel.enroll'
+2018-06-27 17:50:04.935 [restartedMain] WARN  org.mybatis.spring.mapper.ClassPathMapperScanner -
+				No MyBatis mapper was found in '[com.nercel.enroll]' package. Please check your configuration.
+2018-06-27 17:50:05.034 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\ApplyInfoMapper.class]
+2018-06-27 17:50:05.034 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\CertificatesTypeMapper.class]
+2018-06-27 17:50:05.035 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\CountryMapper.class]
+2018-06-27 17:50:05.035 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\NationMapper.class]
+2018-06-27 17:50:05.035 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\PlanTimeMapper.class]
+2018-06-27 17:50:05.035 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\RelationalMapper.class]
+2018-06-27 17:50:05.035 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\SchoolMapper.class]
+2018-06-27 17:50:05.035 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\SchoolRelationshipMapper.class]
+2018-06-27 17:50:05.035 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\SmsCodeMapper.class]
+2018-06-27 17:50:05.036 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\StreetSchoolMapper.class]
+2018-06-27 17:50:05.036 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\StudentInfoMapper.class]
+2018-06-27 17:50:05.036 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserExtendedInfoMapper.class]
+2018-06-27 17:50:05.036 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserGuardianInfoMapper.class]
+2018-06-27 17:50:05.036 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserHouseInfoMapper.class]
+2018-06-27 17:50:05.036 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserMapper.class]
+2018-06-27 17:50:05.036 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserPhotoInfoMapper.class]
+2018-06-27 17:50:05.037 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserPhotoTypeMapper.class]
+2018-06-27 17:50:05.037 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserRoleMapper.class]
+2018-06-27 17:50:05.037 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'applyInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.ApplyInfoMapper' mapperInterface
+2018-06-27 17:50:05.037 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'certificatesTypeMapper' and 'com.nercel.enroll.dao.mapperInterface.CertificatesTypeMapper' mapperInterface
+2018-06-27 17:50:05.037 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'countryMapper' and 'com.nercel.enroll.dao.mapperInterface.CountryMapper' mapperInterface
+2018-06-27 17:50:05.037 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'nationMapper' and 'com.nercel.enroll.dao.mapperInterface.NationMapper' mapperInterface
+2018-06-27 17:50:05.037 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'planTimeMapper' and 'com.nercel.enroll.dao.mapperInterface.PlanTimeMapper' mapperInterface
+2018-06-27 17:50:05.037 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'relationalMapper' and 'com.nercel.enroll.dao.mapperInterface.RelationalMapper' mapperInterface
+2018-06-27 17:50:05.037 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'schoolMapper' and 'com.nercel.enroll.dao.mapperInterface.SchoolMapper' mapperInterface
+2018-06-27 17:50:05.037 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'schoolRelationshipMapper' and 'com.nercel.enroll.dao.mapperInterface.SchoolRelationshipMapper' mapperInterface
+2018-06-27 17:50:05.037 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'smsCodeMapper' and 'com.nercel.enroll.dao.mapperInterface.SmsCodeMapper' mapperInterface
+2018-06-27 17:50:05.037 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'streetSchoolMapper' and 'com.nercel.enroll.dao.mapperInterface.StreetSchoolMapper' mapperInterface
+2018-06-27 17:50:05.038 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'studentInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.StudentInfoMapper' mapperInterface
+2018-06-27 17:50:05.038 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userExtendedInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.UserExtendedInfoMapper' mapperInterface
+2018-06-27 17:50:05.038 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userGuardianInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.UserGuardianInfoMapper' mapperInterface
+2018-06-27 17:50:05.038 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userHouseInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.UserHouseInfoMapper' mapperInterface
+2018-06-27 17:50:05.038 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userMapper' and 'com.nercel.enroll.dao.mapperInterface.UserMapper' mapperInterface
+2018-06-27 17:50:05.038 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userPhotoInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.UserPhotoInfoMapper' mapperInterface
+2018-06-27 17:50:05.038 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userPhotoTypeMapper' and 'com.nercel.enroll.dao.mapperInterface.UserPhotoTypeMapper' mapperInterface
+2018-06-27 17:50:05.038 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userRoleMapper' and 'com.nercel.enroll.dao.mapperInterface.UserRoleMapper' mapperInterface
+2018-06-27 17:50:06.990 [restartedMain] DEBUG org.mybatis.spring.SqlSessionFactoryBean -
+				Parsed configuration file: 'class path resource [mybatis/mybatis-config.xml]'
+2018-06-27 17:50:06.991 [restartedMain] DEBUG org.mybatis.spring.SqlSessionFactoryBean -
+				Property 'mapperLocations' was not specified or no matching resources found
+2018-06-27 17:50:08.287 [restartedMain] DEBUG org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration -
+				No org.mybatis.spring.mapper.MapperFactoryBean found.
+2018-06-27 17:50:09.376 [restartedMain] INFO  com.nercel.enroll.App -
+				Started App in 6.782 seconds (JVM running for 7.684)
+2018-06-27 17:50:09.376 [restartedMain] DEBUG com.nercel.enroll.App -
+				=================================== 启动成功
+2018-06-27 17:50:09.378 [main] DEBUG com.nercel.enroll.App -
+				=================================== 启动成功
+2018-06-27 17:51:48.947 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Creating a new SqlSession
+2018-06-27 17:51:48.950 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@64fa3f40]
+2018-06-27 17:51:48.989 [http-nio-8080-exec-2] DEBUG com.jolbox.bonecp.BoneCPDataSource -
+				JDBC URL = jdbc:mysql://192.168.0.121:3306/enroll?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true, Username = root, partitions = 1, max (per partition) = 100, min (per partition) = 5, idle max age = 30 min, idle test period = 60 min, strategy = DEFAULT
+2018-06-27 17:51:49.248 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.transaction.SpringManagedTransaction -
+				JDBC Connection [ConnectionHandle{url=jdbc:mysql://192.168.0.121:3306/enroll?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true, user=root, debugHandle=null, lastResetAgoInSec=0, lastUsedAgoInSec=0, creationTimeAgoInSec=0}] will be managed by Spring
+2018-06-27 17:51:49.250 [http-nio-8080-exec-2] DEBUG com.nercel.enroll.dao.mapperInterface.UserMapper.selectByExample -
+				==>  Preparing: select Id, username, role, pwd, id_card, phone, permanent_address, type, apply_status, sex, school_id, create_time from user WHERE ( id_card = ? and pwd = ? ) 
+2018-06-27 17:51:49.266 [http-nio-8080-exec-2] DEBUG com.nercel.enroll.dao.mapperInterface.UserMapper.selectByExample -
+				==> Parameters: superuser(String), 20754ab590947275daccbb181c21045f(String)
+2018-06-27 17:51:49.278 [http-nio-8080-exec-2] DEBUG com.nercel.enroll.dao.mapperInterface.UserMapper.selectByExample -
+				<==      Total: 1
+2018-06-27 17:51:49.279 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@64fa3f40]
+2018-06-27 17:51:49.279 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@64fa3f40]
+2018-06-27 17:51:49.279 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@64fa3f40]
+2018-06-27 17:51:49.580 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Creating a new SqlSession
+2018-06-27 17:51:49.580 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3ef940cd]
+2018-06-27 17:51:49.581 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.transaction.SpringManagedTransaction -
+				JDBC Connection [ConnectionHandle{url=jdbc:mysql://192.168.0.121:3306/enroll?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true, user=root, debugHandle=null, lastResetAgoInSec=0, lastUsedAgoInSec=0, creationTimeAgoInSec=0}] will be managed by Spring
+2018-06-27 17:51:49.581 [http-nio-8080-exec-10] DEBUG com.nercel.enroll.dao.mapperInterface.SchoolMapper.selectByExample -
+				==>  Preparing: select Id, name, school_type, first_kind_number, second_kind_number, third_kind_type from school 
+2018-06-27 17:51:49.581 [http-nio-8080-exec-10] DEBUG com.nercel.enroll.dao.mapperInterface.SchoolMapper.selectByExample -
+				==> Parameters: 
+2018-06-27 17:51:49.585 [http-nio-8080-exec-10] DEBUG com.nercel.enroll.dao.mapperInterface.SchoolMapper.selectByExample -
+				<==      Total: 9
+2018-06-27 17:51:49.585 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3ef940cd]
+2018-06-27 17:51:49.585 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3ef940cd]
+2018-06-27 17:51:49.585 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3ef940cd]
+2018-06-27 17:51:49.667 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Creating a new SqlSession
+2018-06-27 17:51:49.667 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2894df9]
+2018-06-27 17:51:49.667 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.transaction.SpringManagedTransaction -
+				JDBC Connection [ConnectionHandle{url=jdbc:mysql://192.168.0.121:3306/enroll?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true, user=root, debugHandle=null, lastResetAgoInSec=0, lastUsedAgoInSec=0, creationTimeAgoInSec=0}] will be managed by Spring
+2018-06-27 17:51:49.667 [http-nio-8080-exec-7] DEBUG com.nercel.enroll.dao.mapperInterface.UserMapper.selectByPrimaryKey -
+				==>  Preparing: select Id, username, role, pwd, id_card, phone, permanent_address, type, apply_status, sex, school_id, create_time from user where Id = ? 
+2018-06-27 17:51:49.668 [http-nio-8080-exec-7] DEBUG com.nercel.enroll.dao.mapperInterface.UserMapper.selectByPrimaryKey -
+				==> Parameters: 14(Integer)
+2018-06-27 17:51:49.670 [http-nio-8080-exec-7] DEBUG com.nercel.enroll.dao.mapperInterface.UserMapper.selectByPrimaryKey -
+				<==      Total: 1
+2018-06-27 17:51:49.671 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2894df9]
+2018-06-27 17:51:49.671 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2894df9]
+2018-06-27 17:51:49.671 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2894df9]
+2018-06-27 17:53:40.315 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Creating a new SqlSession
+2018-06-27 17:53:40.316 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5aee7263]
+2018-06-27 17:53:40.318 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.transaction.SpringManagedTransaction -
+				JDBC Connection [ConnectionHandle{url=jdbc:mysql://192.168.0.121:3306/enroll?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true, user=root, debugHandle=null, lastResetAgoInSec=111, lastUsedAgoInSec=111, creationTimeAgoInSec=111}] will be managed by Spring
+2018-06-27 17:53:40.318 [http-nio-8080-exec-8] DEBUG com.nercel.enroll.dao.mapperInterface.SchoolMapper.selectByExample -
+				==>  Preparing: select Id, name, school_type, first_kind_number, second_kind_number, third_kind_type from school WHERE ( school_type = ? ) 
+2018-06-27 17:53:40.319 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Creating a new SqlSession
+2018-06-27 17:53:40.319 [http-nio-8080-exec-8] DEBUG com.nercel.enroll.dao.mapperInterface.SchoolMapper.selectByExample -
+				==> Parameters: 1(Integer)
+2018-06-27 17:53:40.319 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4638f015]
+2018-06-27 17:53:40.319 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.transaction.SpringManagedTransaction -
+				JDBC Connection [ConnectionHandle{url=jdbc:mysql://192.168.0.121:3306/enroll?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true, user=root, debugHandle=null, lastResetAgoInSec=111, lastUsedAgoInSec=111, creationTimeAgoInSec=111}] will be managed by Spring
+2018-06-27 17:53:40.319 [http-nio-8080-exec-3] DEBUG com.nercel.enroll.dao.mapperInterface.UserMapper.selectByPrimaryKey -
+				==>  Preparing: select Id, username, role, pwd, id_card, phone, permanent_address, type, apply_status, sex, school_id, create_time from user where Id = ? 
+2018-06-27 17:53:40.320 [http-nio-8080-exec-3] DEBUG com.nercel.enroll.dao.mapperInterface.UserMapper.selectByPrimaryKey -
+				==> Parameters: 14(Integer)
+2018-06-27 17:53:40.322 [http-nio-8080-exec-8] DEBUG com.nercel.enroll.dao.mapperInterface.SchoolMapper.selectByExample -
+				<==      Total: 6
+2018-06-27 17:53:40.323 [http-nio-8080-exec-3] DEBUG com.nercel.enroll.dao.mapperInterface.UserMapper.selectByPrimaryKey -
+				<==      Total: 1
+2018-06-27 17:53:40.323 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4638f015]
+2018-06-27 17:53:40.323 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5aee7263]
+2018-06-27 17:53:40.323 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5aee7263]
+2018-06-27 17:53:40.323 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4638f015]
+2018-06-27 17:53:40.323 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5aee7263]
+2018-06-27 17:53:40.324 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4638f015]
+2018-06-27 17:53:42.400 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Creating a new SqlSession
+2018-06-27 17:53:42.400 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@70e0f6ff]
+2018-06-27 17:53:42.401 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.transaction.SpringManagedTransaction -
+				JDBC Connection [ConnectionHandle{url=jdbc:mysql://192.168.0.121:3306/enroll?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true, user=root, debugHandle=null, lastResetAgoInSec=113, lastUsedAgoInSec=113, creationTimeAgoInSec=113}] will be managed by Spring
+2018-06-27 17:53:42.401 [http-nio-8080-exec-5] DEBUG com.nercel.enroll.dao.mapperInterface.SchoolMapper.selectByExample -
+				==>  Preparing: select Id, name, school_type, first_kind_number, second_kind_number, third_kind_type from school WHERE ( school_type = ? ) 
+2018-06-27 17:53:42.402 [http-nio-8080-exec-5] DEBUG com.nercel.enroll.dao.mapperInterface.SchoolMapper.selectByExample -
+				==> Parameters: 2(Integer)
+2018-06-27 17:53:42.403 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Creating a new SqlSession
+2018-06-27 17:53:42.403 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@127c2d1b]
+2018-06-27 17:53:42.404 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.transaction.SpringManagedTransaction -
+				JDBC Connection [ConnectionHandle{url=jdbc:mysql://192.168.0.121:3306/enroll?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true, user=root, debugHandle=null, lastResetAgoInSec=113, lastUsedAgoInSec=112, creationTimeAgoInSec=113}] will be managed by Spring
+2018-06-27 17:53:42.404 [http-nio-8080-exec-6] DEBUG com.nercel.enroll.dao.mapperInterface.UserMapper.selectByPrimaryKey -
+				==>  Preparing: select Id, username, role, pwd, id_card, phone, permanent_address, type, apply_status, sex, school_id, create_time from user where Id = ? 
+2018-06-27 17:53:42.404 [http-nio-8080-exec-6] DEBUG com.nercel.enroll.dao.mapperInterface.UserMapper.selectByPrimaryKey -
+				==> Parameters: 14(Integer)
+2018-06-27 17:53:42.406 [http-nio-8080-exec-6] DEBUG com.nercel.enroll.dao.mapperInterface.UserMapper.selectByPrimaryKey -
+				<==      Total: 1
+2018-06-27 17:53:42.406 [http-nio-8080-exec-5] DEBUG com.nercel.enroll.dao.mapperInterface.SchoolMapper.selectByExample -
+				<==      Total: 3
+2018-06-27 17:53:42.406 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@127c2d1b]
+2018-06-27 17:53:42.406 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@70e0f6ff]
+2018-06-27 17:53:42.406 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@127c2d1b]
+2018-06-27 17:53:42.406 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@70e0f6ff]
+2018-06-27 17:53:42.406 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@127c2d1b]
+2018-06-27 17:53:42.406 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@70e0f6ff]
+2018-06-27 17:53:44.313 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Creating a new SqlSession
+2018-06-27 17:53:44.313 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@d8b4e31]
+2018-06-27 17:53:44.313 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.transaction.SpringManagedTransaction -
+				JDBC Connection [ConnectionHandle{url=jdbc:mysql://192.168.0.121:3306/enroll?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true, user=root, debugHandle=null, lastResetAgoInSec=115, lastUsedAgoInSec=114, creationTimeAgoInSec=115}] will be managed by Spring
+2018-06-27 17:53:44.313 [http-nio-8080-exec-10] DEBUG com.nercel.enroll.dao.mapperInterface.SchoolMapper.selectByExample -
+				==>  Preparing: select Id, name, school_type, first_kind_number, second_kind_number, third_kind_type from school 
+2018-06-27 17:53:44.314 [http-nio-8080-exec-10] DEBUG com.nercel.enroll.dao.mapperInterface.SchoolMapper.selectByExample -
+				==> Parameters: 
+2018-06-27 17:53:44.315 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Creating a new SqlSession
+2018-06-27 17:53:44.315 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3183ead2]
+2018-06-27 17:53:44.315 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.transaction.SpringManagedTransaction -
+				JDBC Connection [ConnectionHandle{url=jdbc:mysql://192.168.0.121:3306/enroll?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true, user=root, debugHandle=null, lastResetAgoInSec=115, lastUsedAgoInSec=3, creationTimeAgoInSec=115}] will be managed by Spring
+2018-06-27 17:53:44.315 [http-nio-8080-exec-9] DEBUG com.nercel.enroll.dao.mapperInterface.UserMapper.selectByPrimaryKey -
+				==>  Preparing: select Id, username, role, pwd, id_card, phone, permanent_address, type, apply_status, sex, school_id, create_time from user where Id = ? 
+2018-06-27 17:53:44.315 [http-nio-8080-exec-9] DEBUG com.nercel.enroll.dao.mapperInterface.UserMapper.selectByPrimaryKey -
+				==> Parameters: 14(Integer)
+2018-06-27 17:53:44.316 [http-nio-8080-exec-10] DEBUG com.nercel.enroll.dao.mapperInterface.SchoolMapper.selectByExample -
+				<==      Total: 9
+2018-06-27 17:53:44.316 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@d8b4e31]
+2018-06-27 17:53:44.316 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@d8b4e31]
+2018-06-27 17:53:44.316 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@d8b4e31]
+2018-06-27 17:53:44.317 [http-nio-8080-exec-9] DEBUG com.nercel.enroll.dao.mapperInterface.UserMapper.selectByPrimaryKey -
+				<==      Total: 1
+2018-06-27 17:53:44.317 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3183ead2]
+2018-06-27 17:53:44.317 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3183ead2]
+2018-06-27 17:53:44.317 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils -
+				Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3183ead2]

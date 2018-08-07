@@ -1,0 +1,50 @@
+<div id="loginController_page">
+    <div class="page_plan">
+        <div class="page_content">
+            <div class="page_top">
+                    <div class="top_logo">
+                        <img ng-src="/res/img/logologin1.png" alt=""/>
+                        <a class="page_enroll_middle page_common col-xs-4" href="#enrollParent" style="float: right;width: auto;margin-top: 20px;padding-right: 0px;">家长登录</a>
+                    </div>
+            </div>
+            <div class="page_center">
+                  <div class="page_center_left" ng-if="notice_have">
+
+                      <div class="page_notice" id="notice">
+                          <div class="page_proclamation" style="float: left;font-size: 20px;color: white;">公告</div>
+                          <div class="page_ul" style="float: left;margin-top: 20px;width: 100%;">
+                          <ul style="line-height: 36px;width: 400px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                          </ul>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="page_center_right">
+                        <div class="page_enter">
+                                <div class="page_top" style="border: none;background-color: #fff;color: #000">
+	                               <span style="margin: 0;width: 100%;font-size: 20px;" ng-click="loginInfo.user_type = 2" ng-class="{'layui-this': loginInfo.user_type == 2}">管理员登录</span>
+	                            </div>
+                            <div class="page_row">
+                                  <div class="page_row_matter">
+                                      <input class="form_control" ng-model="loginInfo.user_name" type="text"  placeholder="账号" />
+                                  </div>
+                                <div class="page_row_matter">
+                                      <input id="enter_password" class="form_control" ng-model="loginInfo.user_pwd" type="password"  placeholder="密码"  />
+                                  </div>
+                                <div class="page_row_matter">
+                                    <i class="box" ng-class="{'at':loginInfo.checked}" ng-click="loginInfo.checked=!loginInfo.checked"></i>
+                                    <span style="float:left;margin-left: 5px;font-size: 15px;line-height: 20px;cursor: pointer" ng-click="loginInfo.checked=!loginInfo.checked">记住密码</span>
+                                  </div>
+                                <div class="page_row_matter">
+                                    <button id="login_enter" class="block layui-btn layui-btn-normal layui-btn-big" type="submit" ng-click="_singIn()" >登录</button>
+                                </div>
+                            </div>
+                            <div class="page_enroll" id="page_sign">
+                            </div>
+
+                        </div>
+                  </div>
+            </div>
+
+        </div>
+    </div>
+</div>

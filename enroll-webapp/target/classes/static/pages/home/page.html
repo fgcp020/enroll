@@ -1,0 +1,202 @@
+<div id="home">
+    <div class="model_total">
+        <label class="form_label"><span><strong>欢迎使用当阳市中小学智慧招生平台!</strong></span></label>
+    </div>
+    <div class="model_list">
+        <!-- <div class="model_left"
+             ng-class="{'all':role_id!=135&&role_id!=136&&role_id!=138&&role_id!=140&&role_id!=141&&role_id!=142&&role_id!=144}">
+            <div class="title">
+                <i class="iconfont icon-yinpin"></i>
+                通知公告
+            </div>
+            <div class="content" id="notice">
+                <ul></ul>
+            </div>
+        </div> -->
+        <div class="model_right" ng-if="role_id==142">
+            <div class="title">
+                <i class="iconfont icon-yinpin"></i>
+                当前状态
+            </div>
+            <div class="content">
+
+                <div ng-show="audit_status == 1 || audit_status == 5">
+                    <p style="padding:100px 0 10px 50px;font-size: 24px;" ng-show="process_type == 1">{{tips}}</p>
+
+                    <p style="padding:100px 0 10px 50px;font-size: 30px;" ng-show="process_type != 1"><em>*</em>您的预录取学校为:<i
+                            style="color: rgb(0,157,214)">{{enter_school_name}}</i></p>
+
+                    <p style="padding: 0 80px;font-size: 24px;text-indent: 2em" ng-show="process_type !=1">{{tips}}</p>
+
+                </div>
+
+                <div ng-show="audit_status == 10">
+                    <p style="padding:100px 0 10px 50px;font-size: 24px;">{{tips}}</p>
+                    <!--<p style="padding:100px 0 10px 50px;font-size: 30px;" ng-show="can_view"><em>*</em>您的预录取学校为:<i
+                            style="color: rgb(0,157,214)">{{enter_school_name}}</i></p>
+                    <p style="padding: 0 80px;font-size: 24px;text-indent: 2em" ng-show="can_view">{{tips}}</p>-->
+                </div>
+
+                <div ng-show="audit_status == 20 || audit_status == 30 ">
+                    <p style="padding:100px 0 10px 50px;font-size: 34px;"><em>*</em>您的预录取学校为:<i
+                            style="color: rgb(0,157,214)">{{enter_school_name}}</i></p>
+
+                    <p style="padding: 0 80px;font-size: 24px;text-indent: 2em">{{tips}}</p>
+                </div>
+                <div ng-show=" audit_status == 70">
+                    <p style="padding:100px 0 10px 50px;font-size: 34px;"><em>*</em>您的录取学校为:<i
+                            style="color: rgb(0,157,214)">{{enter_school_name}}</i></p>
+
+                    <p style="padding: 0 80px;font-size: 24px;text-indent: 2em">{{tips}}</p>
+                </div>
+                <div ng-show="audit_status == 25 || audit_status == 35 ||audit_status == 40 || audit_status == 50 || audit_status == 55 ||audit_status == 60 || audit_status == 65 ||audit_status == 80">
+                    <p style="padding:100px 0 10px 50px;font-size: 24px;">{{tips}}</p>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="model_right" ng-if="role_id==141">
+            <div class="title">
+                <i class="iconfont icon-yinpin"></i>
+                当前状态
+            </div>
+            <div class="content">
+                <div ng-show="audit_status == 1 || audit_status == 5">
+                    <p style="padding:100px 0 10px 50px;font-size: 24px;" ng-show="process_type == 1">{{tips}}</p>
+
+                    <p style="padding:100px 0 10px 50px;font-size: 30px;" ng-show="process_type == 2"><em>*</em>您的预录取学校为:<i
+                            style="color: rgb(0,157,214)">{{enter_school_name}}</i></p>
+
+                    <p style="padding: 0 80px;font-size: 24px;text-indent: 2em" ng-show="process_type == 2">{{tips}}</p>
+
+                </div>
+                <div ng-show="audit_status == 10">
+                    <p style="padding:100px 0 10px 50px;font-size: 24px;">{{tips}}</p>
+                    <!--<p style="padding:100px 0 10px 50px;font-size: 30px;" ng-show="can_view"><em>*</em>您的预录取学校为:<i
+                            style="color: rgb(0,157,214)">{{enter_school_name}}</i></p>
+                    <p style="padding: 0 80px;font-size: 24px;text-indent: 2em" ng-show="can_view">{{tips}}</p>-->
+                </div>
+                <div ng-show="audit_status == 20 || audit_status == 30 || audit_status == 70">
+                    <p style="padding:100px 0 10px 50px;font-size: 34px;"><em>*</em>您的预录取学校为:<i
+                            style="color: rgb(0,157,214)">{{enter_school_name}}</i></p>
+
+                    <p style="padding: 0 80px;font-size: 24px;text-indent: 2em">{{tips}}</p>
+                </div>
+
+                <div ng-show="audit_status == 40 || audit_status == 50 ||audit_status == 60">
+                    <p style="padding:100px 0 10px 50px;font-size: 24px;">{{tips}}</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="model_right" ng-if="role_id==140">
+            <div class="title">
+                <i class="iconfont icon-yinpin"></i>
+                当前状态
+            </div>
+            <div class="content">
+                <div ng-show="audit_status == 1">
+                    <p style="padding: 0 80px;font-size: 24px;text-indent: 2em">{{tips}}</p>
+                </div>
+                <div ng-show="audit_status == 60 || audit_status == 80">
+                    <p style="padding:10px 0 10px 10px;font-size: 26px;"><em>*</em>您的<i
+                            ng-show="selRow.audit_status == 60">预</i>录取幼儿园为:<i
+                            style="color: rgb(0,157,214)">{{enter_school_name}}</i></p>
+
+                    <p style="font-size: 20px;text-indent: 2em" ng-show="audit_status == 60">
+                        {{tips}}</p>
+
+                    <p style="font-size:20px;text-indent: 2em" ng-show="audit_status == 80">
+                        请进一步完善孩子的学籍信息</p>
+                </div>
+
+                <div ng-show="audit_status == 70">
+                    <p style="padding:30px 0 10px 50px;font-size: 34px;">学位已取消</p>
+                </div>
+                <div id="static" ng-if="role_id==140" style="padding-top: 10px;">
+                    <h3 style="font-size: 16px;font-weight: 500;">学位申请注意事项</h3>
+
+                    <p>1.家长在26日平台开放时才能申请学位，一个身份证号只能在一台电脑上登录申请，不能在多台电脑上同时登录。</p>
+
+                    <p>2.家长登录平台后直接选择意向的幼儿园提交申请，界面上会提示每所幼儿园剩余的学位数。</p>
+
+                    <p>3.家长提交申请后，系统会自动回复您申请学位是否成功，如果申请成功将不能再申请其他幼儿园学位；如果未成功，您可有机会继续在其他幼儿园申请学位。</p>
+
+                    <p>4.学位申请时，7所公办园的通道同时打开，学位满员一所关闭一所通道。通道关闭后，将无法再申请该园学位。</p>
+
+                    <p>5.家长应理性慎重选择意向就读的幼儿园，切不可盲目跟风。</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="model_right" ng-show="role_id==135||role_id==136||role_id==138|| role_id == 144">
+            <div class="title">
+                <i class="iconfont icon-yinpin"></i>
+                待办业务
+            </div>
+            <div class="content">
+                <ul>
+                    <div ng-show="role_id==135">
+                        <li>幼升小</li>
+                        <li>&gt;&emsp;片区对应审核&emsp;未审核&emsp;{{primary_apply_audit_num}}条
+                            <a class="go_audit" ng-href="#/smaAreaManage">去审核</a>
+                        </li>
+                        <li>&gt;&emsp;随迁招生审核&emsp;未审核&emsp;{{primary_select_audit_num}}条
+                            <a class="go_audit" ng-href="#/smaSchoolStudent">去审核</a>
+                        </li>
+
+                        <li>小升初</li>
+                        <li>&gt;&emsp;片区对应审核&emsp;未审核&emsp;{{declara_num}}条
+                            <a class="go_audit" ng-href="#/degreeFinalAudit">去审核</a>
+                        </li>
+                        <li>&gt;&emsp;跨区交换审核&emsp;未审核&emsp;{{declaration_num}}条
+                            <a class="go_audit" ng-href="#/degreeRegionalAudit">去审核</a>
+                        </li>
+                        <li>&gt;&emsp;随迁招生审核&emsp;未审核&emsp;{{immigrant_school_num}}条
+                            <a class="go_audit" ng-href="#/immigrantAudit">去审核</a>
+                        </li>
+                        <li>&gt;&emsp;多校划片审核&emsp;未审核&emsp;{{many_declara_num}}条
+                            <a class="go_audit" ng-href="#/manySchoolStudent">去审核</a>
+                        </li>
+                        <li>&gt;&emsp;择校招生审核&emsp;未审核&emsp;{{select_declara_num}}条
+                            <a class="go_audit" ng-href="#/schoolStudentManager">去审核</a>
+                        </li>
+
+                    </div>
+                    <div ng-show="role_id==136">
+                        <li>&gt;&emsp;学位申报网审&emsp;未审核&emsp;{{declarationDegree_num}}条
+                            <a class="go_audit" ng-href="#/degreeApplyAudit">去审核</a>
+                        </li>
+                        <li>&gt;&emsp;学位申报面审&emsp;未审核&emsp;{{declaration_num}}条
+                            <a class="go_audit" ng-href="#/degreeFaceAudit">去审核</a>
+                        </li>
+                    </div>
+                    <div ng-show="role_id==138">
+                        <li>幼升小</li>
+                        <li>&gt;&emsp;片区对应网审&emsp;未审核&emsp;{{primary_apply_audit_num}}条
+                            <a class="go_audit" ng-href="#/smaDegreeApplyAudit">去审核</a>
+                        </li>
+                        <li>&gt;&emsp;片区对应面审&emsp;未审核&emsp;{{face_num}}条
+                            <a class="go_audit" ng-href="#/smaDegreeFaceAudit">去审核</a>
+                        </li>
+                        <li>小升初</li>
+                        <li>&gt;&emsp;区外就读初中&emsp;未审核&emsp;{{declara_num}}条
+                            <a class="go_audit" ng-href="#/outAttendMessage">去审核</a>
+                        </li>
+                    </div>
+                    <!--<div ng-show="role_id==143">
+                        <li>&gt;&emsp;区县审核&emsp;未审核&emsp;{{declarationDegree_num}}条
+                            <a class="go_audit" ng-href="#/preDegreeFinalAudit">去审核</a>
+                        </li>
+                    </div>-->
+                    <div ng-show="role_id==144">
+                        <li>&gt;&emsp;网上注册资格审查&emsp;未审核&emsp;{{qualificationExaminationNum}}条
+                            <a class="go_audit" ng-href="#/preExamination">去审核</a>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

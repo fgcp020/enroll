@@ -1,0 +1,50 @@
+<div class="table_control">
+    <table class="layui-table" >
+        <colgroup>
+            <col width="50" ng-if="gridTableControl.config.check">
+            <col ng-repeat="t in gridTableControl.config.columns" width="{{t.width}}">
+        </colgroup>
+        <thead>
+            <tr>
+                <th style="min-width:50px;width: 50px;text-align: left" ng-if="gridTableControl.config.check">
+                    <div class="box" ng-click="gridTableControl.unSelectAll()">
+                        <label class="check">
+                            <i ng-class="{'active': gridTableControl.config.selectAll}"></i>
+                        </label>
+                    </div>
+                </th>
+                <th ng-repeat="t in gridTableControl.config.columns" align="{{t.align}}"
+                    ng-click="gridTableControl.orderBy(t)">
+                    {{t.title}}
+                    <label ng-show="t.order && gridTableControl.config.param.orderField == t.field" ng-if="t.order">
+                        <i class="iconfont icon-jiantou3xia paixu" ng-class="{'tran_180': t.orderType == 'asc'}"></i>
+                    </label>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in gridTableControl.rows" ng-class="{'marked':row.marked}" ng-click="gridTableControl.unSelectRow(row)">
+                <td style="min-width:50px;width: 50px" ng-if="gridTableControl.config.check">
+                    <div class="box">
+                        <label class="check">
+                            <i ng-class="{'active': row.select}"></i>
+                        </label>
+                    </div>
+                </td>
+                <td ng-repeat="col in row.data" align="{{col.align}}" ng-bind-html="col.value"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="table_pager" ng-hide="gridTableControl.unpager == 'true'">
+        <div class="table_pager_num layui-btn-group" style="height: 30px;">
+            <span class="layui-btn layui-btn-small layui-btn-primary" did="10" style="height: 30px;line-height: 30px">10条</span>
+            <span class="layui-btn layui-btn-small layui-btn-primary" did="50" style="height: 30px;line-height: 30px">50条</span>
+            <span class="layui-btn layui-btn-small layui-btn-primary" did="100" style="height: 30px;line-height: 30px">100条</span>
+            <span class="layui-btn layui-btn-small layui-btn-primary" did="500" style="height: 30px;line-height: 30px">500条</span>
+        </div>
+        <div id="public_table_pager"></div>
+        <div id="lay_page_dir"></div>
+        <div class="public_table_pager_total" ng-show="gridTableControl.config.param.total > 0 && gridTableControl.config.param.total !=null">共<em ng-bind="gridTableControl.config.param.total"></em>条</div>
+    </div>
+</div>

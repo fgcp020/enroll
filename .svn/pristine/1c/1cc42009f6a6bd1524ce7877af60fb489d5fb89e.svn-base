@@ -1,0 +1,306 @@
+package com.nercel.enroll.dao.impl;
+
+import com.nercel.enroll.dao.mapperInterface.ApplyInfoMapper;
+import com.nercel.enroll.domain.model.beans.ApplyInfo;
+import com.nercel.enroll.domain.model.constants.TApplyInfo;
+import com.nercel.enroll.domain.model.constants.TUser;
+import com.nercel.enroll.domain.mybatis.Criteria;
+import com.nercel.enroll.domain.mybatis.Criteria.Condition;
+
+import java.util.List;
+import javax.annotation.Resource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
+
+/**
+ * @ClassName: ApplyInfoDao
+ * @Description: apply_info表对应dao操作接口实现类
+ * @author: linyl linyuliang.85@gmail.com
+ */
+@Repository
+public class ApplyInfoDao {
+	/**
+	 * @Fields LOGGER : 日志操作类
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(ApplyInfoDao.class);
+
+	/**
+	 * @Fields ApplyInfo表的Mybatis Mapper操作映射类
+	 */
+	@Resource
+	private ApplyInfoMapper applyInfoMapper;
+
+	/**
+	 * @Title ApplyInfoDao.countByExample
+	 * @Description: 根据查询条件，计算apply_info个数
+	 * @param example
+	 *            通用查询条件类
+	 * @return int 结果个数
+	 */
+	private int countByExample(Criteria example) {
+		int count = this.applyInfoMapper.countByExample(example);
+		LOGGER.debug("count: {}", count);
+		return count;
+	}
+
+	/**
+	 * @Title ApplyInfoDao.selectByPrimaryKey
+	 * @Description: 根据主键类，返回apply_info
+	 * @param id
+	 *            id
+	 * @return ApplyInfo bean对象
+	 */
+	private ApplyInfo selectByPrimaryKey(Integer id) {
+		return this.applyInfoMapper.selectByPrimaryKey(id);
+	}
+
+	/**
+	 * @Title ApplyInfoDao.selectByExample
+	 * @Description: 根据查询条件类，返回apply_info结果集
+	 * @param example
+	 *            通用查询条件类
+	 * @return List<ApplyInfo>apply_info结果集
+	 */
+	private List<ApplyInfo> selectByExample(Criteria example) {
+		return this.applyInfoMapper.selectByExample(example);
+	}
+
+	/**
+	 * @Title ApplyInfoDao.deleteByPrimaryKey
+	 * @Description: 根据属性名称，删除apply_info
+	 * @param id
+	 *            id
+	 * @return int 删除个数
+	 */
+	private int deleteByPrimaryKey(Integer id) {
+		return this.applyInfoMapper.deleteByPrimaryKey(id);
+	}
+
+	/**
+	 * @Title ApplyInfoDao.updateByPrimaryKeySelective
+	 * @Description: 根据主键更新apply_info部分字段
+	 * @param record
+	 *            要更新成为的ApplyInfo对象
+	 * @return int 更新记录数
+	 */
+	private int updateByPrimaryKeySelective(ApplyInfo record) {
+		return this.applyInfoMapper.updateByPrimaryKeySelective(record);
+	}
+
+	/**
+	 * @Title ApplyInfoDao.updateByPrimaryKey
+	 * @Description: 根据主键更新apply_info全部字段
+	 * @param record
+	 *            要更新成为的ApplyInfo对象
+	 * @return int 更新记录数
+	 */
+	private int updateByPrimaryKey(ApplyInfo record) {
+		return this.applyInfoMapper.updateByPrimaryKey(record);
+	}
+
+	/**
+	 * @Title ApplyInfoDao.deleteByExample
+	 * @Description: 根据查询条件，删除apply_info
+	 * @param example
+	 *            通用查询条件类
+	 * @return int 删除个数
+	 */
+	private int deleteByExample(Criteria example) {
+		return this.applyInfoMapper.deleteByExample(example);
+	}
+
+	/**
+	 * @Title ApplyInfoDao.updateByExampleSelective
+	 * @Description: 根据查询条件更新apply_info部分字段
+	 * @param record
+	 *            要更新成为的ApplyInfo对象
+	 * @param example
+	 *            更新记录的查询条件
+	 * @return int 更新记录数
+	 */
+	private int updateByExampleSelective(ApplyInfo record, Criteria example) {
+		return this.applyInfoMapper.updateByExampleSelective(record, example);
+	}
+
+	/**
+	 * @Title ApplyInfoDao.updateByExample
+	 * @Description: 根据查询条件更新apply_info全表字段
+	 * @param record
+	 *            要更新成为的ApplyInfo对象
+	 * @param example
+	 *            更新记录的查询条件
+	 * @return int 更新记录数
+	 */
+	private int updateByExample(ApplyInfo record, Criteria example) {
+		return this.applyInfoMapper.updateByExample(record, example);
+	}
+
+	/**
+	 * @Title ApplyInfoDao.insert
+	 * @Description: 插入一个apply_info
+	 * @param record
+	 *            apply_info的bean对象
+	 * @return int 插入个数
+	 */
+	private int insert(ApplyInfo record) {
+		return this.applyInfoMapper.insert(record);
+	}
+
+	/**
+	 * @Title ApplyInfoDao.insertSelective
+	 * @Description: 插入一个只有部分字段的apply_info
+	 * @param record
+	 *            只含部分字段的apply_info的bean对象
+	 * @return int 插入个数
+	 */
+	private int insertSelective(ApplyInfo record) {
+		return this.applyInfoMapper.insertSelective(record);
+	}
+
+	/**
+	 * 选择性保存申请信息
+	 * 
+	 * @param applyInfo
+	 *            申请信息
+	 * @return
+	 */
+	public Integer saveApplyInfo(ApplyInfo applyInfo) {
+		return this.insertSelective(applyInfo);
+	}
+
+	/**
+	 * 根据用户ID查询出申请记录
+	 * 
+	 * @param userId
+	 *            用户id
+	 * @return
+	 */
+	public List<ApplyInfo> queryApplyInfoByUserId(Integer userId) {
+		Criteria example = new Criteria();
+		Condition condition = example.createConditon();
+		condition.andEqualTo(TApplyInfo.APPLICANT, userId);
+		return this.selectByExample(example);
+	}
+
+	/**
+	 * 根据id选择性更新申请信息
+	 * 
+	 * @param applyInfo
+	 *            申请信息
+	 * @return
+	 */
+	public Integer updateApplyInfoSelectiveById(ApplyInfo applyInfo) {
+		return this.updateByPrimaryKeySelective(applyInfo);
+	}
+
+	/**
+	 * 根据学校id查询出该校的申请信息
+	 * 
+	 * @param schoolId
+	 *            学校id
+	 * @return
+	 */
+	public List<ApplyInfo> queryApplyInfoBySchoolId(Integer schoolId) {
+		Criteria example = new Criteria();
+		Condition condition = example.createConditon();
+		condition.andEqualTo(TApplyInfo.APPLY_SCHOOL, schoolId);
+		return this.selectByExample(example);
+	}
+
+	/**
+	 * 根据筛选条件查询出信息
+	 * 
+	 * @param schoolId
+	 * @param studentName
+	 * @param IdCard
+	 * @param applyStatu
+	 * @param schoolType
+	 * @return
+	 */
+	public List<ApplyInfo> queryApplyInfoByUserAndSChoolCondtion(Integer schoolId, String studentName, String IdCard,
+			Integer applyStatu, Integer schoolType) {
+
+		Criteria example = new Criteria();
+		Condition condition = example.createConditon();
+		condition.andEqualTo(TApplyInfo.IDCARD, IdCard).andEqualTo(TApplyInfo.APPLY_SCHOOL, schoolId)
+				.andEqualTo(TApplyInfo.APPLY_STATUS, applyStatu).andLike(TApplyInfo.STUDENT_NAME, studentName)
+				.andEqualTo(TApplyInfo.SCHOOL_TYPE, schoolType);
+		return this.selectByExample(example);
+	}
+
+	/**
+	 * 根据id选择性更新申请信息
+	 * 
+	 * @param applyInfo
+	 *            申请信息
+	 * @return
+	 */
+	public Integer updateApplyInfoById(ApplyInfo applyInfo) {
+		return this.updateByPrimaryKeySelective(applyInfo);
+	}
+
+	/**
+	 * 根据学校类型查询出不属于某种状态的申请信息
+	 * 
+	 * @param schoolType
+	 *            学校类型
+	 * @param status
+	 *            申请状态
+	 * @return
+	 */
+	public List<ApplyInfo> queryApplyInfoBySchoolTypeAndStatus(Integer schoolType, Integer status) {
+
+		Criteria example = new Criteria();
+		Condition condition = example.createConditon();
+		condition.andEqualTo(TApplyInfo.SCHOOL_TYPE, schoolType).andNotEqualTo(TApplyInfo.APPLY_STATUS, status);
+		return this.selectByExample(example);
+
+	}
+
+	/**
+	 * 根据学生类型(学校类型)、学生名字、身份证号，状态查询出符合条件的学生的信息
+	 * 
+	 * @param schoolType
+	 *            学生类型(学校类型)
+	 * @param studentName
+	 *            学生名字
+	 * @param IdCard
+	 *            身份证号
+	 * @param status
+	 *            状态
+	 * @return
+	 */
+	public List<ApplyInfo> queryApplyInfoByCondition(Integer schoolType, String studentName, String IdCard,
+			Integer status) {
+
+		Criteria example = new Criteria();
+		Condition condition = example.createConditon();
+		condition.andEqualTo(TApplyInfo.SCHOOL_TYPE, schoolType).andEqualTo(TApplyInfo.APPLY_STATUS, status)
+				.andEqualTo(TApplyInfo.IDCARD, IdCard).andLike(TApplyInfo.STUDENT_NAME, studentName);
+		return this.selectByExample(example);
+
+	}
+
+	/**
+	 * 根据学校id查询记录数
+	 * 
+	 * @param schoolId 学校的id
+	 * @return 记录数
+	 */
+	public Integer queryCountBySchool(Integer schoolId) {
+		Criteria example = new Criteria();
+		Condition condition = example.createConditon();
+		condition.andEqualTo(TApplyInfo.APPLY_SCHOOL, schoolId);
+		return this.countByExample(example);
+	}
+	
+	/**
+	 * 根据Id查询申请记录
+	 * @param id
+	 * @return
+	 */
+	public ApplyInfo queryApplyInfoById(Integer id){
+		return this.selectByPrimaryKey(id);
+	}
+}

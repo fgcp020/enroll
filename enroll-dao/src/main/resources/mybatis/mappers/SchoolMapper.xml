@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nercel.enroll.dao.mapperInterface.SchoolMapper" >
+  <resultMap id="BaseResultMap" type="com.nercel.enroll.domain.model.beans.School" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="school_type" property="schoolType" jdbcType="INTEGER" />
+    <result column="first_kind_number" property="firstKindNumber" jdbcType="INTEGER" />
+    <result column="second_kind_number" property="secondKindNumber" jdbcType="INTEGER" />
+    <result column="third_kind_type" property="thirdKindType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, name, school_type, first_kind_number, second_kind_number, third_kind_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.nercel.enroll.domain.mybatis.Criteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from school
+    <if test="_parameter != null" >
+      <include refid="common.Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from school
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from school
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nercel.enroll.domain.mybatis.Criteria" >
+    delete from school
+    <if test="_parameter != null" >
+      <include refid="common.Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nercel.enroll.domain.model.beans.School" >
+    insert into school (Id, name, school_type, 
+      first_kind_number, second_kind_number, third_kind_type
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{schoolType,jdbcType=INTEGER}, 
+      #{firstKindNumber,jdbcType=INTEGER}, #{secondKindNumber,jdbcType=INTEGER}, #{thirdKindType,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nercel.enroll.domain.model.beans.School" >
+    insert into school
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="schoolType != null" >
+        school_type,
+      </if>
+      <if test="firstKindNumber != null" >
+        first_kind_number,
+      </if>
+      <if test="secondKindNumber != null" >
+        second_kind_number,
+      </if>
+      <if test="thirdKindType != null" >
+        third_kind_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolType != null" >
+        #{schoolType,jdbcType=INTEGER},
+      </if>
+      <if test="firstKindNumber != null" >
+        #{firstKindNumber,jdbcType=INTEGER},
+      </if>
+      <if test="secondKindNumber != null" >
+        #{secondKindNumber,jdbcType=INTEGER},
+      </if>
+      <if test="thirdKindType != null" >
+        #{thirdKindType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nercel.enroll.domain.mybatis.Criteria" resultType="java.lang.Integer" >
+    select count(*) from school
+    <if test="_parameter != null" >
+      <include refid="common.Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update school
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schoolType != null" >
+        school_type = #{record.schoolType,jdbcType=INTEGER},
+      </if>
+      <if test="record.firstKindNumber != null" >
+        first_kind_number = #{record.firstKindNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.secondKindNumber != null" >
+        second_kind_number = #{record.secondKindNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.thirdKindType != null" >
+        third_kind_type = #{record.thirdKindType,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="common.Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update school
+    set Id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      school_type = #{record.schoolType,jdbcType=INTEGER},
+      first_kind_number = #{record.firstKindNumber,jdbcType=INTEGER},
+      second_kind_number = #{record.secondKindNumber,jdbcType=INTEGER},
+      third_kind_type = #{record.thirdKindType,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="common.Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nercel.enroll.domain.model.beans.School" >
+    update school
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolType != null" >
+        school_type = #{schoolType,jdbcType=INTEGER},
+      </if>
+      <if test="firstKindNumber != null" >
+        first_kind_number = #{firstKindNumber,jdbcType=INTEGER},
+      </if>
+      <if test="secondKindNumber != null" >
+        second_kind_number = #{secondKindNumber,jdbcType=INTEGER},
+      </if>
+      <if test="thirdKindType != null" >
+        third_kind_type = #{thirdKindType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nercel.enroll.domain.model.beans.School" >
+    update school
+    set name = #{name,jdbcType=VARCHAR},
+      school_type = #{schoolType,jdbcType=INTEGER},
+      first_kind_number = #{firstKindNumber,jdbcType=INTEGER},
+      second_kind_number = #{secondKindNumber,jdbcType=INTEGER},
+      third_kind_type = #{thirdKindType,jdbcType=INTEGER}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

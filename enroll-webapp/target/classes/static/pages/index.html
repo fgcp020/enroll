@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <title>当阳市智慧招生平台</title>
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?08fb645d349f1d4926469c9ae77df4ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+
+        //var ctxPath = "${ctxPath}";
+        var ctxPath = "";
+        var returnCitySN = {"cip": "255.255.255.255", "cid": "000000", "cname": "IP获取失败"};
+        function IETester(userAgent) {
+            var UA = userAgent || navigator.userAgent;
+            if (/msie/i.test(UA)) {
+                return UA.match(/msie (\d+\.\d+)/i)[1];
+            } else if (~UA.toLowerCase().indexOf('trident') && ~UA.indexOf('rv')) {
+                return UA.match(/rv:(\d+\.\d+)/)[1];
+            }
+            return false;
+        }
+        (function (bool) {
+            bool&&bool<10&&(window.location.href=ctxPath+'/indexError');
+        })(IETester()) //不传参数返回当前IE版本，如果不是IE内核浏览器，返回false
+    </script>
+
+    <link href="../res/img/fav.ico" rel="shortcut icon" type="image/x-icon"/>
+    <!--layui-->
+    <link rel="stylesheet" href="../plugins/layui/css/layui.css"/>
+    <!-- <link rel="stylesheet" href="../plugins/layui/css/layui.mobile.css"/> -->
+    <link rel="stylesheet" href="../common/css/basic.css"/>
+    <link rel="stylesheet" href="../common/css/iconfont.css"/>
+    <link rel="stylesheet" href="../common/css/animate.css"/>
+    <link rel="stylesheet" href="../plugins/easyui/easyui.css"/>
+    <!-- 自定义列表 -->
+    <link rel="stylesheet" href="../plugins/gridtable/main.css"/>
+    <link rel="stylesheet" href="../plugins/print/main.css"/>
+    <link rel="stylesheet" href="../plugins/kindergarten_print/main.css"/>
+    <link rel="stylesheet" href="../plugins/primary_print/main.css"/>
+    <!--时间 -->
+    <link rel="stylesheet" href="../plugins/datetimepicker/jquery.datetimepicker.css"/>
+    <script type="text/javascript" src="../plugins/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../plugins/jquery/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../plugins/jquery/jquery.form.js"></script>
+    <script type="text/javascript" src="../plugins/layui/layui.js"></script>
+    <script type="text/javascript" src="../common/js/layui_public.js"></script>
+    <script type="text/javascript" src="../plugins/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../plugins/angular/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="../plugins/angular/ocLazyLoad.min.js"></script>
+    <script type="text/javascript" src="../plugins/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../plugins/datetime/moment.min.js"></script>
+    <script type="text/javascript" src="../common/js/app_public.js"></script>
+    <script type="text/javascript" src="../common/js/app_directives.js"></script>
+    <script type="text/javascript" src="../common/js/app_services.js"></script>
+    <!-- 时间转换 -->
+    <script type="text/javascript" src="../plugins/jquery/xdate.js"></script>
+    <!-- 日历 -->
+    <script type="text/javascript"
+            src="../plugins/datetimepicker/jquery.datetimepicker.js?v=122"></script>
+    <!-- 上传 -->
+    <script type="text/javascript" src="../plugins/prettyfile/bootstrap-prettyfile.js"></script>
+    <!-- 二维码 -->
+    <script type="text/javascript" src="../plugins/qrcode/qrcode.min.js"></script>
+    <!-- 滚动条 -->
+    <link rel="stylesheet" href="../plugins/scrollbar/jquery.mCustomScrollbar.css"/>
+    <script type="text/javascript" src="../plugins/scrollbar/jquery.mousewheel.min.js"></script>
+    <script type="text/javascript"
+            src="../plugins/scrollbar/jquery.mCustomScrollbar.min.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="mainController" class="un-login">
+<div class="top_header" ng-if="!mobile">
+    <!-- <a href="#/{{_HOME}}" class="logo"><img src="/res/img/logo.png"></a> -->
+    <a class="logo"><img src="/res/img/logo.png"></a>
+    <!-- <ul class="layui-nav top_menu">
+        <li class="layui-nav-item"
+            ng-if="_USERINFO && _USERINFO.role_id!=140 &&  _USERINFO.role_id!=141 && _USERINFO.role_id!=142"
+            ng-repeat="item in _ALLMENU" ng-show="$index < 8 && item.res_url!='/admin#/bell'"
+            ng-class="{'layui-this': item.res_id == selectTopMenu.res_id}">
+            <a ng-href="${ctxPath}{{item.res_url}}" ng-show="_USERINFO" ng-bind="item.res_name"></a>
+        </li>
+    </ul> -->
+    <div class="top_right">
+        <div class="u_info" style="margin-top: 0;height: 50px;line-height: 60px;padding-right: 10px;">
+            <div class="cover">
+                <i class="iconfont icon-touxiang" ng-hide="_USERINFO.icon"></i>
+                <img ng-src="${ctxPath}{{_USERINFO.icon}}" ng-if="_USERINFO.icon"/>
+            </div>
+            <span class="u_text" style="height:50px;" ng-bind="_USERINFO.user_real_name"></span>
+            <!-- <span ng-click="upPassword()" style="color:#1E90FF;margin: 0 10px">修改密码</span> -->
+            <span ng-click="loginup()" style="color: #1E90FF;">退出</span>
+        </div>
+        <label class="sys_time" style="height: 35px" ng-bind="sys_dateTime"></label>
+    </div>
+</div>
+<div class="left_main_menu" ng-if="!mobile">
+    <div class="all_menu" id="publicMenu">
+        <div style="display: inline-block;width: 100%;margin-bottom: 50px;">
+            <ul class="layui-nav layui-nav-tree" lay-filter="dis_menu" ng-repeat="mmm in _ALLMENU"
+                >
+                <!-- ng-show="selectTopMenu.res_id == mmm.res_id"> -->
+                <li class="layui-nav-item layui-nav-itemed navigation">
+                    <a style=" color: #fff !important;background-color: rgb(134, 192, 223) !important;">管理导航</a>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed" ng-repeat="item in mmm.children"
+                    ng-class="{'layui-this': item.res_id == curentSel && item.res_url}">
+                    <a ng-href="{{item.res_url}}" class="hasHref" ng-click="setContent(item.res_url)"
+                       ng-if="item.res_url && item.res_url == curentSel" style="background-color:rgb(206, 229, 242) !important">
+                        <i class="iconfont {{item.res_icon}}"></i>{{item.res_name}}
+                    </a>
+                    <a ng-href="{{item.res_url}}" class="hasHref" ng-click="setContent(item.res_url)"
+                       ng-if="item.res_url && !(item.res_url == curentSel)">
+                        <i class="iconfont {{item.res_icon}}"></i>{{item.res_name}}
+                    </a>
+                    <a ng-if="!item.res_url">
+                        <i class="iconfont {{item.res_icon}}"></i>{{item.res_name}}
+                    </a>
+                    <dl class="layui-nav-child" ng-if="item.children && item.children.length > 0">
+                        <dd ng-repeat="model in item.children"
+                            ng-class="{'layui-this': model.res_id == selectSecondMenu.res_id}">
+                            <a ng-href="{{model.res_url}}"
+                               ng-show="model.res_type == 1">{{model.res_name}}</a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+<div class="center_main_content" ng-show="!mobile">
+    <div class="parent_view" ui-view=""></div>
+</div>
+<!--修改密码-->
+<div id="upPassword" style="display: none;">
+    <div class="layui-form-item">
+        <label class="layui-form-label text-right"><em>*</em>旧密码:</label>
+
+        <div class="layui-input-block">
+            <input type="password" class="col-xs-10 layui-input" ng-model="updatePassParam.oldpwd">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label text-right"><em>*</em>新密码:</label>
+
+        <div class="layui-input-block">
+            <input type="password" class="col-xs-10 layui-input" ng-model="updatePassParam.newpwd">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label text-right"><em>*</em>确认密码:</label>
+
+        <div class="layui-input-block">
+            <input type="password" class="col-xs-10 layui-input" ng-model="updatePassParam.newpwd_1">
+        </div>
+    </div>
+    <div class="layui-form-item text-center">
+        <button class="layui-btn" ng-click="cen_upPassword()">确&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定</button>
+    </div>
+</div>
+<script type="text/javascript" src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<div id="declarationDegree" xmlns="http://www.w3.org/1999/html" style="display:block;height: auto;top: 75px;left: 200px;width:auto">
+	<div class="audit_content">
+        <!--基本信息-->
+        <label class="form_label title col-xs-12" style="font-size: 20px;text-align: center;">{{pageTitle}}</label>
+        <div class="border_left border_right border_top" style="float: left;width: 100%">
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">审核状态:</label>
+                <span class="form_label col-xs-3 text_left weight" ng-bind="registerInfo.status"></span>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">学生姓名:</label>
+                <span class="form_label col-xs-3 text_left weight" ng-bind="registerInfo.studentName"></span>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">身份证号:</label>
+                <span class="form_label col-xs-3 text_left weight" ng-bind="registerInfo.idcard"></span>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">学生类别:</label>
+                <span class="form_label col-xs-3 text_left weight" ng-bind="registerInfo.studentType_text"></span>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">学校类别:</label>
+                <span class="form_label col-xs-3 text_left weight" ng-bind="registerInfo.schoolType_text"></span>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">申请学校:</label>
+                <span class="form_label col-xs-3 text_left weight" ng-bind="registerInfo.applySchoolName" ng-if="5 == registerInfo.applyStatus"></span>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">申请时间:</label>
+                <span class="form_label col-xs-3 text_left weight" ng-bind="registerInfo.applyTime_text"></span>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">审批人:</label>
+                <span class="form_label col-xs-3 text_left weight" ng-bind="registerInfo.approverName"></span>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">审批时间:</label>
+                <span class="form_label col-xs-3 text_left weight" ng-bind="registerInfo.approveTime_text"></span>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">审批意见:</label>
+                <span class="form_label col-xs-3 text_left weight" ng-bind="registerInfo.approveOpinion"></span>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">备注:</label>
+                <span class="form_label col-xs-3 text_left weight" ng-bind="registerInfo.tooltip"></span>
+            </div>
+        </div>
+	</div>
+</div>

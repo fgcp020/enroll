@@ -1,0 +1,111 @@
+#printTemplate {
+    width: 1024px;
+    position: relative;
+    margin: 0 auto;
+    display: block;
+}
+
+#printTemplate .temp {
+    float: left;
+    width: 100%;
+    position: relative;
+}
+
+#printTemplate .temp .index1 {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+}
+
+#printTemplate .temp .index1 img {
+    float: left;
+    width: 1024px;
+    height:768px;
+}
+
+#printTemplate .temp .index2 {
+    position: relative;
+    z-index: 2;
+    width: 1024px;
+    height:768px;
+}
+
+#printTemplate .lab_1 {
+    position: absolute;
+    top: 130px;
+    left: 780px;
+    font-size: 26px;
+    font-weight: 500;
+}
+
+#printTemplate .lab_2 {
+    position: absolute;
+    top: 308px;
+    right: 722px;
+    font-weight: 500;
+    font-size: 26px;
+}
+
+#printTemplate .lab_3 {
+    position: absolute;
+    top: 383px;
+    right: 280px;
+    font-weight: 500;
+    font-size: 26px;
+}
+
+#printTemplate .lab_4 {
+    position: absolute;
+    top: 433px;
+    right: 652px;
+    font-weight: 500;
+    font-size: 26px;
+}
+
+#printTemplate .lab_5 {
+    position: absolute;
+    top: 433px;
+    right: 552px;
+    font-weight: 500;
+    font-size: 26px;
+}
+
+#printTemplate .lab_6 {
+    position: absolute;
+    top: 433px;
+    right: 452px;
+    font-weight: 500;
+    font-size: 26px;
+}
+
+#printTemplate .lab_7 {
+    position: absolute;
+    top: 555px;
+    right: 150px;
+    font-weight: 500;
+    font-size: 22px;
+}
+
+#printTemplate .lab_8 {
+    position: absolute;
+    top: 604px;
+    right: 290px;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+#printTemplate .lab_9 {
+    position: absolute;
+    top: 604px;
+    right: 230px;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+#printTemplate .lab_10 {
+    position: absolute;
+    top: 604px;
+    right: 170px;
+    font-weight: 500;
+    font-size: 18px;
+}

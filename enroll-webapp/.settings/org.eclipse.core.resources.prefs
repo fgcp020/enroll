@@ -1,0 +1,16 @@
+eclipse.preferences.version=1
+encoding//src/main/java=UTF-8
+encoding//src/main/resources=UTF-8
+encoding//src/main/resources/application.properties=UTF-8
+encoding//src/main/resources/static/pages/enrollParent/page.css=UTF-8
+encoding//src/main/resources/static/pages/enrollParent/page.html=UTF-8
+encoding//src/main/resources/static/pages/home/page.html=UTF-8
+encoding//src/main/resources/static/pages/instructor/instructor.html=UTF-8
+encoding//src/main/resources/static/pages/login/page.css=UTF-8
+encoding//src/main/resources/static/pages/login/page.html=UTF-8
+encoding//src/main/resources/static/pages/register/register.html=UTF-8
+encoding//src/main/resources/static/pages/register/registerStatus/registerStatus.html=UTF-8
+encoding//src/main/resources/static/plugins/admin/css/admin.css=UTF-8
+encoding//src/main/resources/static/plugins/gridtable/main.html=UTF-8
+encoding//src/test/java=UTF-8
+encoding/<project>=UTF-8

@@ -1,0 +1,15 @@
+<div id="detail">
+    <div class="title">
+        {{row.article_title}}
+    </div>
+    <div class="text">
+        <p>
+            <span>分类：{{row.article_cat_name}}</span>
+            <span>发布时间：{{row.create_time}}</span>
+            <span>发布人：{{row.user_real_name}}</span>
+        </p>
+    </div>
+    <div class="pageMain" ng-bind-html="row.article_content">
+
+    </div>
+</div>

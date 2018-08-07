@@ -1,0 +1,15 @@
+package com.nercel.enroll.common.entity;
+
+public class SmsException extends Exception {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6571828828655735850L;
+
+	public SmsException(String message) {
+		super(message);
+		// TODO Auto-generated constructor stub
+	}
+
+}

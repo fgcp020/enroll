@@ -1,0 +1,40 @@
+package com.nercel.enroll.core.service.impl;
+
+import com.nercel.enroll.common.utils.JwtTokenProvider;
+import com.nercel.enroll.domain.common.CustomeException;
+
+import io.jsonwebtoken.Claims;
+
+/**
+ * 基础逻辑处理类
+ * 
+ * @author yishui
+ * @date 2018年6月14日
+ * @version 0.0.1
+ */
+public abstract class BaseService {
+
+	/**
+	 * 默认的参数名字
+	 */
+	protected final static String DEFAULT_TOKEN_NAME = "recordId";
+
+	/**
+	 * 对传入的token信息进行检查，若token有问题则跑出异常
+	 * 
+	 * @param token
+	 *            token信息
+	 * @return
+	 * @throws CustomeException
+	 */
+	protected Integer checkToken(String token) throws CustomeException {
+		Claims claims = new JwtTokenProvider(JwtTokenProvider.DEFAULT_KEY).parseToken(token);
+		if (claims == null) {
+			throw new CustomeException("传入的token不正确或者已经过期");
+		}
+		if (claims.get(DEFAULT_TOKEN_NAME, Integer.class) == null) {
+			throw new CustomeException("没有提取到有用的token信息");
+		}
+		return claims.get(DEFAULT_TOKEN_NAME, Integer.class);
+	}
+}

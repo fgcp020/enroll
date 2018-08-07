@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+  		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>网站后台管理模版</title>
+		<link rel="stylesheet" type="text/css" href="../../../plugins/admin/layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="../../../plugins/admin/css/admin.css"/>
+	</head>
+	<body>
+		<div class="layui-tab page-content-wrap">
+		  <!-- <ul class="layui-tab-title">
+		    <li class="layui-this">修改资料</li>
+		    <li>修改密码</li>
+		  </ul> -->
+		  <label class="form_label title col-xs-12" style="font-size: 20px;text-align: center;">{{pageTitle}}</label>
+		  <div class="layui-tab-content">
+		    <div class="layui-tab-item layui-show">
+		    	<form class="layui-form"  style="width: 90%;padding-top: 20px;">
+				  <div class="layui-form-item no_bottom_marg">
+				    <label class="layui-form-label">审核状态:</label>
+				    <div class="layui-input-block mobile_value_cls">
+				      <span class="mobile_value" ng-bind="registerInfo.status"></span>
+				    </div>
+				  </div>
+				  <div class="layui-form-item no_bottom_marg">
+				    <label class="layui-form-label">学生姓名:</label>
+				    <div class="layui-input-block mobile_value_cls">
+				      <span class="mobile_value" ng-bind="registerInfo.studentName"></span>
+				    </div>
+				  </div>
+				   <div class="layui-form-item no_bottom_marg">
+				    <label class="layui-form-label">身份证号:</label>
+				    <div class="layui-input-block mobile_value_cls">
+				      <span class="mobile_value" ng-bind="registerInfo.idcard"></span>
+				    </div>
+				  </div>
+				  <div class="layui-form-item no_bottom_marg">
+				    <label class="layui-form-label">学生类别:</label>
+				    <div class="layui-input-block mobile_value_cls">
+				      <span class="mobile_value" ng-bind="registerInfo.studentType_text"></span>
+				    </div>
+				  </div>
+				  <div class="layui-form-item no_bottom_marg">
+				    <label class="layui-form-label">学校类别:</label>
+				    <div class="layui-input-block mobile_value_cls">
+				      <span class="mobile_value" ng-bind="registerInfo.schoolType_text"></span>
+				    </div>
+				  </div>
+				  <div class="layui-form-item no_bottom_marg" ng-if="5 == registerInfo.applyStatus">
+				    <label class="layui-form-label">申请学校:</label>
+				    <div class="layui-input-block mobile_value_cls">
+				      <span class="mobile_value" ng-bind="registerInfo.applySchoolName"></span>
+				    </div>
+				  </div>
+				  <div class="layui-form-item no_bottom_marg">
+				    <label class="layui-form-label">申请时间:</label>
+				    <div class="layui-input-block mobile_value_cls">
+				      <span class="mobile_value" ng-bind="registerInfo.applyTime_text"></span>
+				    </div>
+				  </div>
+				  <div class="layui-form-item no_bottom_marg">
+				    <label class="layui-form-label">审批时间:</label>
+				    <div class="layui-input-block mobile_value_cls">
+				      <span class="mobile_value" ng-bind="registerInfo.approveTime_text"></span>
+				    </div>
+				  </div>
+				  <div class="layui-form-item no_bottom_marg">
+				    <label class="layui-form-label">审批意见:</label>
+				    <div class="layui-input-block mobile_value_cls">
+				      <span class="mobile_value" ng-bind="registerInfo.approveOpinion"></span>
+				    </div>
+				  </div>
+				  <div class="layui-form-item no_bottom_marg">
+				    <label class="layui-form-label">备注:</label>
+				    <div class="layui-input-block mobile_value_cls">
+				      <span class="mobile_value" ng-bind="registerInfo.tooltip"></span>
+				    </div>
+				  </div>
+				</form>
+		    </div>
+		    
+		  </div>
+		</div>
+	<script src="../../../plugins/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

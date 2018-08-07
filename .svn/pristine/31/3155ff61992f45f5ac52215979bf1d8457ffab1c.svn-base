@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nercel.enroll.dao.mapperInterface.PlanTimeMapper" >
+  <resultMap id="BaseResultMap" type="com.nercel.enroll.domain.model.beans.PlanTime" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="register_start_time" property="registerStartTime" jdbcType="TIMESTAMP" />
+    <result column="register_end_time" property="registerEndTime" jdbcType="TIMESTAMP" />
+    <result column="apply_start_time" property="applyStartTime" jdbcType="TIMESTAMP" />
+    <result column="apply_end_time" property="applyEndTime" jdbcType="TIMESTAMP" />
+    <result column="school_check_start_time" property="schoolCheckStartTime" jdbcType="TIMESTAMP" />
+    <result column="school_check_end_time" property="schoolCheckEndTime" jdbcType="TIMESTAMP" />
+    <result column="school_invest_start_time" property="schoolInvestStartTime" jdbcType="TIMESTAMP" />
+    <result column="school_invest_end_time" property="schoolInvestEndTime" jdbcType="TIMESTAMP" />
+    <result column="city_check_time_start_time" property="cityCheckTimeStartTime" jdbcType="TIMESTAMP" />
+    <result column="city_check_time_end_time" property="cityCheckTimeEndTime" jdbcType="TIMESTAMP" />
+    <result column="city_plan_start_time" property="cityPlanStartTime" jdbcType="TIMESTAMP" />
+    <result column="city_plan_end_time" property="cityPlanEndTime" jdbcType="TIMESTAMP" />
+    <result column="print_notice_start_time" property="printNoticeStartTime" jdbcType="TIMESTAMP" />
+    <result column="print_notice_end_time" property="printNoticeEndTime" jdbcType="TIMESTAMP" />
+    <result column="division_start_time" property="divisionStartTime" jdbcType="TIMESTAMP" />
+    <result column="division_end_time" property="divisionEndTime" jdbcType="TIMESTAMP" />
+    <result column="data_abutment_start_time" property="dataAbutmentStartTime" jdbcType="TIMESTAMP" />
+    <result column="data_abutment_end_time" property="dataAbutmentEndTime" jdbcType="TIMESTAMP" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, register_start_time, register_end_time, apply_start_time, apply_end_time, school_check_start_time, 
+    school_check_end_time, school_invest_start_time, school_invest_end_time, city_check_time_start_time, 
+    city_check_time_end_time, city_plan_start_time, city_plan_end_time, print_notice_start_time, 
+    print_notice_end_time, division_start_time, division_end_time, data_abutment_start_time, 
+    data_abutment_end_time, type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.nercel.enroll.domain.mybatis.Criteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from plan_time
+    <if test="_parameter != null" >
+      <include refid="common.Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from plan_time
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from plan_time
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nercel.enroll.domain.mybatis.Criteria" >
+    delete from plan_time
+    <if test="_parameter != null" >
+      <include refid="common.Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nercel.enroll.domain.model.beans.PlanTime" >
+    insert into plan_time (Id, register_start_time, register_end_time, 
+      apply_start_time, apply_end_time, school_check_start_time, 
+      school_check_end_time, school_invest_start_time, 
+      school_invest_end_time, city_check_time_start_time, 
+      city_check_time_end_time, city_plan_start_time, 
+      city_plan_end_time, print_notice_start_time, 
+      print_notice_end_time, division_start_time, 
+      division_end_time, data_abutment_start_time, 
+      data_abutment_end_time, type)
+    values (#{id,jdbcType=INTEGER}, #{registerStartTime,jdbcType=TIMESTAMP}, #{registerEndTime,jdbcType=TIMESTAMP}, 
+      #{applyStartTime,jdbcType=TIMESTAMP}, #{applyEndTime,jdbcType=TIMESTAMP}, #{schoolCheckStartTime,jdbcType=TIMESTAMP}, 
+      #{schoolCheckEndTime,jdbcType=TIMESTAMP}, #{schoolInvestStartTime,jdbcType=TIMESTAMP}, 
+      #{schoolInvestEndTime,jdbcType=TIMESTAMP}, #{cityCheckTimeStartTime,jdbcType=TIMESTAMP}, 
+      #{cityCheckTimeEndTime,jdbcType=TIMESTAMP}, #{cityPlanStartTime,jdbcType=TIMESTAMP}, 
+      #{cityPlanEndTime,jdbcType=TIMESTAMP}, #{printNoticeStartTime,jdbcType=TIMESTAMP}, 
+      #{printNoticeEndTime,jdbcType=TIMESTAMP}, #{divisionStartTime,jdbcType=TIMESTAMP}, 
+      #{divisionEndTime,jdbcType=TIMESTAMP}, #{dataAbutmentStartTime,jdbcType=TIMESTAMP}, 
+      #{dataAbutmentEndTime,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nercel.enroll.domain.model.beans.PlanTime" >
+    insert into plan_time
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="registerStartTime != null" >
+        register_start_time,
+      </if>
+      <if test="registerEndTime != null" >
+        register_end_time,
+      </if>
+      <if test="applyStartTime != null" >
+        apply_start_time,
+      </if>
+      <if test="applyEndTime != null" >
+        apply_end_time,
+      </if>
+      <if test="schoolCheckStartTime != null" >
+        school_check_start_time,
+      </if>
+      <if test="schoolCheckEndTime != null" >
+        school_check_end_time,
+      </if>
+      <if test="schoolInvestStartTime != null" >
+        school_invest_start_time,
+      </if>
+      <if test="schoolInvestEndTime != null" >
+        school_invest_end_time,
+      </if>
+      <if test="cityCheckTimeStartTime != null" >
+        city_check_time_start_time,
+      </if>
+      <if test="cityCheckTimeEndTime != null" >
+        city_check_time_end_time,
+      </if>
+      <if test="cityPlanStartTime != null" >
+        city_plan_start_time,
+      </if>
+      <if test="cityPlanEndTime != null" >
+        city_plan_end_time,
+      </if>
+      <if test="printNoticeStartTime != null" >
+        print_notice_start_time,
+      </if>
+      <if test="printNoticeEndTime != null" >
+        print_notice_end_time,
+      </if>
+      <if test="divisionStartTime != null" >
+        division_start_time,
+      </if>
+      <if test="divisionEndTime != null" >
+        division_end_time,
+      </if>
+      <if test="dataAbutmentStartTime != null" >
+        data_abutment_start_time,
+      </if>
+      <if test="dataAbutmentEndTime != null" >
+        data_abutment_end_time,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="registerStartTime != null" >
+        #{registerStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="registerEndTime != null" >
+        #{registerEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyStartTime != null" >
+        #{applyStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyEndTime != null" >
+        #{applyEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="schoolCheckStartTime != null" >
+        #{schoolCheckStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="schoolCheckEndTime != null" >
+        #{schoolCheckEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="schoolInvestStartTime != null" >
+        #{schoolInvestStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="schoolInvestEndTime != null" >
+        #{schoolInvestEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cityCheckTimeStartTime != null" >
+        #{cityCheckTimeStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cityCheckTimeEndTime != null" >
+        #{cityCheckTimeEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cityPlanStartTime != null" >
+        #{cityPlanStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cityPlanEndTime != null" >
+        #{cityPlanEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="printNoticeStartTime != null" >
+        #{printNoticeStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="printNoticeEndTime != null" >
+        #{printNoticeEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="divisionStartTime != null" >
+        #{divisionStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="divisionEndTime != null" >
+        #{divisionEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataAbutmentStartTime != null" >
+        #{dataAbutmentStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataAbutmentEndTime != null" >
+        #{dataAbutmentEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nercel.enroll.domain.mybatis.Criteria" resultType="java.lang.Integer" >
+    select count(*) from plan_time
+    <if test="_parameter != null" >
+      <include refid="common.Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update plan_time
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.registerStartTime != null" >
+        register_start_time = #{record.registerStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.registerEndTime != null" >
+        register_end_time = #{record.registerEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.applyStartTime != null" >
+        apply_start_time = #{record.applyStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.applyEndTime != null" >
+        apply_end_time = #{record.applyEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.schoolCheckStartTime != null" >
+        school_check_start_time = #{record.schoolCheckStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.schoolCheckEndTime != null" >
+        school_check_end_time = #{record.schoolCheckEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.schoolInvestStartTime != null" >
+        school_invest_start_time = #{record.schoolInvestStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.schoolInvestEndTime != null" >
+        school_invest_end_time = #{record.schoolInvestEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cityCheckTimeStartTime != null" >
+        city_check_time_start_time = #{record.cityCheckTimeStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cityCheckTimeEndTime != null" >
+        city_check_time_end_time = #{record.cityCheckTimeEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cityPlanStartTime != null" >
+        city_plan_start_time = #{record.cityPlanStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cityPlanEndTime != null" >
+        city_plan_end_time = #{record.cityPlanEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.printNoticeStartTime != null" >
+        print_notice_start_time = #{record.printNoticeStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.printNoticeEndTime != null" >
+        print_notice_end_time = #{record.printNoticeEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.divisionStartTime != null" >
+        division_start_time = #{record.divisionStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.divisionEndTime != null" >
+        division_end_time = #{record.divisionEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dataAbutmentStartTime != null" >
+        data_abutment_start_time = #{record.dataAbutmentStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dataAbutmentEndTime != null" >
+        data_abutment_end_time = #{record.dataAbutmentEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="common.Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update plan_time
+    set Id = #{record.id,jdbcType=INTEGER},
+      register_start_time = #{record.registerStartTime,jdbcType=TIMESTAMP},
+      register_end_time = #{record.registerEndTime,jdbcType=TIMESTAMP},
+      apply_start_time = #{record.applyStartTime,jdbcType=TIMESTAMP},
+      apply_end_time = #{record.applyEndTime,jdbcType=TIMESTAMP},
+      school_check_start_time = #{record.schoolCheckStartTime,jdbcType=TIMESTAMP},
+      school_check_end_time = #{record.schoolCheckEndTime,jdbcType=TIMESTAMP},
+      school_invest_start_time = #{record.schoolInvestStartTime,jdbcType=TIMESTAMP},
+      school_invest_end_time = #{record.schoolInvestEndTime,jdbcType=TIMESTAMP},
+      city_check_time_start_time = #{record.cityCheckTimeStartTime,jdbcType=TIMESTAMP},
+      city_check_time_end_time = #{record.cityCheckTimeEndTime,jdbcType=TIMESTAMP},
+      city_plan_start_time = #{record.cityPlanStartTime,jdbcType=TIMESTAMP},
+      city_plan_end_time = #{record.cityPlanEndTime,jdbcType=TIMESTAMP},
+      print_notice_start_time = #{record.printNoticeStartTime,jdbcType=TIMESTAMP},
+      print_notice_end_time = #{record.printNoticeEndTime,jdbcType=TIMESTAMP},
+      division_start_time = #{record.divisionStartTime,jdbcType=TIMESTAMP},
+      division_end_time = #{record.divisionEndTime,jdbcType=TIMESTAMP},
+      data_abutment_start_time = #{record.dataAbutmentStartTime,jdbcType=TIMESTAMP},
+      data_abutment_end_time = #{record.dataAbutmentEndTime,jdbcType=TIMESTAMP},
+      type = #{record.type,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="common.Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nercel.enroll.domain.model.beans.PlanTime" >
+    update plan_time
+    <set >
+      <if test="registerStartTime != null" >
+        register_start_time = #{registerStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="registerEndTime != null" >
+        register_end_time = #{registerEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyStartTime != null" >
+        apply_start_time = #{applyStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyEndTime != null" >
+        apply_end_time = #{applyEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="schoolCheckStartTime != null" >
+        school_check_start_time = #{schoolCheckStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="schoolCheckEndTime != null" >
+        school_check_end_time = #{schoolCheckEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="schoolInvestStartTime != null" >
+        school_invest_start_time = #{schoolInvestStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="schoolInvestEndTime != null" >
+        school_invest_end_time = #{schoolInvestEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cityCheckTimeStartTime != null" >
+        city_check_time_start_time = #{cityCheckTimeStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cityCheckTimeEndTime != null" >
+        city_check_time_end_time = #{cityCheckTimeEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cityPlanStartTime != null" >
+        city_plan_start_time = #{cityPlanStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cityPlanEndTime != null" >
+        city_plan_end_time = #{cityPlanEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="printNoticeStartTime != null" >
+        print_notice_start_time = #{printNoticeStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="printNoticeEndTime != null" >
+        print_notice_end_time = #{printNoticeEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="divisionStartTime != null" >
+        division_start_time = #{divisionStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="divisionEndTime != null" >
+        division_end_time = #{divisionEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataAbutmentStartTime != null" >
+        data_abutment_start_time = #{dataAbutmentStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataAbutmentEndTime != null" >
+        data_abutment_end_time = #{dataAbutmentEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nercel.enroll.domain.model.beans.PlanTime" >
+    update plan_time
+    set register_start_time = #{registerStartTime,jdbcType=TIMESTAMP},
+      register_end_time = #{registerEndTime,jdbcType=TIMESTAMP},
+      apply_start_time = #{applyStartTime,jdbcType=TIMESTAMP},
+      apply_end_time = #{applyEndTime,jdbcType=TIMESTAMP},
+      school_check_start_time = #{schoolCheckStartTime,jdbcType=TIMESTAMP},
+      school_check_end_time = #{schoolCheckEndTime,jdbcType=TIMESTAMP},
+      school_invest_start_time = #{schoolInvestStartTime,jdbcType=TIMESTAMP},
+      school_invest_end_time = #{schoolInvestEndTime,jdbcType=TIMESTAMP},
+      city_check_time_start_time = #{cityCheckTimeStartTime,jdbcType=TIMESTAMP},
+      city_check_time_end_time = #{cityCheckTimeEndTime,jdbcType=TIMESTAMP},
+      city_plan_start_time = #{cityPlanStartTime,jdbcType=TIMESTAMP},
+      city_plan_end_time = #{cityPlanEndTime,jdbcType=TIMESTAMP},
+      print_notice_start_time = #{printNoticeStartTime,jdbcType=TIMESTAMP},
+      print_notice_end_time = #{printNoticeEndTime,jdbcType=TIMESTAMP},
+      division_start_time = #{divisionStartTime,jdbcType=TIMESTAMP},
+      division_end_time = #{divisionEndTime,jdbcType=TIMESTAMP},
+      data_abutment_start_time = #{dataAbutmentStartTime,jdbcType=TIMESTAMP},
+      data_abutment_end_time = #{dataAbutmentEndTime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=INTEGER}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

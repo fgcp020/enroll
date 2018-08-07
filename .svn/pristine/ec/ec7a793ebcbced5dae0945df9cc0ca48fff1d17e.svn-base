@@ -1,0 +1,111 @@
+<div id="enrollParentController_page" ng-class="{'loginController_page_mobile':mobile}">
+    <div class="page_plan" ng-if="!mobile">
+        <div class="page_content">
+            <div class="page_top">
+                    <div class="top_logo">
+                        <img ng-src="/res/img/logologin1.png" alt=""/>
+                        <a class="page_enroll_middle page_common col-xs-4" href="#login" style="float: right;width: auto;margin-top: 20px;padding-right: 0px;">管理员登录</a>
+                    </div>
+            </div>
+            <div class="page_center">
+                  <div class="page_center_left" ng-if="notice_have">
+
+                      <div class="page_notice" id="notice">
+                          <div class="page_proclamation" style="float: left;font-size: 20px;color: white;">公告</div>
+                          <div class="page_ul" style="float: left;margin-top: 20px;width: 100%">
+                          <ul style="line-height: 36px;width: 400px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></ul>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="page_center_right">
+                        <div class="page_enter">
+                                <div class="page_top" style="border: none;background-color: #fff;color: #000">
+                                    <span style="margin: 0;width: 100%;font-size: 20px;" ng-click="loginInfo.user_type = 1" ng-class="{'layui-this': loginInfo.user_type == 1 || loginInfo.user_type == null}">家长登录</span>
+                                </div>
+                            <div class="page_row">
+                                  <div class="page_row_matter">
+                                      <input class="form_control" ng-model="loginInfo.user_name" type="text"  placeholder="学生身份证号">
+                                  </div>
+                                <div class="page_row_matter">
+                                      <input id="enter_password" class="form_control" ng-model="loginInfo.user_pwd" type="password"  placeholder="密码"  />
+                                  </div>
+                                <div class="page_row_matter">
+                                    <i class="box" ng-class="{'at':loginInfo.checked}" ng-click="loginInfo.checked=!loginInfo.checked"></i>
+                                    <span style="float:left;margin-left: 5px;font-size: 15px;line-height: 20px;cursor: pointer" ng-click="loginInfo.checked=!loginInfo.checked">记住密码</span>
+                                    <!-- <a class="page_forget" href="/forget_pwd">忘记密码</a> -->
+                                  </div>
+                                <div class="page_row_matter">
+                                    <button id="login_enter" class="block layui-btn layui-btn-normal layui-btn-big" type="submit" ng-click="_singIn()" >登录</button>
+                                </div>
+                            </div>
+                            <!--注册-->
+                            <div class="page_enroll" id="page_sign">
+                                <!-- <a class="page_enroll_left page_common col-xs-4" style="padding-left: 4px" href="{{ctxPath}}/kindergarten_register">幼儿园新生注册</a> -->
+                                <a class="page_enroll_middle page_common col-xs-4" href="#registers#primary">小学新生注册</a>
+                                <a class="page_enroll_right page_common col-xs-4" href="#registers#junior">初中新生注册</a>
+                            </div>
+
+                        </div>
+                      <div id="qrcode" style="border: 2px solid #ccc;width: 100px;position: absolute;left: 20px;bottom:20px;visibility:hidden"></div>
+                      <!-- <div class="prompt_tips" style="position: absolute;color: #fff;top: 580px;left: 135px;font-size: 14px">扫一扫，用手机进行学位申报</div> -->
+                  </div>
+            </div>
+
+        </div>
+    </div>
+    <center ng-if="mobile" class="page_content_mobile" style="width:100%">
+    	<!-- <a class="page_enroll_middle page_common col-xs-4" href="#enrollParent" style="float: right;width: auto;margin-top: 20px;padding-right: 0px;">家长登录</a> -->
+    	<div class="top_logo">
+            <img ng-src="/res/img/mobile_logo.png" style="width:20%;"/>
+        </div>
+        <h1 style="font-size: 20px;margin:30px 0 30px 0">当阳市中小学智慧招生平台</h1>
+        <div style="width: 300px;">
+		     <div>
+	             <div class="page_top" style="border: none;color: #000;width: 300px;display: inline-flex;height:30px">
+		            <div style="width: 50%;font-size: 20px;float:left;background-color: #fff;border-radius: 9px 9px 0 0;border: 1px #ddd solid;border-bottom: none;">家长登录</a></div>
+		             <div style="width: 50%;font-size: 20px;float:right;"><a href="#login">管理员登录</a></div>
+		         </div>
+		         <div>
+		               <div >
+		                   <input class="form_control" ng-model="loginInfo.user_name" type="text"  placeholder="账号" />
+		               </div>
+		             <div style="margin-bottom:20px">
+		                   <input id="enter_password" class="form_control" ng-model="loginInfo.user_pwd" type="password"  placeholder="密码"  />
+		               </div>
+		             <div class="">
+		                 <i class="box" ng-class="{'at':loginInfo.checked}" ng-click="loginInfo.checked=!loginInfo.checked"></i>
+		                 <span style="float:left;margin-left: 5px;font-size: 15px;line-height: 20px;cursor: pointer" ng-click="loginInfo.checked=!loginInfo.checked">记住密码</span>
+		                </div>
+		              <div class="">
+		                  <button id="login_enter" class="block layui-btn layui-btn-normal layui-btn-big" type="submit" ng-click="_singIn()" >登录</button>
+		              </div>
+		          </div>
+		          <div style="margin:20px 0 20px 0">
+                      <a style="color:#00BCD4;font-size: 16px;" href="#registers#primary">小学新生注册 ></a>
+                  </div>
+					<div>
+                      <a style="color:#00BCD4;font-size: 16px;" href="#registers#junior">初中新生注册 ></a>
+                  </div>
+		      </div>
+		</div>
+    </center>
+</div>
+<!-- <script>
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
+        width : 96,//设置宽高
+        height : 96
+    });
+    var bool=!!window.location.href.match('https://');
+    var url= bool && window.location.href.replace('https://','')||window.location.href.replace('http://','');
+    qrcode.makeCode((bool && 'https://' || 'http://')+url.substring(0,url.indexOf('/'))+ctxPath+'/mobile');
+</script>
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?08fb645d349f1d4926469c9ae77df4ac";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script> -->

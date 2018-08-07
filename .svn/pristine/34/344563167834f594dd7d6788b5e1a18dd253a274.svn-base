@@ -1,0 +1,203 @@
+package com.nercel.enroll.core.service.impl;
+
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import com.nercel.enroll.common.entity.DateFormatException;
+import com.nercel.enroll.common.utils.SmsUtil;
+import com.nercel.enroll.core.service.BasicDataService;
+import com.nercel.enroll.core.service.utils.DateUtil;
+import com.nercel.enroll.dao.impl.CertificatesTypeDao;
+import com.nercel.enroll.dao.impl.CountryDao;
+import com.nercel.enroll.dao.impl.NationDao;
+import com.nercel.enroll.dao.impl.PlanTimeDao;
+import com.nercel.enroll.dao.impl.RelationalDao;
+import com.nercel.enroll.dao.impl.SchoolDao;
+import com.nercel.enroll.dao.impl.SmsCodeDao;
+import com.nercel.enroll.dao.impl.StreetSchoolDao;
+import com.nercel.enroll.dao.impl.StudentInfoDao;
+import com.nercel.enroll.domain.common.CustomeException;
+import com.nercel.enroll.domain.dto.PlanTimeDto;
+import com.nercel.enroll.domain.model.beans.CertificatesType;
+import com.nercel.enroll.domain.model.beans.Country;
+import com.nercel.enroll.domain.model.beans.Nation;
+import com.nercel.enroll.domain.model.beans.PlanTime;
+import com.nercel.enroll.domain.model.beans.Relational;
+import com.nercel.enroll.domain.model.beans.School;
+import com.nercel.enroll.domain.model.beans.SmsCode;
+import com.nercel.enroll.domain.model.beans.StreetSchool;
+import com.nercel.enroll.domain.model.beans.StudentInfo;
+
+@Service
+public class BasicDataServiceImpl implements BasicDataService {
+	private static final Logger LOG = LoggerFactory.getLogger(BasicDataServiceImpl.class);
+	/**
+	 * 默认短信发送间隔时间为2分钟
+	 */
+	private final static Integer MSG_DEFAULT_TIME = 2;
+	@Autowired
+	private NationDao nationDao;
+
+	@Autowired
+	private CountryDao countryDao;
+
+	@Autowired
+	private CertificatesTypeDao certificatesTypeDao;
+
+	@Autowired
+	private RelationalDao relationalDao;
+
+	@Autowired
+	private SchoolDao schoolDao;
+
+	@Autowired
+	private StreetSchoolDao streetSchoolDao;
+
+	@Autowired
+	private StudentInfoDao studentInfoDao;
+	@Autowired
+	private SmsCodeDao smsCodeDao;
+	@Value("${messageIntervalTime}")
+	private Integer messageIntervalTime;
+	@Autowired
+	private PlanTimeDao planTimeDao;
+
+	@Override
+	public List<Nation> queryAllNation() {
+		return nationDao.queryAllNation();
+	}
+
+	@Override
+	public List<Country> queryAllCountry() {
+		return countryDao.queryAllCountry();
+	}
+
+	@Override
+	public List<CertificatesType> queryAllCertificatesType() {
+		return certificatesTypeDao.queryAllCertificatesType();
+	}
+
+	@Override
+	public List<Relational> queryAllRelational() {
+		return relationalDao.queryAllRelational();
+	}
+
+	@Override
+	public List<School> queryAllSchool() {
+		return schoolDao.queryAllSchool();
+	}
+
+	@Override
+	public List<StreetSchool> queryAllStreetSchool() {
+		return streetSchoolDao.queryAllStreetSchool();
+	}
+
+	@Override
+	public List<StudentInfo> queryAllStudentInfo() {
+		return studentInfoDao.queryAllStudentInfo();
+	}
+
+	@Override
+	public List<StudentInfo> queryStudentInfo(String studentNumber) {
+		return studentInfoDao.queryStudentInfo(studentNumber);
+	}
+
+	@Override
+	public List<School> querySchoolByType(Integer schoolType) {
+		return schoolDao.querySchoolByType(schoolType);
+	}
+
+	@Override
+	public Boolean sendSmsCode(String phone) throws IOException, Exception {
+		if (StringUtils.isBlank(phone)) {
+			return false;
+		}
+		List<SmsCode> smsCodes = smsCodeDao.querySmsCodeByPhone(phone);
+		Boolean flag = false;
+		for (SmsCode sms : smsCodes) {
+			if (System.currentTimeMillis()
+					- sms.getCreateTime() < (messageIntervalTime == null ? MSG_DEFAULT_TIME : messageIntervalTime) * 60
+							* 1000) {
+				flag = true;
+				break;
+			}
+		}
+		if (flag) {
+			throw new CustomeException(String.format("相同手机号的短信验证码获取时间间隔必须大于 %s分钟",
+					(messageIntervalTime == null ? MSG_DEFAULT_TIME : messageIntervalTime)));
+		}
+
+		// 短信验证码
+		String code = ((int) ((Math.random() * 9 + 1) * 100000)) + "";
+		// 验证码内容
+		Boolean result = SmsUtil.sendValidateCode(phone, code);
+		if (result) {
+			smsCodeDao.saveSmsCode(new SmsCode(phone, code, System.currentTimeMillis()));
+		}
+		return result;
+
+	}
+
+	@Override
+	public Boolean querySmsCode(String phone, String smsCode) {
+		if (StringUtils.isBlank(phone) || StringUtils.isBlank(smsCode)) {
+			return false;
+		}
+		List<SmsCode> smsCodes = smsCodeDao.querySmsCodeByPhoneAndCode(phone, smsCode);
+		Boolean flag = false;
+		// 防止匹配文件里没有配置
+		if (messageIntervalTime == null) {
+			messageIntervalTime = MSG_DEFAULT_TIME;
+		}
+		for (SmsCode sms : smsCodes) {
+			if (System.currentTimeMillis() - sms.getCreateTime() < messageIntervalTime * 60 * 1000) {
+				flag = true;
+				break;
+			}
+		}
+		return flag;
+	}
+
+	@Override
+	public Boolean savePlanTime(String token, PlanTimeDto planTimeDto) {
+		Boolean flag = false;
+		if (planTimeDto != null) {
+			try {
+				Integer result = planTimeDao
+						.savePlanTime(new PlanTime(DateUtil.convertDateTime(planTimeDto.getRegisterStartTime()),
+								DateUtil.convertDateTime(planTimeDto.getRegisterEndTime()),
+								DateUtil.convertDateTime(planTimeDto.getApplyStartTime()),
+								DateUtil.convertDateTime(planTimeDto.getApplyEndTime()),
+								DateUtil.convertDateTime(planTimeDto.getSchoolCheckStartTime()),
+								DateUtil.convertDateTime(planTimeDto.getSchoolCheckEndTime()),
+								DateUtil.convertDateTime(planTimeDto.getSchoolInvestStartTime()),
+								DateUtil.convertDateTime(planTimeDto.getSchoolInvestEndTime()),
+								DateUtil.convertDateTime(planTimeDto.getCityCheckTimeStartTime()),
+								DateUtil.convertDateTime(planTimeDto.getCityCheckTimeEndTime()),
+								DateUtil.convertDateTime(planTimeDto.getCityPlanStartTime()),
+								DateUtil.convertDateTime(planTimeDto.getCityPlanEndTime()),
+								DateUtil.convertDateTime(planTimeDto.getPrintNoticeStartTime()),
+								DateUtil.convertDateTime(planTimeDto.getPrintNoticeEndTime()),
+								DateUtil.convertDateTime(planTimeDto.getDivisionStartTime()),
+								DateUtil.convertDateTime(planTimeDto.getDivisionEndTime()),
+								DateUtil.convertDateTime(planTimeDto.getDataAbutmentStartTime()),
+								DateUtil.convertDateTime(planTimeDto.getDataAbutmentEndTime())));
+				flag = (result == 1) ? true : false;
+			} catch (DateFormatException e) {
+				LOG.error(e.getMessage());
+			} catch (ParseException e) {
+				LOG.error(e.getMessage());
+			}
+		}
+		return flag;
+	}
+
+}

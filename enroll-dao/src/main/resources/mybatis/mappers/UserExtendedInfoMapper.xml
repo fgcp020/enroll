@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nercel.enroll.dao.mapperInterface.UserExtendedInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.nercel.enroll.domain.model.beans.UserExtendedInfo" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="homeplace" property="homeplace" jdbcType="VARCHAR" />
+    <result column="native_place" property="nativePlace" jdbcType="VARCHAR" />
+    <result column="nation" property="nation" jdbcType="INTEGER" />
+    <result column="no_mainland" property="noMainland" jdbcType="BIT" />
+    <result column="country" property="country" jdbcType="INTEGER" />
+    <result column="id_type" property="idType" jdbcType="INTEGER" />
+    <result column="health_condition" property="healthCondition" jdbcType="INTEGER" />
+    <result column="one_child" property="oneChild" jdbcType="BIT" />
+    <result column="graduated" property="graduated" jdbcType="BIT" />
+    <result column="former_school" property="formerSchool" jdbcType="VARCHAR" />
+    <result column="school_number" property="schoolNumber" jdbcType="VARCHAR" />
+    <result column="left_behind_children" property="leftBehindChildren" jdbcType="BIT" />
+    <result column="work_to_city" property="workToCity" jdbcType="BIT" />
+    <result column="orphan" property="orphan" jdbcType="BIT" />
+    <result column="disability_type" property="disabilityType" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="id_number" property="idNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, homeplace, native_place, nation, no_mainland, country, id_type, health_condition, 
+    one_child, graduated, former_school, school_number, left_behind_children, work_to_city, 
+    orphan, disability_type, user_id, create_time, update_time, id_number
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.nercel.enroll.domain.mybatis.Criteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_extended_info
+    <if test="_parameter != null" >
+      <include refid="common.Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_extended_info
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_extended_info
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nercel.enroll.domain.mybatis.Criteria" >
+    delete from user_extended_info
+    <if test="_parameter != null" >
+      <include refid="common.Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nercel.enroll.domain.model.beans.UserExtendedInfo" >
+    insert into user_extended_info (Id, homeplace, native_place, 
+      nation, no_mainland, country, 
+      id_type, health_condition, one_child, 
+      graduated, former_school, school_number, 
+      left_behind_children, work_to_city, orphan, 
+      disability_type, user_id, create_time, 
+      update_time, id_number)
+    values (#{id,jdbcType=INTEGER}, #{homeplace,jdbcType=VARCHAR}, #{nativePlace,jdbcType=VARCHAR}, 
+      #{nation,jdbcType=INTEGER}, #{noMainland,jdbcType=BIT}, #{country,jdbcType=INTEGER}, 
+      #{idType,jdbcType=INTEGER}, #{healthCondition,jdbcType=INTEGER}, #{oneChild,jdbcType=BIT}, 
+      #{graduated,jdbcType=BIT}, #{formerSchool,jdbcType=VARCHAR}, #{schoolNumber,jdbcType=VARCHAR}, 
+      #{leftBehindChildren,jdbcType=BIT}, #{workToCity,jdbcType=BIT}, #{orphan,jdbcType=BIT}, 
+      #{disabilityType,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=BIGINT}, #{idNumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nercel.enroll.domain.model.beans.UserExtendedInfo" >
+    insert into user_extended_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="homeplace != null" >
+        homeplace,
+      </if>
+      <if test="nativePlace != null" >
+        native_place,
+      </if>
+      <if test="nation != null" >
+        nation,
+      </if>
+      <if test="noMainland != null" >
+        no_mainland,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="idType != null" >
+        id_type,
+      </if>
+      <if test="healthCondition != null" >
+        health_condition,
+      </if>
+      <if test="oneChild != null" >
+        one_child,
+      </if>
+      <if test="graduated != null" >
+        graduated,
+      </if>
+      <if test="formerSchool != null" >
+        former_school,
+      </if>
+      <if test="schoolNumber != null" >
+        school_number,
+      </if>
+      <if test="leftBehindChildren != null" >
+        left_behind_children,
+      </if>
+      <if test="workToCity != null" >
+        work_to_city,
+      </if>
+      <if test="orphan != null" >
+        orphan,
+      </if>
+      <if test="disabilityType != null" >
+        disability_type,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="idNumber != null" >
+        id_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="homeplace != null" >
+        #{homeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="nativePlace != null" >
+        #{nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        #{nation,jdbcType=INTEGER},
+      </if>
+      <if test="noMainland != null" >
+        #{noMainland,jdbcType=BIT},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=INTEGER},
+      </if>
+      <if test="idType != null" >
+        #{idType,jdbcType=INTEGER},
+      </if>
+      <if test="healthCondition != null" >
+        #{healthCondition,jdbcType=INTEGER},
+      </if>
+      <if test="oneChild != null" >
+        #{oneChild,jdbcType=BIT},
+      </if>
+      <if test="graduated != null" >
+        #{graduated,jdbcType=BIT},
+      </if>
+      <if test="formerSchool != null" >
+        #{formerSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolNumber != null" >
+        #{schoolNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="leftBehindChildren != null" >
+        #{leftBehindChildren,jdbcType=BIT},
+      </if>
+      <if test="workToCity != null" >
+        #{workToCity,jdbcType=BIT},
+      </if>
+      <if test="orphan != null" >
+        #{orphan,jdbcType=BIT},
+      </if>
+      <if test="disabilityType != null" >
+        #{disabilityType,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="idNumber != null" >
+        #{idNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nercel.enroll.domain.mybatis.Criteria" resultType="java.lang.Integer" >
+    select count(*) from user_extended_info
+    <if test="_parameter != null" >
+      <include refid="common.Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_extended_info
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.homeplace != null" >
+        homeplace = #{record.homeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nativePlace != null" >
+        native_place = #{record.nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nation != null" >
+        nation = #{record.nation,jdbcType=INTEGER},
+      </if>
+      <if test="record.noMainland != null" >
+        no_mainland = #{record.noMainland,jdbcType=BIT},
+      </if>
+      <if test="record.country != null" >
+        country = #{record.country,jdbcType=INTEGER},
+      </if>
+      <if test="record.idType != null" >
+        id_type = #{record.idType,jdbcType=INTEGER},
+      </if>
+      <if test="record.healthCondition != null" >
+        health_condition = #{record.healthCondition,jdbcType=INTEGER},
+      </if>
+      <if test="record.oneChild != null" >
+        one_child = #{record.oneChild,jdbcType=BIT},
+      </if>
+      <if test="record.graduated != null" >
+        graduated = #{record.graduated,jdbcType=BIT},
+      </if>
+      <if test="record.formerSchool != null" >
+        former_school = #{record.formerSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schoolNumber != null" >
+        school_number = #{record.schoolNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leftBehindChildren != null" >
+        left_behind_children = #{record.leftBehindChildren,jdbcType=BIT},
+      </if>
+      <if test="record.workToCity != null" >
+        work_to_city = #{record.workToCity,jdbcType=BIT},
+      </if>
+      <if test="record.orphan != null" >
+        orphan = #{record.orphan,jdbcType=BIT},
+      </if>
+      <if test="record.disabilityType != null" >
+        disability_type = #{record.disabilityType,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.idNumber != null" >
+        id_number = #{record.idNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="common.Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_extended_info
+    set Id = #{record.id,jdbcType=INTEGER},
+      homeplace = #{record.homeplace,jdbcType=VARCHAR},
+      native_place = #{record.nativePlace,jdbcType=VARCHAR},
+      nation = #{record.nation,jdbcType=INTEGER},
+      no_mainland = #{record.noMainland,jdbcType=BIT},
+      country = #{record.country,jdbcType=INTEGER},
+      id_type = #{record.idType,jdbcType=INTEGER},
+      health_condition = #{record.healthCondition,jdbcType=INTEGER},
+      one_child = #{record.oneChild,jdbcType=BIT},
+      graduated = #{record.graduated,jdbcType=BIT},
+      former_school = #{record.formerSchool,jdbcType=VARCHAR},
+      school_number = #{record.schoolNumber,jdbcType=VARCHAR},
+      left_behind_children = #{record.leftBehindChildren,jdbcType=BIT},
+      work_to_city = #{record.workToCity,jdbcType=BIT},
+      orphan = #{record.orphan,jdbcType=BIT},
+      disability_type = #{record.disabilityType,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=BIGINT},
+      id_number = #{record.idNumber,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="common.Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nercel.enroll.domain.model.beans.UserExtendedInfo" >
+    update user_extended_info
+    <set >
+      <if test="homeplace != null" >
+        homeplace = #{homeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="nativePlace != null" >
+        native_place = #{nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        nation = #{nation,jdbcType=INTEGER},
+      </if>
+      <if test="noMainland != null" >
+        no_mainland = #{noMainland,jdbcType=BIT},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=INTEGER},
+      </if>
+      <if test="idType != null" >
+        id_type = #{idType,jdbcType=INTEGER},
+      </if>
+      <if test="healthCondition != null" >
+        health_condition = #{healthCondition,jdbcType=INTEGER},
+      </if>
+      <if test="oneChild != null" >
+        one_child = #{oneChild,jdbcType=BIT},
+      </if>
+      <if test="graduated != null" >
+        graduated = #{graduated,jdbcType=BIT},
+      </if>
+      <if test="formerSchool != null" >
+        former_school = #{formerSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolNumber != null" >
+        school_number = #{schoolNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="leftBehindChildren != null" >
+        left_behind_children = #{leftBehindChildren,jdbcType=BIT},
+      </if>
+      <if test="workToCity != null" >
+        work_to_city = #{workToCity,jdbcType=BIT},
+      </if>
+      <if test="orphan != null" >
+        orphan = #{orphan,jdbcType=BIT},
+      </if>
+      <if test="disabilityType != null" >
+        disability_type = #{disabilityType,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="idNumber != null" >
+        id_number = #{idNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nercel.enroll.domain.model.beans.UserExtendedInfo" >
+    update user_extended_info
+    set homeplace = #{homeplace,jdbcType=VARCHAR},
+      native_place = #{nativePlace,jdbcType=VARCHAR},
+      nation = #{nation,jdbcType=INTEGER},
+      no_mainland = #{noMainland,jdbcType=BIT},
+      country = #{country,jdbcType=INTEGER},
+      id_type = #{idType,jdbcType=INTEGER},
+      health_condition = #{healthCondition,jdbcType=INTEGER},
+      one_child = #{oneChild,jdbcType=BIT},
+      graduated = #{graduated,jdbcType=BIT},
+      former_school = #{formerSchool,jdbcType=VARCHAR},
+      school_number = #{schoolNumber,jdbcType=VARCHAR},
+      left_behind_children = #{leftBehindChildren,jdbcType=BIT},
+      work_to_city = #{workToCity,jdbcType=BIT},
+      orphan = #{orphan,jdbcType=BIT},
+      disability_type = #{disabilityType,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      id_number = #{idNumber,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

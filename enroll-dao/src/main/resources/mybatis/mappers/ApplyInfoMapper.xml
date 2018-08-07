@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nercel.enroll.dao.mapperInterface.ApplyInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.nercel.enroll.domain.model.beans.ApplyInfo" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="applicant" property="applicant" jdbcType="INTEGER" />
+    <result column="apply_school" property="applySchool" jdbcType="INTEGER" />
+    <result column="apply_reason" property="applyReason" jdbcType="VARCHAR" />
+    <result column="apply_status" property="applyStatus" jdbcType="INTEGER" />
+    <result column="apply_time" property="applyTime" jdbcType="BIGINT" />
+    <result column="approver" property="approver" jdbcType="INTEGER" />
+    <result column="approve_time" property="approveTime" jdbcType="BIGINT" />
+    <result column="approve_opinion" property="approveOpinion" jdbcType="VARCHAR" />
+    <result column="student_name" property="studentName" jdbcType="VARCHAR" />
+    <result column="idCard" property="idcard" jdbcType="VARCHAR" />
+    <result column="student_type" property="studentType" jdbcType="INTEGER" />
+    <result column="school_type" property="schoolType" jdbcType="INTEGER" />
+    <result column="apply_school_name" property="applySchoolName" jdbcType="VARCHAR" />
+    <result column="tooltip" property="tooltip" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, applicant, apply_school, apply_reason, apply_status, apply_time, approver, approve_time, 
+    approve_opinion, student_name, idCard, student_type, school_type, apply_school_name, 
+    tooltip
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.nercel.enroll.domain.mybatis.Criteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from apply_info
+    <if test="_parameter != null" >
+      <include refid="common.Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from apply_info
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from apply_info
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nercel.enroll.domain.mybatis.Criteria" >
+    delete from apply_info
+    <if test="_parameter != null" >
+      <include refid="common.Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nercel.enroll.domain.model.beans.ApplyInfo" >
+    insert into apply_info (Id, applicant, apply_school, 
+      apply_reason, apply_status, apply_time, 
+      approver, approve_time, approve_opinion, 
+      student_name, idCard, student_type, 
+      school_type, apply_school_name, tooltip
+      )
+    values (#{id,jdbcType=INTEGER}, #{applicant,jdbcType=INTEGER}, #{applySchool,jdbcType=INTEGER}, 
+      #{applyReason,jdbcType=VARCHAR}, #{applyStatus,jdbcType=INTEGER}, #{applyTime,jdbcType=BIGINT}, 
+      #{approver,jdbcType=INTEGER}, #{approveTime,jdbcType=BIGINT}, #{approveOpinion,jdbcType=VARCHAR}, 
+      #{studentName,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, #{studentType,jdbcType=INTEGER}, 
+      #{schoolType,jdbcType=INTEGER}, #{applySchoolName,jdbcType=VARCHAR}, #{tooltip,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nercel.enroll.domain.model.beans.ApplyInfo" >
+    insert into apply_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="applicant != null" >
+        applicant,
+      </if>
+      <if test="applySchool != null" >
+        apply_school,
+      </if>
+      <if test="applyReason != null" >
+        apply_reason,
+      </if>
+      <if test="applyStatus != null" >
+        apply_status,
+      </if>
+      <if test="applyTime != null" >
+        apply_time,
+      </if>
+      <if test="approver != null" >
+        approver,
+      </if>
+      <if test="approveTime != null" >
+        approve_time,
+      </if>
+      <if test="approveOpinion != null" >
+        approve_opinion,
+      </if>
+      <if test="studentName != null" >
+        student_name,
+      </if>
+      <if test="idcard != null" >
+        idCard,
+      </if>
+      <if test="studentType != null" >
+        student_type,
+      </if>
+      <if test="schoolType != null" >
+        school_type,
+      </if>
+      <if test="applySchoolName != null" >
+        apply_school_name,
+      </if>
+      <if test="tooltip != null" >
+        tooltip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="applicant != null" >
+        #{applicant,jdbcType=INTEGER},
+      </if>
+      <if test="applySchool != null" >
+        #{applySchool,jdbcType=INTEGER},
+      </if>
+      <if test="applyReason != null" >
+        #{applyReason,jdbcType=VARCHAR},
+      </if>
+      <if test="applyStatus != null" >
+        #{applyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="applyTime != null" >
+        #{applyTime,jdbcType=BIGINT},
+      </if>
+      <if test="approver != null" >
+        #{approver,jdbcType=INTEGER},
+      </if>
+      <if test="approveTime != null" >
+        #{approveTime,jdbcType=BIGINT},
+      </if>
+      <if test="approveOpinion != null" >
+        #{approveOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="studentName != null" >
+        #{studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="studentType != null" >
+        #{studentType,jdbcType=INTEGER},
+      </if>
+      <if test="schoolType != null" >
+        #{schoolType,jdbcType=INTEGER},
+      </if>
+      <if test="applySchoolName != null" >
+        #{applySchoolName,jdbcType=VARCHAR},
+      </if>
+      <if test="tooltip != null" >
+        #{tooltip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nercel.enroll.domain.mybatis.Criteria" resultType="java.lang.Integer" >
+    select count(*) from apply_info
+    <if test="_parameter != null" >
+      <include refid="common.Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update apply_info
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.applicant != null" >
+        applicant = #{record.applicant,jdbcType=INTEGER},
+      </if>
+      <if test="record.applySchool != null" >
+        apply_school = #{record.applySchool,jdbcType=INTEGER},
+      </if>
+      <if test="record.applyReason != null" >
+        apply_reason = #{record.applyReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyStatus != null" >
+        apply_status = #{record.applyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.applyTime != null" >
+        apply_time = #{record.applyTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.approver != null" >
+        approver = #{record.approver,jdbcType=INTEGER},
+      </if>
+      <if test="record.approveTime != null" >
+        approve_time = #{record.approveTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.approveOpinion != null" >
+        approve_opinion = #{record.approveOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentName != null" >
+        student_name = #{record.studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcard != null" >
+        idCard = #{record.idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentType != null" >
+        student_type = #{record.studentType,jdbcType=INTEGER},
+      </if>
+      <if test="record.schoolType != null" >
+        school_type = #{record.schoolType,jdbcType=INTEGER},
+      </if>
+      <if test="record.applySchoolName != null" >
+        apply_school_name = #{record.applySchoolName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tooltip != null" >
+        tooltip = #{record.tooltip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="common.Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update apply_info
+    set Id = #{record.id,jdbcType=INTEGER},
+      applicant = #{record.applicant,jdbcType=INTEGER},
+      apply_school = #{record.applySchool,jdbcType=INTEGER},
+      apply_reason = #{record.applyReason,jdbcType=VARCHAR},
+      apply_status = #{record.applyStatus,jdbcType=INTEGER},
+      apply_time = #{record.applyTime,jdbcType=BIGINT},
+      approver = #{record.approver,jdbcType=INTEGER},
+      approve_time = #{record.approveTime,jdbcType=BIGINT},
+      approve_opinion = #{record.approveOpinion,jdbcType=VARCHAR},
+      student_name = #{record.studentName,jdbcType=VARCHAR},
+      idCard = #{record.idcard,jdbcType=VARCHAR},
+      student_type = #{record.studentType,jdbcType=INTEGER},
+      school_type = #{record.schoolType,jdbcType=INTEGER},
+      apply_school_name = #{record.applySchoolName,jdbcType=VARCHAR},
+      tooltip = #{record.tooltip,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="common.Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nercel.enroll.domain.model.beans.ApplyInfo" >
+    update apply_info
+    <set >
+      <if test="applicant != null" >
+        applicant = #{applicant,jdbcType=INTEGER},
+      </if>
+      <if test="applySchool != null" >
+        apply_school = #{applySchool,jdbcType=INTEGER},
+      </if>
+      <if test="applyReason != null" >
+        apply_reason = #{applyReason,jdbcType=VARCHAR},
+      </if>
+      <if test="applyStatus != null" >
+        apply_status = #{applyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="applyTime != null" >
+        apply_time = #{applyTime,jdbcType=BIGINT},
+      </if>
+      <if test="approver != null" >
+        approver = #{approver,jdbcType=INTEGER},
+      </if>
+      <if test="approveTime != null" >
+        approve_time = #{approveTime,jdbcType=BIGINT},
+      </if>
+      <if test="approveOpinion != null" >
+        approve_opinion = #{approveOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="studentName != null" >
+        student_name = #{studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        idCard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="studentType != null" >
+        student_type = #{studentType,jdbcType=INTEGER},
+      </if>
+      <if test="schoolType != null" >
+        school_type = #{schoolType,jdbcType=INTEGER},
+      </if>
+      <if test="applySchoolName != null" >
+        apply_school_name = #{applySchoolName,jdbcType=VARCHAR},
+      </if>
+      <if test="tooltip != null" >
+        tooltip = #{tooltip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nercel.enroll.domain.model.beans.ApplyInfo" >
+    update apply_info
+    set applicant = #{applicant,jdbcType=INTEGER},
+      apply_school = #{applySchool,jdbcType=INTEGER},
+      apply_reason = #{applyReason,jdbcType=VARCHAR},
+      apply_status = #{applyStatus,jdbcType=INTEGER},
+      apply_time = #{applyTime,jdbcType=BIGINT},
+      approver = #{approver,jdbcType=INTEGER},
+      approve_time = #{approveTime,jdbcType=BIGINT},
+      approve_opinion = #{approveOpinion,jdbcType=VARCHAR},
+      student_name = #{studentName,jdbcType=VARCHAR},
+      idCard = #{idcard,jdbcType=VARCHAR},
+      student_type = #{studentType,jdbcType=INTEGER},
+      school_type = #{schoolType,jdbcType=INTEGER},
+      apply_school_name = #{applySchoolName,jdbcType=VARCHAR},
+      tooltip = #{tooltip,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

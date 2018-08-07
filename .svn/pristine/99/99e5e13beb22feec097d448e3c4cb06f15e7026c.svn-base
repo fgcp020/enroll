@@ -1,0 +1,31 @@
+package com.nercel.enroll.domain.constant;
+
+/**
+ * 申请状态常量类
+ * 
+ * @author yishui
+ * @date 2018年6月27日
+ * @version 0.0.1
+ */
+public final class ApplyStatuConstant {
+	/**
+	 * 未审核
+	 */
+	public final static Integer UN_APPROVE = 0;
+	/**
+	 * 审核通过
+	 */
+	public final static Integer APPROVE_SUCCESS = 1;
+	/**
+	 * 审核失败
+	 */
+	public final static Integer APPROVE_FAIL = 2;
+	/**
+	 * 驳回补充材料
+	 */
+	public final static Integer ANNEX = 3;
+	/**
+	 * 材料不完整
+	 */
+	public final static Integer INFO_UNCOMPLETE = 4;
+}

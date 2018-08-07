@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nercel.enroll.dao.mapperInterface.UserHouseInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.nercel.enroll.domain.model.beans.UserHouseInfo" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="house_address" property="houseAddress" jdbcType="VARCHAR" />
+    <result column="house_type" property="houseType" jdbcType="INTEGER" />
+    <result column="house_number" property="houseNumber" jdbcType="VARCHAR" />
+    <result column="live_type" property="liveType" jdbcType="INTEGER" />
+    <result column="house_owner" property="houseOwner" jdbcType="VARCHAR" />
+    <result column="house_owner_type" property="houseOwnerType" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, house_address, house_type, house_number, live_type, house_owner, house_owner_type, 
+    user_id, create_time, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.nercel.enroll.domain.mybatis.Criteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_house_info
+    <if test="_parameter != null" >
+      <include refid="common.Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_house_info
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_house_info
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nercel.enroll.domain.mybatis.Criteria" >
+    delete from user_house_info
+    <if test="_parameter != null" >
+      <include refid="common.Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nercel.enroll.domain.model.beans.UserHouseInfo" >
+    insert into user_house_info (Id, house_address, house_type, 
+      house_number, live_type, house_owner, 
+      house_owner_type, user_id, create_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{houseAddress,jdbcType=VARCHAR}, #{houseType,jdbcType=INTEGER}, 
+      #{houseNumber,jdbcType=VARCHAR}, #{liveType,jdbcType=INTEGER}, #{houseOwner,jdbcType=VARCHAR}, 
+      #{houseOwnerType,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nercel.enroll.domain.model.beans.UserHouseInfo" >
+    insert into user_house_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="houseAddress != null" >
+        house_address,
+      </if>
+      <if test="houseType != null" >
+        house_type,
+      </if>
+      <if test="houseNumber != null" >
+        house_number,
+      </if>
+      <if test="liveType != null" >
+        live_type,
+      </if>
+      <if test="houseOwner != null" >
+        house_owner,
+      </if>
+      <if test="houseOwnerType != null" >
+        house_owner_type,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="houseAddress != null" >
+        #{houseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="houseType != null" >
+        #{houseType,jdbcType=INTEGER},
+      </if>
+      <if test="houseNumber != null" >
+        #{houseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="liveType != null" >
+        #{liveType,jdbcType=INTEGER},
+      </if>
+      <if test="houseOwner != null" >
+        #{houseOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="houseOwnerType != null" >
+        #{houseOwnerType,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nercel.enroll.domain.mybatis.Criteria" resultType="java.lang.Integer" >
+    select count(*) from user_house_info
+    <if test="_parameter != null" >
+      <include refid="common.Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_house_info
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.houseAddress != null" >
+        house_address = #{record.houseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.houseType != null" >
+        house_type = #{record.houseType,jdbcType=INTEGER},
+      </if>
+      <if test="record.houseNumber != null" >
+        house_number = #{record.houseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.liveType != null" >
+        live_type = #{record.liveType,jdbcType=INTEGER},
+      </if>
+      <if test="record.houseOwner != null" >
+        house_owner = #{record.houseOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.houseOwnerType != null" >
+        house_owner_type = #{record.houseOwnerType,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="common.Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_house_info
+    set Id = #{record.id,jdbcType=INTEGER},
+      house_address = #{record.houseAddress,jdbcType=VARCHAR},
+      house_type = #{record.houseType,jdbcType=INTEGER},
+      house_number = #{record.houseNumber,jdbcType=VARCHAR},
+      live_type = #{record.liveType,jdbcType=INTEGER},
+      house_owner = #{record.houseOwner,jdbcType=VARCHAR},
+      house_owner_type = #{record.houseOwnerType,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="common.Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nercel.enroll.domain.model.beans.UserHouseInfo" >
+    update user_house_info
+    <set >
+      <if test="houseAddress != null" >
+        house_address = #{houseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="houseType != null" >
+        house_type = #{houseType,jdbcType=INTEGER},
+      </if>
+      <if test="houseNumber != null" >
+        house_number = #{houseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="liveType != null" >
+        live_type = #{liveType,jdbcType=INTEGER},
+      </if>
+      <if test="houseOwner != null" >
+        house_owner = #{houseOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="houseOwnerType != null" >
+        house_owner_type = #{houseOwnerType,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nercel.enroll.domain.model.beans.UserHouseInfo" >
+    update user_house_info
+    set house_address = #{houseAddress,jdbcType=VARCHAR},
+      house_type = #{houseType,jdbcType=INTEGER},
+      house_number = #{houseNumber,jdbcType=VARCHAR},
+      live_type = #{liveType,jdbcType=INTEGER},
+      house_owner = #{houseOwner,jdbcType=VARCHAR},
+      house_owner_type = #{houseOwnerType,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

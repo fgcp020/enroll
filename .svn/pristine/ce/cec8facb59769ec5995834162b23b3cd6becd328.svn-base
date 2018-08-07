@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nercel.enroll.dao.mapperInterface.SchoolRelationshipMapper" >
+  <resultMap id="BaseResultMap" type="com.nercel.enroll.domain.model.beans.SchoolRelationship" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="source_school" property="sourceSchool" jdbcType="INTEGER" />
+    <result column="target_school" property="targetSchool" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, source_school, target_school, type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.nercel.enroll.domain.mybatis.Criteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from school_relationship
+    <if test="_parameter != null" >
+      <include refid="common.Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from school_relationship
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from school_relationship
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nercel.enroll.domain.mybatis.Criteria" >
+    delete from school_relationship
+    <if test="_parameter != null" >
+      <include refid="common.Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nercel.enroll.domain.model.beans.SchoolRelationship" >
+    insert into school_relationship (Id, source_school, target_school, 
+      type)
+    values (#{id,jdbcType=INTEGER}, #{sourceSchool,jdbcType=INTEGER}, #{targetSchool,jdbcType=INTEGER}, 
+      #{type,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nercel.enroll.domain.model.beans.SchoolRelationship" >
+    insert into school_relationship
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="sourceSchool != null" >
+        source_school,
+      </if>
+      <if test="targetSchool != null" >
+        target_school,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sourceSchool != null" >
+        #{sourceSchool,jdbcType=INTEGER},
+      </if>
+      <if test="targetSchool != null" >
+        #{targetSchool,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nercel.enroll.domain.mybatis.Criteria" resultType="java.lang.Integer" >
+    select count(*) from school_relationship
+    <if test="_parameter != null" >
+      <include refid="common.Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update school_relationship
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sourceSchool != null" >
+        source_school = #{record.sourceSchool,jdbcType=INTEGER},
+      </if>
+      <if test="record.targetSchool != null" >
+        target_school = #{record.targetSchool,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="common.Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update school_relationship
+    set Id = #{record.id,jdbcType=INTEGER},
+      source_school = #{record.sourceSchool,jdbcType=INTEGER},
+      target_school = #{record.targetSchool,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="common.Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nercel.enroll.domain.model.beans.SchoolRelationship" >
+    update school_relationship
+    <set >
+      <if test="sourceSchool != null" >
+        source_school = #{sourceSchool,jdbcType=INTEGER},
+      </if>
+      <if test="targetSchool != null" >
+        target_school = #{targetSchool,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nercel.enroll.domain.model.beans.SchoolRelationship" >
+    update school_relationship
+    set source_school = #{sourceSchool,jdbcType=INTEGER},
+      target_school = #{targetSchool,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

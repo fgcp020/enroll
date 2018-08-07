@@ -1,0 +1,94 @@
+package com.nercel.enroll.controller.api.impl;
+
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.nercel.enroll.controller.api.BasicDataController;
+import com.nercel.enroll.core.service.BasicDataService;
+import com.nercel.enroll.domain.common.Response;
+import com.nercel.enroll.domain.common.Response.Statu;
+import com.nercel.enroll.domain.model.beans.CertificatesType;
+import com.nercel.enroll.domain.model.beans.Country;
+import com.nercel.enroll.domain.model.beans.Nation;
+import com.nercel.enroll.domain.model.beans.Relational;
+import com.nercel.enroll.domain.model.beans.School;
+import com.nercel.enroll.domain.model.beans.StreetSchool;
+import com.nercel.enroll.domain.model.beans.StudentInfo;
+
+/**
+ * BasicDataController接口实现类
+ * 
+ * @author yishui
+ * @date 2018年6月15日
+ * @version 0.0.1
+ */
+@RestController
+public class BasicDataImplController implements BasicDataController {
+	//private final static Logger LOG = LoggerFactory.getLogger(BasicDataController.class);
+	@Autowired
+	private BasicDataService basicDataService;
+
+	@Override
+	public Response queryAllNation() {
+		List<Nation> nations = basicDataService.queryAllNation();
+		return new Response(Statu.OK, nations, UUID.randomUUID().toString());
+	}
+
+	@Override
+	public Response queryALLCountry() {
+		List<Country> countrys = basicDataService.queryAllCountry();
+		return new Response(Statu.OK, countrys, UUID.randomUUID().toString());
+	}
+
+	@Override
+	public Response queryAllCertificatesType() {
+		List<CertificatesType> certificatesTypes = basicDataService.queryAllCertificatesType();
+		return new Response(Statu.OK, certificatesTypes, UUID.randomUUID().toString());
+	}
+
+	@Override
+	public Response queryAllRelational() {
+		List<Relational> relational = basicDataService.queryAllRelational();
+		return new Response(Statu.OK, relational, UUID.randomUUID().toString());
+	}
+
+	@Override
+	public Response queryAllSchool() {
+		List<School> school = basicDataService.queryAllSchool();
+		return new Response(Statu.OK, school, UUID.randomUUID().toString());
+	}
+
+	@Override
+	public Response queryAllStreetSchool() {
+		List<StreetSchool> streetSchool = basicDataService.queryAllStreetSchool();
+		return new Response(Statu.OK, streetSchool, UUID.randomUUID().toString());
+	}
+
+	@Override
+	public Response queryAllStudentInfo() {
+		List<StudentInfo> studentInfo = basicDataService.queryAllStudentInfo();
+		return new Response(Statu.OK, studentInfo, UUID.randomUUID().toString());
+	}
+
+	@Override
+	public Response queryStudentInfo(@RequestParam(name = "studentNumber") String studentNumber) {
+		List<StudentInfo> studentInfo = basicDataService.queryStudentInfo(studentNumber);
+		return new Response(studentInfo != null && studentInfo.size() > 0 ? Statu.OK : Statu.FAIL,
+				studentInfo != null && studentInfo.size() > 0 ? studentInfo.get(0) : null,
+				UUID.randomUUID().toString());
+	}
+
+	@Override
+	public Response querySchoolByType(@RequestParam(name = "schoolType") Integer schoolType) {
+		List<School> school = basicDataService.querySchoolByType(schoolType);
+		return new Response(school != null && school.size() > 0 ? Statu.OK : Statu.FAIL, school,
+				UUID.randomUUID().toString());
+	}
+
+
+
+}

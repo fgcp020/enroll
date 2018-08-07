@@ -1,0 +1,723 @@
+<div id="declarationDegree" xmlns="http://www.w3.org/1999/html">
+    <div class="audit_content" style="min-width: 340px;">
+        <!--基本信息-->
+        <label class="title col-xs-12" style="font-size: 24px;text-align: center;margin-bottom: 20px;">{{pageTitle}}</label>
+        <div class="border_left border_right border_top" style="float: left;width: 100%">
+            <div class="form_row border_bottom">
+                <strong class="form_label title col-xs-12">学生个人基础信息</strong>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;学生姓名:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.user.username" type="text" ng-blur="checkStuCode()" ng-disabled="review"/>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;性别:</label>
+                <!-- <select class="form_control col-xs-3" ng-model="selRow.student_sexs">
+					  <option value ="male">男</option>
+					  <option value ="female">女</option>
+					</select> -->
+				<div class="layui-unselect col-xs-3 layui-form-select min_wit">
+                    <div class="layui-select-title">
+                        <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                               placeholder="" ng-model="registerMsg.user.sex_text" ng-disabled="review"/>
+                        <i class="layui-edge"></i>
+                    </div>
+                    <dl class="layui-anim layui-anim-upbit">
+                        <dd ng-repeat="item in allSex"
+                            ng-click="registerMsg.user.sex = item.value;registerMsg.user.sex_text = item.label"
+                            ng-class="{'layui-this':registerMsg.user.sex_text == item.label}">{{item.label}}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;手机号:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.user.phone" maxlength="11" type="text" placeholder="学生或父母监护人手机号" ng-change="checkPhone(1)" ng-disabled="review"/>
+                <button class="btn btn-primary sms_btn" id="send" ng-if="!review"
+                        value="smsCodeValue" ng-click="senSmsCode()" ng-disabled="senBtnDisable">{{smsCodeValue}}
+                </button>
+                <em style="color: red;line-height: 40px;margin-left: 15px;display: inline-flex;" ng-if="phone1Invalid">手机号格式有误</em>
+                <em style="color: #ff7600;line-height: 40px;margin-left: 15px;display: inline-flex;" ng-if="isStu">用于接收验证码和消息通知，请确保正确填写。</em>
+            </div>
+            <div class="form_row border_bottom" ng-if="!review">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;验证码:</label>
+                <input class="form_control col-xs-3" ng-model="registerMsg.user.smsCode" maxlength="6" type="text" placeholder="手机验证码" ng-change="checkSmsCode()"/>
+                <em style="color: red;line-height: 40px;margin-left: 15px;display: inline-flex;" ng-if="smsCodeInvalid && 0 < registerMsg.user.smsCode.length">验证码错误</em>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;籍贯:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.userExtendedInfo.nativePlace" type="text"/>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;民族:</label>
+                <div class="layui-unselect col-xs-3 layui-form-select min_wit">
+                    <div class="layui-select-title">
+                        <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                               placeholder="" ng-model="registerMsg.userExtendedInfo.nation_text"/>
+                        <i class="layui-edge"></i>
+                    </div>
+                    <dl class="layui-anim layui-anim-upbit">
+                        <dd ng-repeat="item in allNation"
+                            ng-click="registerMsg.userExtendedInfo.nation = item.id;registerMsg.userExtendedInfo.nation_text = item.content"
+                            ng-class="{'layui-this':registerMsg.userExtendedInfo.nation_text == item.content}">{{item.content}}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;港澳台侨外:</label>
+                <div class="layui-unselect col-xs-3 layui-form-select  min_wit">
+                    <div class="layui-select-title">
+                        <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                               placeholder="" ng-model="registerMsg.userExtendedInfo.noMainland_text"/>
+                        <i class="layui-edge"></i>
+                    </div>
+                    <dl class="layui-anim layui-anim-upbit">
+                        <dd ng-repeat="item in toChoose"
+                            ng-click="registerMsg.userExtendedInfo.noMainland_text = item.label;registerMsg.userExtendedInfo.noMainland = item.value"
+                            ng-class="{'layui-this':registerMsg.userExtendedInfo.noMainland_text == item.label}">{{item.label}}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;国籍/地区:</label>
+                <div class="layui-unselect col-xs-3 layui-form-select  min_wit">
+                    <div class="layui-select-title">
+                        <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                               placeholder="" ng-model="registerMsg.userExtendedInfo.country_text"/>
+                        <i class="layui-edge"></i>
+                    </div>
+                    <dl class="layui-anim layui-anim-upbit">
+                        <dd ng-repeat="item in allCountry"
+                            ng-click="registerMsg.userExtendedInfo.country = item.id;registerMsg.userExtendedInfo.country_text = item.content;"
+                            ng-class="{'layui-this':registerMsg.userExtendedInfo.country_text == item.content}">{{item.content}}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;证件类型:</label>
+                <div class="layui-unselect col-xs-3 layui-form-select  min_wit">
+                    <div class="layui-select-title">
+                        <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                               placeholder="" ng-model="registerMsg.userExtendedInfo.idType_text" ng-disabled="review"/>
+                        <i class="layui-edge"></i>
+                    </div>
+                    <dl class="layui-anim layui-anim-upbit">
+                        <dd ng-repeat="item in allCard.slice(0, 1)"
+                            ng-click="setCardType(0, item)"
+                            ng-class="{'layui-this':registerMsg.userExtendedInfo.idType_text == item.content}">{{item.content}}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;证件号:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.user.idCard" type="text" maxlength="18" ng-change="checkCardNum(1)" ng-disabled="review"/>
+                <em style="color: red;line-height: 40px;margin-left: 15px;display: inline-flex;" ng-if="idCard1Invalid">学生身份证号有误</em>
+                <em style="color: red;line-height: 40px;margin-left: 15px;display: inline-flex;" ng-if="ageInvalid && !idCard1Invalid">学生年龄不符合要求</em>
+                <em style="color: #ff7600;line-height: 40px;margin-left: 25px;display: inline-flex;" ng-if="isStu">用于登录，请确保正确填写。</em>
+            </div>
+            <div class="form_row border_bottom" ng-if="!review">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;密码:</label>
+                <input class="form_control col-xs-3" ng-model="registerMsg.user.pwd" type="password" ng-change="checkPassword()"/>
+                <em style="color: red;line-height: 40px;margin-left: 15px;display: inline-flex;" ng-if="passwordInvalid">请输入6-16位的字母和数字组合</em>
+            </div>
+            <div class="form_row border_bottom" ng-if="!review">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;确认密码:</label>
+                <input class="form_control col-xs-3" ng-model="registerMsg.user.repwd" type="password" ng-change="checkRePassword()"/>
+                <em style="color: red;line-height: 40px;margin-left: 15px;display: inline-flex;" ng-if="repasswordInvalid">两次输入的密码不相同</em>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;户口所在地:</label>
+                <input class="form_control col-xs-1 min_wit" type="text" value="{{registerMsg.user.permanentAddress0}}" readonly/>
+                <input class="form_control col-xs-2 min_wit" ng-model="registerMsg.user.permanentAddress" type="text" placeholder="街道+门牌号"/>
+                <em style="color: #ff7600;line-height: 40px;margin-left: 15px;display: inline-flex;" ng-if="isStu">如：东正街6号、北二巷单号1号、广洲路七巷双号84号、步行街5栋、金塔村4组。请不要输入空格等特殊符号。</em>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;出生所在地:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.userExtendedInfo.homeplace" type="text"/>
+            </div>
+            <!-- 身份证号联动 --><!-- 日期插件 -->
+            <!-- <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;出生日期:</label>
+                <input class="form_control col-xs-3" ng-model="selRow.user_birthday" type="text"/>
+                <div class="form_group col-xs-3 right" style="padding: 0">
+                    <input class="date-time-picker form_control" ng-model="selRow.birth_day"
+                           type="text"
+                           plugintype="datetime">
+                </div>
+            </div> -->
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;健康状况:</label>
+                <div class="layui-unselect col-xs-3 layui-form-select  min_wit">
+                    <div class="layui-select-title">
+                        <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                               placeholder="" ng-model="registerMsg.userExtendedInfo.healthCondition_text"/>
+                        <i class="layui-edge"></i>
+                    </div>
+                    <dl class="layui-anim layui-anim-upbit">
+                        <dd ng-repeat="item in allHealth"
+                            ng-click="registerMsg.userExtendedInfo.healthCondition_text = item.label;registerMsg.userExtendedInfo.healthCondition = item.value"
+                            ng-class="{'layui-this':registerMsg.userExtendedInfo.healthCondition_text == item.label}">{{item.label}}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="form_row border_bottom" ng-show="false">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;招生类型:</label>
+                <div class="layui-unselect col-xs-3 layui-form-select  min_wit">
+                    <div class="layui-select-title">
+                        <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                               placeholder="" ng-model="registerMsg.user.type_text"/>
+                        <i class="layui-edge"></i>
+                    </div>
+                    <dl class="layui-anim layui-anim-upbit">
+                        <dd ng-repeat="item in enrollType"
+                            ng-click="registerMsg.user.type_text = item.label;registerMsg.user.type = item.value"
+                            ng-class="{'layui-this':registerMsg.user.type_text == item.label}">{{item.label}}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <!--填写毕业小学信息-->
+            
+        </div>
+        <div class="border_left border_right border_top" style="float: left;width: 100%">
+            <div class="form_row border_bottom">
+                <label class="form_label title col-xs-12">学生个人扩展信息</label>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">是否是独生子女:</label>
+                <div class="layui-unselect col-xs-3 layui-form-select  min_wit">
+                    <div class="layui-select-title">
+                        <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                               placeholder="" ng-model="registerMsg.userExtendedInfo.oneChild_text"/>
+                        <i class="layui-edge"></i>
+                    </div>
+                    <dl class="layui-anim layui-anim-upbit">
+                        <dd ng-repeat="item in toChoose"
+                            ng-click="registerMsg.userExtendedInfo.oneChild_text = item.label;registerMsg.userExtendedInfo.oneChild = item.value"
+                            ng-class="{'layui-this':registerMsg.userExtendedInfo.oneChild_text == item.label}">{{item.label}}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight" ng-show="'primary' == toSignUp"><em>*</em>&nbsp;是否上过幼儿园:</label>
+                <label class="form_label col-xs-2 border_right text_right weight" ng-show="'junior' == toSignUp"><em>*</em>&nbsp;是否上过小学:</label>
+                <div class="layui-unselect col-xs-3 layui-form-select  min_wit">
+                    <div class="layui-select-title">
+                        <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                               placeholder="" ng-model="registerMsg.userExtendedInfo.graduated_text"/>
+                        <i class="layui-edge"></i>
+                    </div>
+                    <dl class="layui-anim layui-anim-upbit">
+                        <dd ng-repeat="item in toChoose"
+                            ng-click="registerMsg.userExtendedInfo.graduated_text = item.label;registerMsg.userExtendedInfo.graduated = item.value"
+                            ng-class="{'layui-this':registerMsg.userExtendedInfo.graduated_text == item.label}">{{item.label}}
+                        </dd>
+                    </dl>
+                </div>
+                <em style="color: #ff7600;line-height: 40px;margin-left: 15px;display: inline-flex;">该项为必填项，本栏其他选项为非必填项</em>
+            </div>
+            <div class="form_row border_bottom" ng-show="'primary' == toSignUp && registerMsg.userExtendedInfo.graduated">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;幼儿园名称:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.userExtendedInfo.formerSchool" type="text"/>
+            </div>
+            <div class="form_row border_bottom" ng-show="'junior' == toSignUp && registerMsg.userExtendedInfo.graduated">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;小学名称:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.userExtendedInfo.formerSchool" type="text" ng-blur="checkStuCode()"/>
+            </div>
+            <div class="form_row border_bottom" ng-show="'junior' == toSignUp && registerMsg.userExtendedInfo.graduated">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;学籍号:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.userExtendedInfo.schoolNumber" type="text" ng-blur="checkStuCode()"/>
+                <em style="color: red;line-height: 40px;margin-left: 15px;display: inline-flex;" ng-show="!stu_code_pass && registerMsg.userExtendedInfo.schoolNumber">学籍号与学生和学校不匹配</em>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">是否是留守儿童:</label>
+                <div class="layui-unselect col-xs-3 layui-form-select  min_wit">
+                    <div class="layui-select-title">
+                        <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                               placeholder="" ng-model="registerMsg.userExtendedInfo.leftBehindChildren_text"/>
+                        <i class="layui-edge"></i>
+                    </div>
+                    <dl class="layui-anim layui-anim-upbit">
+                        <dd ng-repeat="item in toChoose"
+                            ng-click="registerMsg.userExtendedInfo.leftBehindChildren_text = item.label;registerMsg.userExtendedInfo.leftBehindChildren = item.value"
+                            ng-class="{'layui-this':registerMsg.userExtendedInfo.leftBehindChildren_text == item.label}">{{item.label}}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">是否是进城务工子女:</label>
+                <div class="layui-unselect col-xs-3 layui-form-select  min_wit">
+                    <div class="layui-select-title">
+                        <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                               placeholder="" ng-model="registerMsg.userExtendedInfo.workToCity_text"/>
+                        <i class="layui-edge"></i>
+                    </div>
+                    <dl class="layui-anim layui-anim-upbit">
+                        <dd ng-repeat="item in toChoose"
+                            ng-click="registerMsg.userExtendedInfo.workToCity_text = item.label;registerMsg.userExtendedInfo.workToCity = item.value"
+                            ng-class="{'layui-this':registerMsg.userExtendedInfo.workToCity_text == item.label}">{{item.label}}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <!-- 孤儿不要监护人？孤儿不要监护人2？？ -->
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">是否孤儿:</label>
+                <div class="layui-unselect col-xs-3 layui-form-select  min_wit">
+                    <div class="layui-select-title">
+                        <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                               placeholder="" ng-model="registerMsg.userExtendedInfo.orphan_text"/>
+                        <i class="layui-edge"></i>
+                    </div>
+                    <dl class="layui-anim layui-anim-upbit">
+                        <dd ng-repeat="item in toChoose"
+                            ng-click="registerMsg.userExtendedInfo.orphan_text = item.label;registerMsg.userExtendedInfo.orphan = item.value"
+                            ng-class="{'layui-this':registerMsg.userExtendedInfo.orphan_text == item.label}">{{item.label}}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">是否残疾:</label>
+                <div class="layui-unselect col-xs-3 layui-form-select  min_wit">
+                    <div class="layui-select-title">
+                        <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                               placeholder="" ng-model="registerMsg.userExtendedInfo.disabilityType_text"/>
+                        <i class="layui-edge"></i>
+                    </div>
+                    <dl class="layui-anim layui-anim-upbit">
+                        <dd ng-repeat="item in [{l:'是',v:'1'},{l:'否',v:'0'}]"
+                            ng-click="registerMsg.userExtendedInfo.disabilityType = item.v;registerMsg.userExtendedInfo.disabilityType_text = item.l"
+                            ng-class="{'layui-this':registerMsg.userExtendedInfo.disabilityType_text == item.l}">{{item.l}}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <!-- 法定监护人1 -->
+        <div class="border_left border_right border_top" style="float: left;width: 100%">
+            <div class="form_row border_bottom">
+                <label class="form_label title col-xs-12">法定监护人信息一</label>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;姓名:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.userGuardianInfos[0].name" type="text"/>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;与学生关系:</label>
+                <div class="layui-unselect col-xs-3 layui-form-select min_wit">
+                   <div class="layui-select-title">
+                       <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                              placeholder="" ng-model="registerMsg.userGuardianInfos[0].userRelationship_text"/>
+                       <i class="layui-edge"></i>
+                   </div>
+                   <dl class="layui-anim layui-anim-upbit">
+                       <dd ng-repeat="item in student_relationList" ng-click="set_student_relation(1, item)"
+                           ng-class="{'layui-this':registerMsg.userGuardianInfos[0].userRelationship_text == item.content}">{{item.content}}
+                       </dd>
+                   </dl>
+               </div>
+                <em style="color: #ff7600;line-height: 40px;margin-left: 15px;display: inline-flex;" ng-if="isStu">优先选择父亲。</em>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;工作单位:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.userGuardianInfos[0].workUnit" type="text"/>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;户口所在地:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.userGuardianInfos[0].accountAddress" type="text"/>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;联系电话:</label>
+                <!-- 后期加校验 -->
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.userGuardianInfos[0].phone" type="text" maxlength="11" ng-change="checkPhone(2)"/>
+                <em style="color: red;line-height: 40px;margin-left: 15px;display: inline-flex;" ng-if="phone2Invalid">监护人一联系电话格式有误</em>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;是否为法定监护人:</label>
+                <div class="layui-unselect col-xs-3 layui-form-select  min_wit">
+                    <div class="layui-select-title">
+                        <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                               placeholder="" ng-model="registerMsg.userGuardianInfos[0].guarder_text"/>
+                        <i class="layui-edge"></i>
+                    </div>
+                    <dl class="layui-anim layui-anim-upbit">
+                        <dd ng-repeat="item in toChoose"
+                            ng-click="registerMsg.userGuardianInfos[0].guarder_text = item.label;registerMsg.userGuardianInfos[0].guarder = item.value"
+                            ng-class="{'layui-this':registerMsg.userGuardianInfos[0].guarder_text == item.label}">{{item.label}}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;证件类型:</label>
+                <div class="layui-unselect col-xs-3 layui-form-select  min_wit">
+                    <div class="layui-select-title">
+                        <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                               placeholder="" ng-model="registerMsg.userGuardianInfos[0].idType_text"/>
+                        <i class="layui-edge"></i>
+                    </div>
+                    <dl class="layui-anim layui-anim-upbit">
+                        <dd ng-repeat="item in allCard"
+                            ng-click="setCardType(1, item)"
+                            ng-class="{'layui-this':registerMsg.userGuardianInfos[0].idType_text == item.content}">{{item.content}}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;证件号:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.userGuardianInfos[0].idNumber" maxlength="18" type="text" ng-change="checkCardNum(2)"/>
+                <em style="color: red;line-height: 40px;margin-left: 15px;display: inline-flex;" ng-if="idCard2Invalid">监护人一身份证号有误</em>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;职务:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.userGuardianInfos[0].duties" type="text"/>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;学历:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.userGuardianInfos[0].education" type="text"/>
+            </div>
+        </div>
+        
+        <!-- 法定监护人2 -->
+        <div class="border_left border_right border_top" style="float: left;width: 100%">
+            <div class="form_row border_bottom">
+                <label class="form_label title col-xs-12">法定监护人信息二</label>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">姓名:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.userGuardianInfos[1].name" type="text"/>
+                <em style="color: #ff7600;line-height: 40px;margin-left: 15px;display: inline-flex;">法定监护人信息二为非必填项，若没有可不填</em>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">与学生关系:</label>
+                <div class="layui-unselect col-xs-3 layui-form-select min_wit">
+                   <div class="layui-select-title">
+                       <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                              placeholder="" ng-model="registerMsg.userGuardianInfos[1].userRelationship_text"/>
+                       <i class="layui-edge"></i>
+                   </div>
+                   <dl class="layui-anim layui-anim-upbit">
+                       <dd ng-repeat="item in student_relationList" ng-click="set_student_relation(2, item)"
+                           ng-class="{'layui-this':registerMsg.userGuardianInfos[1].userRelationship_text == item.content}">{{item.content}}
+                       </dd>
+                   </dl>
+               </div>
+                <em style="color: #ff7600;line-height: 40px;margin-left: 15px;display: inline-flex;" ng-if="isStu">优先选择母亲。</em>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">工作单位:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.userGuardianInfos[1].workUnit" type="text"/>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">户口所在地:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.userGuardianInfos[1].accountAddress" type="text"/>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">联系电话:</label>
+                <!-- 后期加校验 -->
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.userGuardianInfos[1].phone" maxlength="11" type="text" ng-change="checkPhone(3)"/>
+                <em style="color: red;line-height: 40px;margin-left: 15px;display: inline-flex;" ng-if="phone3Invalid">监护人二联系电话格式有误</em>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">是否为法定监护人:</label>
+                <div class="layui-unselect col-xs-3 layui-form-select  min_wit">
+                    <div class="layui-select-title">
+                        <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                               placeholder="" ng-model="registerMsg.userGuardianInfos[1].guarder_text"/>
+                        <i class="layui-edge"></i>
+                    </div>
+                    <dl class="layui-anim layui-anim-upbit">
+                        <dd ng-repeat="item in toChoose"
+                            ng-click="registerMsg.userGuardianInfos[1].guarder_text = item.label;registerMsg.userGuardianInfos[1].guarder = item.value"
+                            ng-class="{'layui-this':registerMsg.userGuardianInfos[1].guarder_text == item.label}">{{item.label}}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">证件类型:</label>
+                <div class="layui-unselect col-xs-3 layui-form-select  min_wit">
+                    <div class="layui-select-title">
+                        <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                               placeholder="" ng-model="registerMsg.userGuardianInfos[1].idType_text"/>
+                        <i class="layui-edge"></i>
+                    </div>
+                    <dl class="layui-anim layui-anim-upbit">
+                        <dd ng-repeat="item in allCard"
+                            ng-click="setCardType(2, item)"
+                            ng-class="{'layui-this':registerMsg.userGuardianInfos[1].idType_text == item.content}">{{item.content}}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">证件号:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.userGuardianInfos[1].idNumber" maxlength="18" type="text" ng-change="checkCardNum(3)"/>
+                <em style="color: red;line-height: 40px;margin-left: 15px;display: inline-flex;" ng-if="idCard3Invalid">监护人二身份证号有误</em>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">职务:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.userGuardianInfos[1].duties" type="text"/>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight">学历:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.userGuardianInfos[1].education" type="text"/>
+            </div>
+        </div>
+        <!-- 户籍房产 -->
+        <div class="border_left border_right border_top" style="float: left;width: 100%">
+            <div class="form_row border_bottom">
+                <label class="form_label title col-xs-12">户籍房产类别</label>
+            </div>
+            <!-- <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;学生户口地址:</label>
+                <input class="form_control col-xs-1" type="text" value="湖北省宜昌市当阳市" readonly/>
+                <input class="form_control col-xs-1" ng-model="selRow.user_popular_address" type="text" placeholder="街道"/>
+                <input class="form_control col-xs-1" ng-model="selRow.user_popular_address" type="text" placeholder="门牌号"/>
+                <em style="color: red;line-height: 40px;margin-left: 15px;" >如：东正街 6号</em>
+            </div> -->
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;房产/经商/务工地址:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.userHouseInfo.houseAddress" type="text"/>
+                <em style="color: #ff7600;line-height: 40px;margin-left: 15px;display: inline-flex;">请根据自身情况填写本栏信息</em>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em>*</em>&nbsp;以上房产类型:</label>
+                <div class="layui-unselect col-xs-3 layui-form-select min_wit">
+                    <!--房产类型-->
+                    <div class="layui-select-title">
+                        <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                               placeholder="" ng-model="registerMsg.userHouseInfo.houseType_text"/>
+                        <i class="layui-edge"></i>
+                    </div>
+                    <dl class="layui-anim layui-anim-upbit">
+                        <dd ng-repeat="item in housing_typeList" ng-click="set_housing_type(item)"
+                            ng-class="{'layui-this':registerMsg.userHouseInfo.houseType_text == item.text}">{{item.text}}
+                        </dd>
+                    </dl>
+                </div>
+                <em style="color: #ff7600;line-height: 40px;margin-left: 15px;display: inline-flex;">若填写的是“经商”或“务工”地址，此处请选择“无”，并且下列房产信息请勿填写</em>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em ng-if="0 != registerMsg.userHouseInfo.houseType">*</em>&nbsp;房产证编号/备案号:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.userHouseInfo.houseNumber" type="text"/>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em ng-if="0 != registerMsg.userHouseInfo.houseType">*</em>&nbsp;户口性质:</label>
+                
+                <!--户口性质--------------->
+                <div class="layui-unselect col-xs-3 layui-form-select min_wit">
+                    <div class="layui-select-title">
+                        <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                               placeholder="" ng-model="registerMsg.userHouseInfo.liveType_text"/>
+                        <i class="layui-edge"></i>
+                    </div>
+                    <dl class="layui-anim layui-anim-upbit">
+                        <dd ng-repeat="item in [{label:'农村',value:0}, {label:'城镇',value:1}]" ng-click="set_popular_type(item)"
+                            ng-class="{'layui-this':registerMsg.userHouseInfo.liveType_text == item.label}">{{item.label}}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="form_row border_bottom">
+                <label class="form_label col-xs-2 border_right text_right weight"><em ng-if="0 != registerMsg.userHouseInfo.houseType">*</em>&nbsp;房产所有人姓名:</label>
+                <input class="form_control col-xs-3 min_wit" ng-model="registerMsg.userHouseInfo.houseOwner" type="text"/>
+            </div>
+            <div class="form_row border_bottom">
+		         <label class="form_label col-xs-2 border_right text_right weight"><em ng-if="0 != registerMsg.userHouseInfo.houseType">*</em>&nbsp;房主与学生关系:</label>
+		         <div class="layui-unselect col-xs-3 layui-form-select min_wit">
+		             <!--关系-->
+	                 <div class="layui-select-title">
+	                     <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+	                            placeholder="" ng-model="registerMsg.userHouseInfo.houseOwnerType_text"/>
+	                     <i class="layui-edge"></i>
+	                 </div>
+	                 <dl class="layui-anim layui-anim-upbit">
+	                     <dd ng-repeat="item in student_relationList" ng-click="set_student_house_relation(item)"
+	                         ng-class="{'layui-this':registerMsg.userHouseInfo.houseOwnerType_text == item.content}">{{item.content}}
+	                     </dd>
+	                 </dl>
+		         </div>
+		     </div>
+        </div>
+        <!-- 上传 -->
+	     <div class="form_row col-xs-11 border_left" style="padding-bottom: 15px;">
+	     	<!-- <div class="form_row border_bottom">
+                <label class="form_label title col-xs-12">照片信息上传</label>
+            </div> -->
+            <em style="color: #ff7600;line-height: 40px;margin-left: 15px;display: inline-flex;">
+            	*户口、出生证明为必传，其他根据申请类别上传对应材料：以上房产类型，若填写的是“房产”地址，则上传房产证或有备案号的合同；
+            	若填写的是“经商”地址，则上传营业执照；若填写的是“务工”地址，则上传劳工合同、社保凭证。</em>
+              <input type="file" id="img1" accept="image/gif,image/jpg,image/bmp,image/png,image/jpeg" class="hidden_input">
+              <div>
+                  <div class="form-left">
+                      <div class="layui-form-item img_cc" ng-click="reviewImg(photoObj1)">
+                          <img ng-src="{{photoObj1.base64 || (rootUrl + photoObj1.photoUrl)}}"
+                               style="width:100%;height: 100%;"
+                               ng-if="photoObj1.base64 || photoObj1.photoUrl"/>
+                          <!-- <div ng-if="photoObj3.photoName" title="{{photoObj3.photoName}}" class="img_name">{{photoObj3.photoName}}</div> -->
+                      </div>
+                      <button class="btn btn-primary"
+                              ng-click="img_url_code=1;uploading()" ng-disabled="!isStu">户口本1（主页）
+                      </button>
+                  </div>
+                  <div class="form-left">
+                      <div class="layui-form-item img_cc" ng-click="reviewImg(photoObj2)">
+                          <img ng-src="{{photoObj2.base64 || (rootUrl + photoObj2.photoUrl)}}"
+                               style="width:100%;height: 100%;"
+                               ng-if="photoObj2.base64 || photoObj2.photoUrl"/>
+                         <!--  <div ng-if="photoObj4.photoName" title="{{photoObj4.photoName}}" class="img_name">{{photoObj4.photoName}}</div> -->
+                      </div>
+                      <button class="btn btn-primary"
+                              ng-click="img_url_code=2;uploading()" ng-disabled="!isStu">户口本2（学生所在页）
+                      </button>
+                  </div>
+                  <div class="form-left">
+                      <div class="layui-form-item img_cc" ng-click="reviewImg(photoObj3)">
+                          <img ng-src="{{photoObj3.base64 || (rootUrl + photoObj3.photoUrl)}}"
+                               style="width:100%;height: 100%;"
+                               ng-if="photoObj3.base64 || photoObj3.photoUrl"/>
+                          <!-- <div ng-if="photoObj1.photoName" title="{{photoObj1.photoName}}" class="img_name">{{photoObj1.photoName}}</div> -->
+                      </div>
+                      <button class="btn btn-primary"
+                              ng-click="img_url_code=3;uploading()" ng-disabled="!isStu">出生医学证明
+                      </button>
+                  </div>
+                  
+                  <!-- <div class="form-left" ng-show="no_soldier"> -->
+                  <div class="form-left">
+                      <div class="layui-form-item img_cc" ng-click="reviewImg(photoObj4)">
+                          <img ng-src="{{photoObj4.base64 || (rootUrl + photoObj4.photoUrl)}}"
+                               style="width:100%;height: 100%;"
+                               ng-if="photoObj4.base64 || photoObj4.photoUrl"/>
+                          <!-- <div ng-if="photoObj2.photoName" title="{{photoObj2.photoName}}" class="img_name">{{photoObj2.photoName}}</div> -->
+                      </div>
+                      <button class="btn btn-primary"
+                              ng-click="img_url_code=4;uploading()" ng-disabled="!isStu">房产证明材料1
+                      </button>
+                  </div>
+                  <div class="form-left">
+                      <div class="layui-form-item img_cc" ng-click="reviewImg(photoObj5)">
+                          <img ng-src="{{photoObj5.base64 || (rootUrl + photoObj5.photoUrl)}}"
+                               style="width:100%;height: 100%;"
+                               ng-if="photoObj5.base64 || photoObj5.photoUrl"/>
+                          <!-- <div ng-if="photoObj2.photoName" title="{{photoObj2.photoName}}" class="img_name">{{photoObj2.photoName}}</div> -->
+                      </div>
+                      <button class="btn btn-primary"
+                              ng-click="img_url_code=5;uploading()" ng-disabled="!isStu">房产证明材料2
+                      </button>
+                  </div>
+                  <div class="form-left">
+                      <div class="layui-form-item img_cc" ng-click="reviewImg(photoObj6)">
+                          <img ng-src="{{photoObj6.base64 || (rootUrl + photoObj6.photoUrl)}}"
+                               style="width:100%;height: 100%;"
+                               ng-if="photoObj6.base64 || photoObj6.photoUrl"/>
+                          <!-- <div ng-if="photoObj2.photoName" title="{{photoObj2.photoName}}" class="img_name">{{photoObj2.photoName}}</div> -->
+                      </div>
+                      <button class="btn btn-primary"
+                              ng-click="img_url_code=6;uploading()" ng-disabled="!isStu">房产证明材料3
+                      </button>
+                  </div>
+					<div class="form-left">
+                      <div class="layui-form-item img_cc" ng-click="reviewImg(photoObj7)">
+                          <img ng-src="{{photoObj7.base64 || (rootUrl + photoObj7.photoUrl)}}"
+                               style="width:100%;height: 100%;"
+                               ng-if="photoObj7.base64 || photoObj7.photoUrl"/>
+                          <!-- <div ng-if="photoObj2.photoName" title="{{photoObj2.photoName}}" class="img_name">{{photoObj2.photoName}}</div> -->
+                      </div>
+                      <button class="btn btn-primary"
+                              ng-click="img_url_code=7;uploading()" ng-disabled="!isStu">营业执照
+                      </button>
+                  </div>
+                  <div class="form-left">
+                      <div class="layui-form-item img_cc" ng-click="reviewImg(photoObj8)">
+                          <img ng-src="{{photoObj8.base64 || (rootUrl + photoObj8.photoUrl)}}"
+                               style="width:100%;height: 100%;"
+                               ng-if="photoObj8.base64 || photoObj8.photoUrl"/>
+                          <!-- <div ng-if="photoObj2.photoName" title="{{photoObj2.photoName}}" class="img_name">{{photoObj2.photoName}}</div> -->
+                      </div>
+                      <button class="btn btn-primary"
+                              ng-click="img_url_code=8;uploading()" ng-disabled="!isStu">劳动合同1
+                      </button>
+                  </div>
+                  <div class="form-left">
+                      <div class="layui-form-item img_cc" ng-click="reviewImg(photoObj9)">
+                          <img ng-src="{{photoObj9.base64 || (rootUrl + photoObj9.photoUrl)}}"
+                               style="width:100%;height: 100%;"
+                               ng-if="photoObj9.base64 || photoObj9.photoUrl"/>
+                          <!-- <div ng-if="photoObj2.photoName" title="{{photoObj2.photoName}}" class="img_name">{{photoObj2.photoName}}</div> -->
+                      </div>
+                      <button class="btn btn-primary"
+                              ng-click="img_url_code=9;uploading()" ng-disabled="!isStu">劳动合同2
+                      </button>
+                  </div>
+                  <div class="form-left">
+                      <div class="layui-form-item img_cc" ng-click="reviewImg(photoObj10)">
+                          <img ng-src="{{photoObj10.base64 || (rootUrl + photoObj10.photoUrl)}}"
+                               style="width:100%;height: 100%;"
+                               ng-if="photoObj10.base64 || photoObj10.photoUrl"/>
+                          <!-- <div ng-if="photoObj2.photoName" title="{{photoObj2.photoName}}" class="img_name">{{photoObj2.photoName}}</div> -->
+                      </div>
+                      <button class="btn btn-primary"
+                              ng-click="img_url_code=10;uploading()" ng-disabled="!isStu">社保凭证
+                      </button>
+                  </div>
+                  <!-- <div class="form-left" ng-show="!no_soldier"> -->
+                  <div class="form-left">
+                      <div class="layui-form-item img_cc" ng-click="reviewImg(photoObj11)">
+                          <img ng-src="{{photoObj11.base64 || (rootUrl + photoObj11.photoUrl)}}"
+                               style="width:100%;height: 100%;"
+                               ng-if="photoObj11.base64 || photoObj11.photoUrl"/>
+                          <!-- <div ng-if="photoObj13.photoName" title="{{photoObj13.photoName}}" class="img_name">{{photoObj13.photoName}}</div> -->
+                      </div>
+                      <button class="btn btn-primary"
+                              ng-click="img_url_code=11;uploading()" ng-disabled="!isStu">其他材料
+                      </button>
+                  </div>
+                  <!--上传其他证明  扩展-显示-->
+                  <!-- <div class="form-left" ng-repeat="item in selRow.census_urls_array">
+                      <div class="layui-form-item img_cc">
+                          <img ng-src="{{ctxPath+item}}" style="width:100%;height: 100%;"/>
+                          <i class="d_rem" ng-click="_rel_arr_item(selRow.census_urls_array, item)"></i>
+                      </div>
+                      <button class="btn">其他证明{{$index + 1}}</button>
+                  </div> -->
+                  <!--上传其他证明  扩展-上传-->
+                  <!-- <div class="form-left">
+                      <div class="layui-form-item img_cc"
+                           ng-click="reviewImg(photoObj12)">
+                           <img ng-src="{{photoObj12.base64 || (rootUrl + photoObj12.photoUrl)}}"
+                               style="width:100%;height: 100%;"
+                               ng-if="photoObj12.base64 || photoObj12.photoUrl"/>
+                           <div ng-if="photoObj12.photoName" title="{{photoObj12.photoName}}" class="img_name">{{photoObj12.photoName}}</div>
+                      </div>
+                      <button class="btn btn-primary" ng-click="img_url_code=12;uploading()" ng-disabled="!isStu">上传其他证明</button>
+                  </div> -->
+                  <div class="img_tip" ng-if="review">点击图片预览</div>
+              </div>
+          </div>
+
+    </div>
+    <!-- 上传 -->
+    <div class="input-file hide-input none" style="padding: 0;margin: 0;width: 160px;">
+        <input type="file" multiple="multiple" accept="image/gif,image/jpeg,image/png,image/jpg,image/bmp"
+               autocomplete="off"
+               id="prj-img"
+               class="form-control file-pretty" name="file" data-id="file"
+               data-ajax="true"/>
+    </div>
+	<div class="form_row" ng-if="!review || isStu">
+        <div class="form_btns">
+			<button class="btn btn-primary" ng-click="formSubmit()" ng-disabled="smsCodeInvalid && !review">确定</button>
+        </div>
+   </div>
+</div>

@@ -1,0 +1,304 @@
+2018-06-26 09:32:31.763 [restartedMain] INFO  com.nercel.enroll.App -
+				Starting App on lijw with PID 10952 (F:\code\enroll4\enroll-webapp\target\classes started by Administrator in F:\code\enroll4\enroll-webapp)
+2018-06-26 09:32:31.770 [restartedMain] DEBUG com.nercel.enroll.App -
+				Running with Spring Boot v1.5.9.RELEASE, Spring v4.3.13.RELEASE
+2018-06-26 09:32:31.770 [restartedMain] INFO  com.nercel.enroll.App -
+				No active profile set, falling back to default profiles: default
+2018-06-26 09:32:33.562 [restartedMain] DEBUG org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration -
+				Searching for mappers annotated with @Mapper
+2018-06-26 09:32:33.564 [restartedMain] DEBUG org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration -
+				Using auto-configuration base package 'com.nercel.enroll'
+2018-06-26 09:32:33.603 [restartedMain] WARN  org.mybatis.spring.mapper.ClassPathMapperScanner -
+				No MyBatis mapper was found in '[com.nercel.enroll]' package. Please check your configuration.
+2018-06-26 09:32:33.714 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\ApplyInfoMapper.class]
+2018-06-26 09:32:33.714 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\CertificatesTypeMapper.class]
+2018-06-26 09:32:33.714 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\CountryMapper.class]
+2018-06-26 09:32:33.714 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\NationMapper.class]
+2018-06-26 09:32:33.714 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\PlanTimeMapper.class]
+2018-06-26 09:32:33.715 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\RelationalMapper.class]
+2018-06-26 09:32:33.715 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\SchoolMapper.class]
+2018-06-26 09:32:33.715 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\SchoolRelationshipMapper.class]
+2018-06-26 09:32:33.715 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\SmsCodeMapper.class]
+2018-06-26 09:32:33.715 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\StreetSchoolMapper.class]
+2018-06-26 09:32:33.715 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\StudentInfoMapper.class]
+2018-06-26 09:32:33.715 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserExtendedInfoMapper.class]
+2018-06-26 09:32:33.715 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserGuardianInfoMapper.class]
+2018-06-26 09:32:33.716 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserHouseInfoMapper.class]
+2018-06-26 09:32:33.716 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserMapper.class]
+2018-06-26 09:32:33.716 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserPhotoInfoMapper.class]
+2018-06-26 09:32:33.716 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserPhotoTypeMapper.class]
+2018-06-26 09:32:33.716 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserRoleMapper.class]
+2018-06-26 09:32:33.717 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'applyInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.ApplyInfoMapper' mapperInterface
+2018-06-26 09:32:33.717 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'certificatesTypeMapper' and 'com.nercel.enroll.dao.mapperInterface.CertificatesTypeMapper' mapperInterface
+2018-06-26 09:32:33.717 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'countryMapper' and 'com.nercel.enroll.dao.mapperInterface.CountryMapper' mapperInterface
+2018-06-26 09:32:33.717 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'nationMapper' and 'com.nercel.enroll.dao.mapperInterface.NationMapper' mapperInterface
+2018-06-26 09:32:33.717 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'planTimeMapper' and 'com.nercel.enroll.dao.mapperInterface.PlanTimeMapper' mapperInterface
+2018-06-26 09:32:33.717 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'relationalMapper' and 'com.nercel.enroll.dao.mapperInterface.RelationalMapper' mapperInterface
+2018-06-26 09:32:33.717 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'schoolMapper' and 'com.nercel.enroll.dao.mapperInterface.SchoolMapper' mapperInterface
+2018-06-26 09:32:33.717 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'schoolRelationshipMapper' and 'com.nercel.enroll.dao.mapperInterface.SchoolRelationshipMapper' mapperInterface
+2018-06-26 09:32:33.717 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'smsCodeMapper' and 'com.nercel.enroll.dao.mapperInterface.SmsCodeMapper' mapperInterface
+2018-06-26 09:32:33.717 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'streetSchoolMapper' and 'com.nercel.enroll.dao.mapperInterface.StreetSchoolMapper' mapperInterface
+2018-06-26 09:32:33.717 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'studentInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.StudentInfoMapper' mapperInterface
+2018-06-26 09:32:33.717 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userExtendedInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.UserExtendedInfoMapper' mapperInterface
+2018-06-26 09:32:33.717 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userGuardianInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.UserGuardianInfoMapper' mapperInterface
+2018-06-26 09:32:33.717 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userHouseInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.UserHouseInfoMapper' mapperInterface
+2018-06-26 09:32:33.717 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userMapper' and 'com.nercel.enroll.dao.mapperInterface.UserMapper' mapperInterface
+2018-06-26 09:32:33.718 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userPhotoInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.UserPhotoInfoMapper' mapperInterface
+2018-06-26 09:32:33.718 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userPhotoTypeMapper' and 'com.nercel.enroll.dao.mapperInterface.UserPhotoTypeMapper' mapperInterface
+2018-06-26 09:32:33.718 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userRoleMapper' and 'com.nercel.enroll.dao.mapperInterface.UserRoleMapper' mapperInterface
+2018-06-26 09:32:35.762 [restartedMain] ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter -
+				
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field basicDataService in com.nercel.enroll.controller.api.impl.BasicDataImplController required a bean of type 'com.nercel.enroll.core.service.BasicDataService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'com.nercel.enroll.core.service.BasicDataService' in your configuration.
+
+2018-06-26 09:32:35.763 [restartedMain] DEBUG com.nercel.enroll.App -
+				=================================== 启动成功
+2018-06-26 09:32:35.765 [main] DEBUG com.nercel.enroll.App -
+				=================================== 启动成功
+2018-06-26 09:35:28.447 [restartedMain] INFO  com.nercel.enroll.App -
+				Starting App on lijw with PID 8888 (F:\code\enroll4\enroll-webapp\target\classes started by Administrator in F:\code\enroll4\enroll-webapp)
+2018-06-26 09:35:28.449 [restartedMain] DEBUG com.nercel.enroll.App -
+				Running with Spring Boot v1.5.9.RELEASE, Spring v4.3.13.RELEASE
+2018-06-26 09:35:28.449 [restartedMain] INFO  com.nercel.enroll.App -
+				No active profile set, falling back to default profiles: default
+2018-06-26 09:35:29.708 [restartedMain] DEBUG org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration -
+				Searching for mappers annotated with @Mapper
+2018-06-26 09:35:29.710 [restartedMain] DEBUG org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration -
+				Using auto-configuration base package 'com.nercel.enroll'
+2018-06-26 09:35:29.747 [restartedMain] WARN  org.mybatis.spring.mapper.ClassPathMapperScanner -
+				No MyBatis mapper was found in '[com.nercel.enroll]' package. Please check your configuration.
+2018-06-26 09:35:29.851 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\ApplyInfoMapper.class]
+2018-06-26 09:35:29.851 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\CertificatesTypeMapper.class]
+2018-06-26 09:35:29.851 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\CountryMapper.class]
+2018-06-26 09:35:29.851 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\NationMapper.class]
+2018-06-26 09:35:29.851 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\PlanTimeMapper.class]
+2018-06-26 09:35:29.851 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\RelationalMapper.class]
+2018-06-26 09:35:29.852 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\SchoolMapper.class]
+2018-06-26 09:35:29.852 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\SchoolRelationshipMapper.class]
+2018-06-26 09:35:29.852 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\SmsCodeMapper.class]
+2018-06-26 09:35:29.852 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\StreetSchoolMapper.class]
+2018-06-26 09:35:29.852 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\StudentInfoMapper.class]
+2018-06-26 09:35:29.852 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserExtendedInfoMapper.class]
+2018-06-26 09:35:29.853 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserGuardianInfoMapper.class]
+2018-06-26 09:35:29.853 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserHouseInfoMapper.class]
+2018-06-26 09:35:29.853 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserMapper.class]
+2018-06-26 09:35:29.853 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserPhotoInfoMapper.class]
+2018-06-26 09:35:29.853 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserPhotoTypeMapper.class]
+2018-06-26 09:35:29.853 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserRoleMapper.class]
+2018-06-26 09:35:29.854 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'applyInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.ApplyInfoMapper' mapperInterface
+2018-06-26 09:35:29.854 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'certificatesTypeMapper' and 'com.nercel.enroll.dao.mapperInterface.CertificatesTypeMapper' mapperInterface
+2018-06-26 09:35:29.854 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'countryMapper' and 'com.nercel.enroll.dao.mapperInterface.CountryMapper' mapperInterface
+2018-06-26 09:35:29.854 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'nationMapper' and 'com.nercel.enroll.dao.mapperInterface.NationMapper' mapperInterface
+2018-06-26 09:35:29.854 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'planTimeMapper' and 'com.nercel.enroll.dao.mapperInterface.PlanTimeMapper' mapperInterface
+2018-06-26 09:35:29.854 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'relationalMapper' and 'com.nercel.enroll.dao.mapperInterface.RelationalMapper' mapperInterface
+2018-06-26 09:35:29.854 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'schoolMapper' and 'com.nercel.enroll.dao.mapperInterface.SchoolMapper' mapperInterface
+2018-06-26 09:35:29.854 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'schoolRelationshipMapper' and 'com.nercel.enroll.dao.mapperInterface.SchoolRelationshipMapper' mapperInterface
+2018-06-26 09:35:29.854 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'smsCodeMapper' and 'com.nercel.enroll.dao.mapperInterface.SmsCodeMapper' mapperInterface
+2018-06-26 09:35:29.854 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'streetSchoolMapper' and 'com.nercel.enroll.dao.mapperInterface.StreetSchoolMapper' mapperInterface
+2018-06-26 09:35:29.854 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'studentInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.StudentInfoMapper' mapperInterface
+2018-06-26 09:35:29.854 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userExtendedInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.UserExtendedInfoMapper' mapperInterface
+2018-06-26 09:35:29.854 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userGuardianInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.UserGuardianInfoMapper' mapperInterface
+2018-06-26 09:35:29.854 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userHouseInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.UserHouseInfoMapper' mapperInterface
+2018-06-26 09:35:29.854 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userMapper' and 'com.nercel.enroll.dao.mapperInterface.UserMapper' mapperInterface
+2018-06-26 09:35:29.855 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userPhotoInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.UserPhotoInfoMapper' mapperInterface
+2018-06-26 09:35:29.855 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userPhotoTypeMapper' and 'com.nercel.enroll.dao.mapperInterface.UserPhotoTypeMapper' mapperInterface
+2018-06-26 09:35:29.855 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userRoleMapper' and 'com.nercel.enroll.dao.mapperInterface.UserRoleMapper' mapperInterface
+2018-06-26 09:35:31.422 [restartedMain] ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter -
+				
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field basicDataService in com.nercel.enroll.controller.api.impl.BasicDataImplController required a bean of type 'com.nercel.enroll.core.service.BasicDataService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'com.nercel.enroll.core.service.BasicDataService' in your configuration.
+
+2018-06-26 09:35:31.423 [restartedMain] DEBUG com.nercel.enroll.App -
+				=================================== 启动成功
+2018-06-26 09:35:31.424 [main] DEBUG com.nercel.enroll.App -
+				=================================== 启动成功
+2018-06-26 09:37:20.453 [restartedMain] INFO  com.nercel.enroll.App -
+				Starting App on lijw with PID 4472 (F:\code\enroll4\enroll-webapp\target\classes started by Administrator in F:\code\enroll4\enroll-webapp)
+2018-06-26 09:37:20.455 [restartedMain] DEBUG com.nercel.enroll.App -
+				Running with Spring Boot v1.5.9.RELEASE, Spring v4.3.13.RELEASE
+2018-06-26 09:37:20.455 [restartedMain] INFO  com.nercel.enroll.App -
+				No active profile set, falling back to default profiles: default
+2018-06-26 09:37:21.643 [restartedMain] DEBUG org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration -
+				Searching for mappers annotated with @Mapper
+2018-06-26 09:37:21.646 [restartedMain] DEBUG org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration -
+				Using auto-configuration base package 'com.nercel.enroll'
+2018-06-26 09:37:21.694 [restartedMain] WARN  org.mybatis.spring.mapper.ClassPathMapperScanner -
+				No MyBatis mapper was found in '[com.nercel.enroll]' package. Please check your configuration.
+2018-06-26 09:37:21.803 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\ApplyInfoMapper.class]
+2018-06-26 09:37:21.803 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\CertificatesTypeMapper.class]
+2018-06-26 09:37:21.803 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\CountryMapper.class]
+2018-06-26 09:37:21.804 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\NationMapper.class]
+2018-06-26 09:37:21.804 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\PlanTimeMapper.class]
+2018-06-26 09:37:21.804 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\RelationalMapper.class]
+2018-06-26 09:37:21.804 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\SchoolMapper.class]
+2018-06-26 09:37:21.804 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\SchoolRelationshipMapper.class]
+2018-06-26 09:37:21.805 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\SmsCodeMapper.class]
+2018-06-26 09:37:21.805 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\StreetSchoolMapper.class]
+2018-06-26 09:37:21.805 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\StudentInfoMapper.class]
+2018-06-26 09:37:21.805 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserExtendedInfoMapper.class]
+2018-06-26 09:37:21.805 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserGuardianInfoMapper.class]
+2018-06-26 09:37:21.805 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserHouseInfoMapper.class]
+2018-06-26 09:37:21.806 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserMapper.class]
+2018-06-26 09:37:21.806 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserPhotoInfoMapper.class]
+2018-06-26 09:37:21.806 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserPhotoTypeMapper.class]
+2018-06-26 09:37:21.806 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Identified candidate component class: file [F:\code\enroll4\enroll-dao\target\classes\com\nercel\enroll\dao\mapperInterface\UserRoleMapper.class]
+2018-06-26 09:37:21.807 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'applyInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.ApplyInfoMapper' mapperInterface
+2018-06-26 09:37:21.807 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'certificatesTypeMapper' and 'com.nercel.enroll.dao.mapperInterface.CertificatesTypeMapper' mapperInterface
+2018-06-26 09:37:21.807 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'countryMapper' and 'com.nercel.enroll.dao.mapperInterface.CountryMapper' mapperInterface
+2018-06-26 09:37:21.807 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'nationMapper' and 'com.nercel.enroll.dao.mapperInterface.NationMapper' mapperInterface
+2018-06-26 09:37:21.807 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'planTimeMapper' and 'com.nercel.enroll.dao.mapperInterface.PlanTimeMapper' mapperInterface
+2018-06-26 09:37:21.807 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'relationalMapper' and 'com.nercel.enroll.dao.mapperInterface.RelationalMapper' mapperInterface
+2018-06-26 09:37:21.807 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'schoolMapper' and 'com.nercel.enroll.dao.mapperInterface.SchoolMapper' mapperInterface
+2018-06-26 09:37:21.807 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'schoolRelationshipMapper' and 'com.nercel.enroll.dao.mapperInterface.SchoolRelationshipMapper' mapperInterface
+2018-06-26 09:37:21.807 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'smsCodeMapper' and 'com.nercel.enroll.dao.mapperInterface.SmsCodeMapper' mapperInterface
+2018-06-26 09:37:21.807 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'streetSchoolMapper' and 'com.nercel.enroll.dao.mapperInterface.StreetSchoolMapper' mapperInterface
+2018-06-26 09:37:21.807 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'studentInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.StudentInfoMapper' mapperInterface
+2018-06-26 09:37:21.807 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userExtendedInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.UserExtendedInfoMapper' mapperInterface
+2018-06-26 09:37:21.808 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userGuardianInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.UserGuardianInfoMapper' mapperInterface
+2018-06-26 09:37:21.808 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userHouseInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.UserHouseInfoMapper' mapperInterface
+2018-06-26 09:37:21.808 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userMapper' and 'com.nercel.enroll.dao.mapperInterface.UserMapper' mapperInterface
+2018-06-26 09:37:21.808 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userPhotoInfoMapper' and 'com.nercel.enroll.dao.mapperInterface.UserPhotoInfoMapper' mapperInterface
+2018-06-26 09:37:21.808 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userPhotoTypeMapper' and 'com.nercel.enroll.dao.mapperInterface.UserPhotoTypeMapper' mapperInterface
+2018-06-26 09:37:21.808 [restartedMain] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -
+				Creating MapperFactoryBean with name 'userRoleMapper' and 'com.nercel.enroll.dao.mapperInterface.UserRoleMapper' mapperInterface
+2018-06-26 09:37:23.579 [restartedMain] DEBUG org.mybatis.spring.SqlSessionFactoryBean -
+				Parsed configuration file: 'class path resource [mybatis/mybatis-config.xml]'
+2018-06-26 09:37:23.580 [restartedMain] DEBUG org.mybatis.spring.SqlSessionFactoryBean -
+				Property 'mapperLocations' was not specified or no matching resources found
+2018-06-26 09:37:24.785 [restartedMain] DEBUG org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration -
+				No org.mybatis.spring.mapper.MapperFactoryBean found.
+2018-06-26 09:37:25.773 [restartedMain] INFO  com.nercel.enroll.App -
+				Started App in 5.506 seconds (JVM running for 5.984)
+2018-06-26 09:37:25.773 [restartedMain] DEBUG com.nercel.enroll.App -
+				=================================== 启动成功
+2018-06-26 09:37:25.775 [main] DEBUG com.nercel.enroll.App -
+				=================================== 启动成功

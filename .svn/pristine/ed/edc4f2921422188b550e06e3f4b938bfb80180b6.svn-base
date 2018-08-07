@@ -1,0 +1,122 @@
+package com.nercel.enroll.domain.common;
+
+import java.io.Serializable;
+import java.util.Random;
+
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * 响应结果 version v 0.0.1
+ * 
+ * @author yishui
+ * @date 2017年12月10日
+ */
+public class Response implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4032526214722457656L;
+	/**
+	 * 返回ID
+	 */
+	@ApiModelProperty("返回ID")
+	private Integer id;
+	/**
+	 * 结果
+	 */
+	@ApiModelProperty("结果的类型")
+	private Statu result;
+	/**
+	 * 消息
+	 */
+	@ApiModelProperty("结果的消息实体")
+	private Object msg;
+	/**
+	 * token
+	 */
+	@ApiModelProperty("请求返回的token")
+	private String token;
+	/**
+	 * 时间
+	 */
+	@ApiModelProperty("返回请求的时间")
+	private Long time;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Statu getResult() {
+		return result;
+	}
+
+	public void setResult(Statu result) {
+		this.result = result;
+	}
+
+	public Object getMsg() {
+		return msg;
+	}
+
+	public void setMsg(Object msg) {
+		this.msg = msg;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public Long getTime() {
+		return time;
+	}
+
+	public void setTime(Long time) {
+		this.time = time;
+	}
+
+	public Response() {
+
+	}
+
+	public Response(Integer id, Statu result, String msg, String token, Long time) {
+		this.id = id;
+		this.result = result;
+		this.msg = msg;
+		this.token = token;
+		this.time = time;
+	}
+
+	public static enum Statu {
+		OK, FAIL, ERROR, OTHER
+	}
+
+	public Response(Statu result, String token) {
+		this.id = new Random().nextInt();
+		this.result = result;
+		this.token = token;
+		this.time = System.currentTimeMillis();
+	}
+
+	public Response(Statu result, Object msg, String token) {
+		this.id = new Random().nextInt();
+		this.result = result;
+		this.msg = msg;
+		this.token = token;
+		this.time = System.currentTimeMillis();
+	}
+
+	@Override
+	public String toString() {
+		return "Response [id=" + id + ", result=" + result + ", msg=" + msg + ", token=" + token + ", time=" + time
+				+ "]";
+	}
+
+}

@@ -1,0 +1,117 @@
+
+#preAdmissionPreview .form_row {
+    margin: 0;
+}
+#preAdmissionPreview .audit_content .form_row {
+    display: inline-flex;
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: -webkit-flex;
+}
+#preAdmissionPreview .text_right {
+    text-align: right;
+}
+
+#preAdmissionPreview .text_left {
+    text-align: left;
+}
+#preAdmissionPreview .audit_content {
+    float: left;
+    width: 100%;
+    padding: 0 1%;
+    margin-top: 30px;
+}
+#preAdmissionPreview .form_row .title {
+    height: 35px;
+    background: #86C0DF;
+    color: #fff;
+    text-align: left;
+    line-height: 40px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#preAdmissionPreview .form_label.weight {
+    font-weight: 500;
+}
+
+#preAdmissionPreview .border_bottom {
+    border-bottom: 1px solid #cccccc;
+    position: relative;
+}
+
+#preAdmissionPreview .border_top {
+    border-top: 1px solid #cccccc
+}
+
+#preAdmissionPreview .border_left {
+    border-left: 1px solid #cccccc
+}
+
+#preAdmissionPreview .border_right {
+    border-right: 1px solid #cccccc
+}
+
+
+#preAdmissionPreview .form_row .checkbox{
+    padding:5px 30px;
+}
+#preAdmissionPreview #cause input[type='checkbox']{
+    margin-right: 5px;
+}
+#preAdmissionPreview #imgHouse{
+    position: relative;
+
+}
+#preAdmissionPreview .imgHouse_left{
+    left: 10px;
+}
+#preAdmissionPreview .imgHouse_right{
+    right: 10px;
+}
+#preAdmissionPreview .imgHouse_left,#preAdmissionPreview .imgHouse_right{
+    width: 5%;
+    height: calc(100% - 20px);
+    position: absolute;
+    top: 10px;
+    z-index: 10;
+    opacity: .1;
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+
+    display: -moz-box;
+    -moz-box-orient: horizontal;
+    -moz-box-pack: center;
+    -moz-box-align: center;
+
+    display: -o-box;
+    -o-box-orient: horizontal;
+    -o-box-pack: center;
+    -o-box-align: center;
+
+    display: -ms-box;
+    -ms-box-orient: horizontal;
+    -ms-box-pack: center;
+    -ms-box-align: center;
+
+    display: box;
+    box-orient: horizontal;
+    box-pack: center;
+    box-align: center;
+}
+#preAdmissionPreview .imgHouse_left i,#preAdmissionPreview .imgHouse_right i{
+    font-size: 80px;
+}
+#preAdmissionPreview .imgHouse_left:hover,#preAdmissionPreview .imgHouse_right:hover {
+    cursor: pointer;
+}
+
+#preAdmissionPreview .marked{
+    color: #00a0e9
+}
+
+.table_pager_num {
+	display:none !important;
+}

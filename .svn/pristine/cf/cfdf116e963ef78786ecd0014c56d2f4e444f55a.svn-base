@@ -1,0 +1,76 @@
+package com.nercel.enroll.core.service;
+
+import java.io.IOException;
+
+import com.nercel.enroll.domain.common.CustomeException;
+import com.nercel.enroll.domain.dto.PlanTimeDto;
+import com.nercel.enroll.domain.model.beans.PlanTime;
+
+/**
+ * 基础操作行为接口
+ * 
+ * @author yishui
+ * @date 2018年6月29日
+ * @version 0.0.1
+ */
+public interface BasicOperateService {
+	/**
+	 * 发送短信验证码
+	 * 
+	 * @param phone
+	 *            手机号码
+	 * @return
+	 * @throws IOException
+	 * @throws CustomeException
+	 * @throws com.nercel.enroll.common.entity.CustomeException
+	 * @throws Exception
+	 */
+	Boolean sendSmsCode(String phone) throws IOException, CustomeException, Exception;
+
+	/**
+	 * 查询验证码与手机号是否匹配
+	 * 
+	 * @param phone
+	 *            手机号码
+	 * @param smsCode
+	 *            验证码
+	 * @return
+	 */
+	Boolean querySmsCode(String phone, String smsCode);
+
+	/**
+	 * 保存计划时间
+	 * 
+	 * @param token
+	 * @param planTimeDto
+	 * @return
+	 */
+	Boolean savePlanTime(String token, PlanTimeDto planTimeDto);
+
+	/**
+	 * 查询时间计划
+	 * 
+	 * @return
+	 */
+	PlanTime queryPlanTime();
+
+	/**
+	 * 修改审核状态
+	 * 
+	 * @param token
+	 * @param statu
+	 *            true表示开启
+	 * @return
+	 * @throws CustomeException
+	 */
+	Boolean updateAuditStatu(String token, Boolean statu) throws CustomeException;
+
+	/**
+	 * 系统管理员查询审核开关的状态
+	 * 
+	 * @param token
+	 * @return
+	 * @throws CustomeException
+	 */
+	Boolean queryAuditStatu(String token) throws CustomeException;
+}

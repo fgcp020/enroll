@@ -1,0 +1,264 @@
+#loginController_page {
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    display: none;
+}
+
+.loginController_page_mobile {
+    background: url(/res/img/mobile_back.png) center no-repeat;
+    background-size: cover;
+}
+
+.un-login #loginController_page {
+    display: block;
+}
+
+#loginController_page .page_plan {
+    float: left;
+    width: 100%;
+    height: 100%;
+    min-height: 768px;
+    position: relative;
+}
+
+#loginController_page #notice ul li a {
+    float: left;
+    font-size: 14px;
+    color: white;
+    width: 400px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#loginController_page .page_content {
+    position: absolute;
+    height: 768px;
+    width: 1200px;
+    top: 50%;
+    left: 50%;
+    margin-top: -384px;
+    margin-left: -600px;
+}
+
+#loginController_page .page_content_mobile {
+    position: absolute;
+    height: auto;
+    width: auto;
+    min-height: 600px;
+    min-width: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+#loginController_page .page_content .page_top {
+    float: left;
+    width: 100%;
+    height: 50px;
+    background: #fff;
+    margin: 0;
+}
+
+/*澶�*/
+#loginController_page .page_content .page_top .top_logo {
+    position: relative;
+    left: 0;
+    height: 50px;
+}
+
+#loginController_page .page_content .page_top .top_logo img {
+    float: left;
+    margin-top: 10px;
+}
+
+/*涓棿*/
+#loginController_page .page_content .page_center {
+    float: left;
+    width: 100%;
+    height: 660px;
+    background: url(/res/img/login_bg.jpg) center no-repeat;
+    background-size: 100% 100%;
+    margin-top: 5px;
+}
+
+#loginController_page .page_content .page_center_mobile {
+    float: left;
+    width: 100%;
+    height: 660px;
+    background-size: 100% 100%;
+    margin-top: 5px;
+}
+
+/*鍏憡*/
+#loginController_page .page_content .page_center .page_center_left {
+    margin-left: 150px;
+    margin-top: 100px;
+    width: 500px;
+    float: left;
+    z-index: 10;
+}
+
+#loginController_page .page_content .page_center .page_center_left .page_notice {
+    float: left;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+}
+
+/*鐧诲綍*/
+#loginController_page .page_content .page_center .page_center_right {
+    width: 350px;
+    height: 350px;
+    float: right;
+    margin-top: 175px;
+    margin-right: 120px;
+}
+
+#loginController_page .page_content .page_center .page_center_right .page_enter {
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+
+#loginController_page .page_content .page_center .page_center_right .page_enter .page_top {
+    float: left;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 800;
+    color: #2B2E37;
+    background-color: rgb(241, 243, 245);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+#loginController_page .page_content .page_center .page_center_right .page_enter .page_top .page_top_left {
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 20px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 800;
+    color: #2B2E37;
+}
+
+#loginController_page .page_content .page_center .page_center_right .page_enter .page_top .page_top_right {
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 20px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 800;
+    color: #2B2E37;
+}
+
+#loginController_page .page_content .page_center .page_center_right .page_enter .page_row {
+    float: left;
+    width: 100%;
+    height: 270px;
+    padding: 40px 50px;
+    background: url("tp03_20140320_03.png") no-repeat center center / 100% auto;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#loginController_page .page_content .page_center .page_center_right .page_enter .page_row .page_row_matter {
+    float: left;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 8px;
+}
+
+#loginController_page .page_content .page_center .page_center_right .page_enter .page_row .page_row_matter .page_forget {
+    float: right;
+    margin-left: 14px;
+    color: rgb(104, 145, 248);
+}
+
+#loginController_page .page_content .page_center .page_center_right .page_enter .page_row .page_row_matter .form_control {
+    float: left;
+    width: 100%;
+    height: 35px;
+}
+
+#loginController_page .page_content .page_center .page_center_right .page_enter .page_row .page_row_matter .block {
+    float: left;
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    max-width: 250px;
+    min-width: 250px;
+    padding: 0;
+    color: #fff;
+    background: #4396f4;
+    transition: all 0.5s;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+#loginController_page .page_content .page_center .page_center_right .page_enter .page_enroll {
+    float: left;
+    width: 100%;
+    height: 40px;
+    padding: 5px 0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+/*灏鹃儴*/
+#loginController_page .page_content .page_footer {
+    position: absolute;
+    top: 720px;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: #fff;
+}
+
+#loginController_page .page_content .page_footer .page_rump {
+    float: left;
+    width: 100%;
+    font-size: 15px;
+    text-align: center;
+    color: #797777;
+    margin-top: 15px;
+}
+
+#loginController_page .page_content .page_footer .page_rump .page_commit {
+    padding: 0 10px;
+}
+
+#loginController_page .page_content .page_footer .pages_address {
+    float: left;
+    color: #a9a7a7;
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#loginController_page .box {
+    width: 12px;
+    height: 12px;
+    margin: 3px 0 0 0;
+    border: 1px solid #FFFFFF;
+    background: #FFFFFF;
+    background-size: 100%;
+}
+
+#loginController_page .at {
+    background: url(box-at.png) no-repeat 0 0 #fff;
+    background-size: 100%;
+}
+
+

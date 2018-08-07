@@ -1,0 +1,211 @@
+#declarationDegree {
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    display: none;
+}
+
+.un-login #declarationDegree {
+    display: block;
+}
+
+#declarationDegree .form_row {
+    margin: 0;
+}
+#declarationDegree .layui-unselect.col-xs-2, #declarationDegree .layui-unselect.col-xs-3 {
+    padding: 0;
+    margin: 5px 0 5px 5px;
+    line-height: 32px;
+    height: 32px;
+}
+
+
+
+#declarationDegree .layui-input, .layui-select, .layui-textarea {
+    line-height: 32px;
+    height: 32px;
+}
+
+#declarationDegree .form_row .title {
+    height: 35px;
+    background: #3b8cff;
+    color: #fff;
+    text-align: center;
+    line-height: 35px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#declarationDegree .form_label.weight {
+    font-weight: 500;
+}
+
+#declarationDegree .border_bottom {
+    border-bottom: 1px solid #cccccc;
+    position: relative;
+}
+
+#declarationDegree .border_top {
+    border-top: 1px solid #cccccc
+}
+
+#declarationDegree .border_left {
+    border-left: 1px solid #cccccc
+}
+
+#declarationDegree .border_right {
+    border-right: 1px solid #cccccc
+}
+
+#declarationDegree .text_right {
+    text-align: right;
+}
+
+#declarationDegree .text_left {
+    text-align: left;
+}
+
+/*审核信息*/
+#declarationDegree .audit_content  span{
+    text-align: center;
+    float: left;
+    line-height: 43px;
+    height: 43px;
+    padding-left: 5px;
+}
+
+#declarationDegree .audit_content {
+    float: left;
+    width: 100%;
+    padding: 0 1%;
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+
+#declarationDegree .form_label.title {
+    text-align: left;
+    line-height: 40px;
+    height: 40px;
+    font-size: 18px;
+    background: #86C0DF;
+    color: #fff;
+}
+
+#declarationDegree .form_btns {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#declarationDegree .form_btns .btn {
+    height: 38px;
+    line-height: 38px;
+    border-radius: 5px;
+    padding: 0 45px;
+    font-size: 18px;
+}
+
+#declarationDegree .form_control {
+    margin: 5px 0 5px 5px;
+}
+
+#declarationDegree .form_label {
+    height: 42px;
+    line-height: 42px;
+}
+
+#declarationDegree  input[placeholder] {
+    color: #000
+}
+#declarationDegree input:-ms-input-placeholder {
+    color: #595959
+}
+
+#declarationDegree  input::-webkit-input-placeholder {
+    color: #595959
+}
+
+#declarationDegree  input:-moz-placeholder {
+    color: #595959
+}
+
+#declarationDegree  input::-moz-placeholder {
+    color: #595959
+}
+
+#declarationDegree  .layui-form-select .layui-edge {
+    border-top-color: #575757;
+}
+
+
+#declarationDegree .img_cc {
+    margin: 10px auto;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    position: relative;
+    background: url("/res/img/11.png") center center no-repeat;
+    border: 1px #ddd solid;
+    background-size: 50% 50%;
+    cursor: pointer;
+}
+#declarationDegree .img_cc_upload{
+    background: url("/res/img/_add.png") no-repeat center center;
+    position: relative;
+}
+#declarationDegree .img_cc .d_rem{
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background: url("/res/img/_del.png") no-repeat center center / 15px 15px #ff0000;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+#declarationDegree .form-left {
+    float: left;
+    text-align: center;
+    margin: 5px 0 10px 10px;
+}
+
+#declarationDegree .img-label {
+    display: inline-block;
+    height: 100%;
+    padding-top: 2%;
+}
+#declarationDegree p{
+    color: red;
+    width: 150px;
+    float: left;
+    padding: 20px 0 0 10px
+}
+#declarationDegree .img_item{
+    float: left;
+}
+
+.hidden_input {
+	visibility: hidden;
+    width: 0px;
+    height: 0px;
+    display: contents;
+}
+
+.sms_btn {
+	margin: 5px;
+}
+
+.img_name {
+	margin-top: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.img_tip {
+	margin: 180px 0 0 20px;
+    display: inline-block;
+    font-size: 16px;
+}

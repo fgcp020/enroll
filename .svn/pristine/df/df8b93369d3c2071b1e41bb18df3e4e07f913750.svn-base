@@ -1,0 +1,318 @@
+<div id="preAdmissionPreview">
+    <div class="content_main">
+        <div class="list_bar_row">
+            <div class="content_search">
+                <div class="list_bar_row" ng-if="searchCondition">
+                
+	                <!-- <div class="col-xs-3">
+	                    <label class="layui-form-label">手机号码:</label>
+	
+	                    <div class="layui-input-block">
+	                        <input class="layui-input" ng-model="param.student_name" type="text"/>
+	                    </div>
+	
+	                </div> -->
+	                
+                    <div class="col-xs-2">
+                        <label class="layui-form-label">审核状态:</label>
+                        <div class="layui-input-block">
+                            <div class="layui-unselect layui-form-select">
+                                <div class="layui-select-title">
+                                    <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                                           placeholder="全部" ng-model="param.applyStatus_text"/>
+                                    <i class="layui-edge"></i>
+                                </div>
+                                <dl class="layui-anim layui-anim-upbit">
+                                    <dd ng-repeat="item in allApplayStatus"
+                                        ng-click="param.applyStatu=item.value;param.applyStatus_text=item.text"
+                                        ng-class="{'layui-this':param.applyStatus_text == item.text}">
+                                        {{item.text}}
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xs-2" ng-if="null !== school_type">
+                        <label class="layui-form-label">申请学校:</label>
+						<div class="layui-input-block">
+                            <div class="layui-unselect layui-form-select">
+                                <div class="layui-select-title">
+                                    <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                                           placeholder="全部" ng-model="param.applySchoolName"/>
+                                    <i class="layui-edge"></i>
+                                </div>
+                                <dl class="layui-anim layui-anim-upbit">
+                                    <dd ng-repeat="item in allSchool"
+                                        ng-click="param.applySchoolName=item.name;param.schoolId = item.id"
+                                        ng-class="{'layui-this':param.applySchoolName == item.name}">
+                                        {{item.name}}
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                <!-- </div>
+                <div class="list_bar_row"> -->
+                    <!-- <div class="col-xs-3">
+                        <label class="layui-form-label">证件类型:</label>
+
+                        <div class="layui-input-block">
+                            <div class="layui-unselect layui-form-select">
+                                <div class="layui-select-title">
+                                    <input type="text" class="layui-input layui-unselect" readonly="readonly"
+                                           value=""
+                                           placeholder="全部" ng-model="param.certificates_type_name"/>
+                                    <i class="layui-edge"></i>
+                                </div>
+                                <dl class="layui-anim layui-anim-upbit">
+                                    <dd ng-repeat="item in [{'text':'居民身份证','id':1},{'text':'香港特区护照/身份证明','id':2},
+                                    {'text':'澳门特区护照/身份证明','id':3},
+                                    {'text':'台湾居民来往大陆通行证','id':4},
+                                    {'text':'境外永久居住证','id':5},
+                                    {'text':'护照','id':6},
+                                    {'text':'其他','id':7}]"
+                                        ng-click="param.certificates_type=item.id;param.certificates_type_name=item.text"
+                                        ng-class="{'layui-this':param.certificates_type_name == item.text}">
+                                        {{item.text}}
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+
+                    </div> -->
+
+                    <div class="col-xs-2">
+                        <label class="layui-form-label">证件号码:</label>
+
+                        <div class="layui-input-block">
+                            <input class="layui-input" ng-model="param.IdCard" type="text"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <label class="layui-form-label">学生姓名:</label>
+
+                        <div class="layui-input-block">
+                            <input class="layui-input" ng-model="param.studentName" type="text"/>
+                        </div>
+
+                    </div>
+
+                    <button class="btn btn-primary" ng-click="reload()">查询</button>
+                    <button class="btn btn-primary" ng-click="form_empty()">重置</button>
+                    <!-- <button class="btn btn-primary" ng-click="derive()">导出学籍信息</button> -->
+                </div>
+            </div>
+        </div>
+        <grid-table data-control="tableControl"></grid-table>
+    </div>
+    
+    <!-- layer弹窗 -->
+    <!-- 审核 -->
+    <div id="auditLayer" style="display: none;padding: 10px 0;float: left;">
+        <div class="form_row" id="cause">
+            <div class="form_row checkbox" ng-repeat="item in causeData">
+                <span ng-click="setSelAudit(item)" style="width: 100%;display: block">
+                    <input type="checkbox" ng-checked="item.select"
+                           code="{{item.value}}"/>{{item.text}}</span>
+
+                <!-- <div  ng-show="item.select && (item.reason_code ==3 || item.reason_code ==4)">
+                    <div class="form_row checkbox" id="urlList{{item.reason_code}}" ng-repeat="ite in img_urlList" style="width: 50%;">
+                        <label><input type="checkbox"/>{{ite.name}}</label>
+                    </div>
+                </div> -->
+            </div> 
+            <div class="form_row checkbox">
+                        <textarea placeholder="审核意见"
+                                  style="min-width: 100%;padding: 5px 10px;min-height: 100px;border-color: #ccc;"
+                                  id="remark" ng-model="auditCause"></textarea>
+            </div>
+        </div>
+        <!-- <div class="form_row " style="text-align: center;padding: 10px 0">
+            <button class="btn btn-warn" style="width:110px;" ng-click="reject()">确定</button>
+        </div> -->
+    </div>
+    <!-- 分配学校 -->
+    <div id="schoolLayer" style="display: none;padding: 10px 0;float: left;">
+        <div class="form_row" id="cause">
+            <div class="layui-input-block">
+                <div class="layui-unselect layui-form-select">
+                    <div class="layui-select-title">
+                        <input type="text" class="layui-input layui-unselect" readonly="readonly" value=""
+                             ng-model="selSchool_name"/>
+                        <i class="layui-edge"></i>
+                    </div>
+                    <dl class="layui-anim layui-anim-upbit">
+                        <dd ng-repeat="item in allSchool"
+                            ng-click="setSelSchool(item)"
+                            ng-class="{'layui-this':selSchool_name == item.name}">
+                            {{item.name}}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- <div class="form_content animated none">
+        <div class="form_title">
+            <a href="javascript:void(0)" ng-click="formClose()" class="back_link">关闭</a>
+        </div>
+        <div class="audit_content">
+            <div class="border_left border_right border_top" style="float: left;width: 100%">
+                学生个人基础信息
+
+                <div class="form_row border_bottom">
+                    <label class="form_label title col-xs-12">幼儿个人基础信息</label>
+                </div>
+
+                <div class="form_row border_bottom">
+                    <label class="form_label col-xs-2 border_right text_right weight">幼儿姓名:</label>
+                    <label class="form_label col-xs-2 border_right text_left">{{selRow.student_name}}</label>
+                    <label class="form_label col-xs-2 border_right text_right weight">幼儿性别:</label>
+                    <label class="form_label col-xs-2 border_right text_left">{{selRow.sex}}</label>
+                    <label class="form_label col-xs-2 border_right text_right weight">出生日期:</label>
+                    <label class="form_label col-xs-2  text_left">{{selRow.birth_day}}</label>
+                </div>
+
+                <div class="form_row border_bottom">
+                    <label class="form_label col-xs-2 border_right text_right weight">证件类型:</label>
+                    <label class="form_label col-xs-2 border_right text_left">{{selRow.certificates_type_name}}</label>
+                    <label class="form_label col-xs-2 border_right text_right weight">证件号:</label>
+                    <label class="form_label col-xs-2 border_right text_left">{{selRow.certificates_num}}</label>
+                    <label class="form_label col-xs-2 border_right text_right weight">血型:</label>
+                    <label class="form_label col-xs-2  text_left">{{selRow.blood_type}}</label>
+                </div>
+
+                <div class="form_row border_bottom">
+                    <label class="form_label col-xs-2 border_right text_right weight">国籍/地区:</label>
+                    <label class="form_label col-xs-2 border_right text_left">{{selRow.nationality_name}}</label>
+                    <label class="form_label col-xs-2 border_right text_right weight">民族:</label>
+                    <label class="form_label col-xs-2 border_right text_left">{{selRow.minority_name ||
+                        '&nbsp;'}}</label>
+                    <label class="form_label col-xs-2 border_right text_right weight">籍贯:</label>
+                    <label class="form_label col-xs-2  text_left">{{selRow.nativeplace_detial_address}}</label>
+                </div>
+
+                <div class="form_row border_bottom">
+                    <label class="form_label col-xs-2 border_right text_right weight">出生所在地:</label>
+                    <label class="form_label col-xs-6 border_right text_left">{{selRow.born_detail_address ||
+                        '&nbsp;'}}</label>
+
+                    <label class="form_label col-xs-2 border_right text_right weight">港澳台侨外:</label>
+                    <label class="form_label col-xs-2  text_left">{{selRow.overseas}}</label>
+                </div>
+                学生个人扩展信息
+                <div class="form_row border_bottom">
+                    <label class="form_label title col-xs-12">幼儿个人扩展信息</label>
+                </div>
+                <div class="form_row border_bottom">
+                    <label class="form_label col-xs-2 border_right text_right weight">就读方式:</label>
+                    <label class="form_label col-xs-2 border_right text_left">{{selRow.attend_school_mode}}</label>
+                    <label class="form_label col-xs-2 border_right text_right weight">是否是独生子女:</label>
+                    <label class="form_label col-xs-2  text_left" ng-bind="selRow.only_child?selRow.only_child==1?'是':'否':''"></label>
+                </div>
+
+                <div class="form_row border_bottom">
+                    <label class="form_label col-xs-2 border_right text_right weight">是否是进城务工子女:</label>
+                    <label class="form_label col-xs-2 border_right text_left"
+                           ng-bind="selRow.migrant_workers?selRow.migrant_workers==1?'是':'否':'&nbsp;'"></label>
+                    <label class="form_label col-xs-2 border_right text_right weight">是否是留守儿童:</label>
+                    <label class="form_label col-xs-2 border_right text_left">{{selRow.left_behind || '&nbsp;'}}</label>
+                    <label class="form_label col-xs-2 border_right text_right weight">是否孤儿:</label>
+                    <label class="form_label col-xs-2  text_left"
+                           ng-bind="selRow.orphan?selRow.orphan==1?'是':'否':'&nbsp;'"></label>
+                </div>
+
+                <div class="form_row border_bottom">
+                    <label class="form_label col-xs-2 border_right text_right weight">健康状况:</label>
+                    <label class="form_label col-xs-2 border_right text_left">{{selRow.health}}</label>
+                    <label class="form_label col-xs-2 border_right text_right weight">是否是残疾幼儿:</label>
+                    <label class="form_label col-xs-2 border_right text_left"
+                           ng-bind="selRow.handicap ? selRow.handicap==1?'是':'否':''"></label>
+                    <label class="form_label col-xs-2 border_right text_right weight">残疾幼儿类别:</label>
+                    <label class="form_label col-xs-2  text_left">{{selRow.handicap_type || '&nbsp;'}}</label>
+                </div>
+                学生家庭成员或监护人信息
+                <div class="form_row border_bottom">
+                    <label class="form_label title col-xs-12">幼儿家庭成员或监护人信息</label>
+                </div>
+                <div class="form_row border_bottom">
+                    <label class="form_label col-xs-2 border_right text_right weight">与幼儿的关系:</label>
+                    <label class="form_label col-xs-2 border_right text_left">{{selRow.guardian_relationship}}</label>
+                    <label class="form_label col-xs-2 border_right text_right weight">监护人姓名:</label>
+                    <label class="form_label col-xs-2  text_left">{{selRow.guardian_name}}</label>
+                </div>
+                <div class="form_row border_bottom">
+                    <label class="form_label col-xs-2 border_right text_right weight">监护人证件类型:</label>
+                    <label class="form_label col-xs-2 border_right text_left">{{selRow.guardian_certificates_type}}</label>
+                    <label class="form_label col-xs-2 border_right text_right weight">监护人证件号:</label>
+                    <label class="form_label col-xs-2  text_left">{{selRow.guardian_certificates_num}}</label>
+                </div>
+
+                学生个人辅助信息
+                <div class="form_row border_bottom">
+                    <label class="form_label title col-xs-12">户籍房产信息</label>
+                </div>
+                <div class="form_row border_bottom" ng-class="{'marked':selRow.reside_status !=9}">
+                    <label class="form_label col-xs-2 border_right text_right weight">户口地址:</label>
+                    <label class="form_label col-xs-10  text_left">{{selRow.residence_address ||
+                        '&nbsp;'}}</label>
+                </div>
+                <div class="form_row border_bottom" ng-show="selRow.reside_code">
+                    <label class="form_label col-xs-2 border_right text_right weight" >房产或不动产证号码:</label>
+                    <label class="form_label col-xs-10 border_right text_left" >{{selRow.reside_code}}</label>
+                </div>
+                <div class="form_row border_bottom">
+                    <label class="form_label col-xs-2 border_right text_right weight">户口性质:</label>
+                    <label class="form_label col-xs-2 border_right text_left">{{selRow.residence_nature ||
+                        '&nbsp;'}}</label>
+                    <label class="form_label col-xs-2 border_right text_right weight" ng-show="selRow.residence_nature!='农业户口'">非农业户口类型:</label>
+                    <label class="form_label col-xs-2 border_right text_left" ng-show="selRow.residence_nature!='农业户口'">{{selRow.non_agriculture_type || '&nbsp;'}}</label>
+                    <label class="form_label col-xs-2 border_right text_right weight">房产类型:</label>
+                    <label class="form_label col-xs-2  text_left">商品房</label>
+                </div>
+                <div class="form_row border_bottom" ng-class="{'marked':selRow.reside_status==1}">
+                    <label class="form_label col-xs-2 border_right text_right weight" >房产地址:</label>
+                    <label class="form_label col-xs-2 border_right text_left">{{selRow.live_address}}</label>
+                    <label class="form_label col-xs-2 border_right text_right weight">房产所有人姓名:</label>
+                    <label class="form_label col-xs-2 border_right text_left">{{selRow.house_owner_name}}</label>
+                    <label class="form_label col-xs-2 border_right text_right weight">与幼儿关系:</label>
+                    <label class="form_label col-xs-2  text_left">{{selRow.house_owner_relationship}}</label>
+                </div>
+
+            </div>
+            图片
+            <div class="layui-tab layui-tab-card" style="border-top: none" ng-show="selRow.reside_status!=1">
+                <ul class="layui-tab-title">
+                    <li ng-class="{'layui-this':$index==imgIndex-1}" ng-repeat="item in img_urlList"
+                        ng-click="topBottom_click($index)">{{item.name}}
+                    </li>
+                </ul>
+                <div class="layui-tab-content" id="imgHouse">
+                    <div class="imgHouse_left" ng-click="topImg()" title="上一张">
+                        <div class="imgHouse_par">
+                            <i class="iconfont icon-jiantouzuo"></i>
+                        </div>
+                    </div>
+                    <div ng-repeat="item in img_urlList" class="layui-tab-item animated fadeIn"
+                         ng-class="{'layui-show':$index==imgIndex-1}"
+                         style="text-align: center;margin: 20px 0;">
+                        <div style="height:450px;width: 800px;border: 1px solid #ccc;margin: 0 auto;background:url({{ctxPath+item.url}}) no-repeat center center ;background-size: auto 100%;">
+                            <img style="cursor: pointer;opacity: 0;float: left;width: 100%;height: 100%"
+                                 class="max_img_box"
+                                 ng-src="{{ctxPath+item.url}}">
+                        </div>
+                    </div>
+                    <div class="imgHouse_right" ng-click="bottomImg()" title="下一张">
+                        <div class="imgHouse_par">
+                            <i class="iconfont icon-jiantouyou"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div id="img_layer" style="display: none">
+        <img width="100%" ng-src="{{ctxPath+figUrl}}">
+    </div>
+</div>

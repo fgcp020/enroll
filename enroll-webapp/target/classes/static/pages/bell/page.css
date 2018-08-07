@@ -1,0 +1,28 @@
+#bell {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    top: 0;
+    height: 100%;
+}
+
+#bell .page_main_html {
+    border: 1px solid rgb(105, 155, 252);
+    height: calc(100% - 200px);
+    overflow-y: auto;
+    margin: 0 100px;
+    padding: 50px;
+}
+
+#bell .top_header {
+    margin-bottom: 80px;
+    position: relative;
+    opacity: 1;
+}
+
+#bell .top_header .back {
+    position: absolute;
+    bottom: -50px;
+    left: 100px
+}

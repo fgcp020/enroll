@@ -1,0 +1,140 @@
+package com.nercel.enroll.controller.api;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.nercel.enroll.domain.common.Response;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
+/**
+ * 处理学位申请状态信息的流程
+ * 
+ * @author Administrator
+ * @date 2018年6月13日
+ * @version 0.0.1
+ */
+@RestController
+@RequestMapping("/apply")
+@Api(value = "学位申请信息相关的接口", tags = { "学位申请信息" })
+public interface DegreeApplicationController {
+	/**
+	 * 学生端查询学位申请信息
+	 * 
+	 * @param token
+	 *            请求token
+	 * @return
+	 */
+	@ApiOperation(value = "学生端查询学位申请信息", notes = "学生端根据id查询学位申请信息")
+	@GetMapping(value = "/queryDegreeApplyInfo")
+	@ResponseBody
+	public Response queryDegreeApplyInfo(
+			@ApiParam(required = true, name = "token", value = "token信息") @RequestHeader(value = "token", required = true) String token);
+
+	/**
+	 * 教师角色查询学位申请信息
+	 * 
+	 * @param token
+	 *            请求token
+	 * @return
+	 */
+	@ApiOperation(value = "教师角色查询学位申请信息", notes = "教师角色根据id查询学位申请信息")
+	@GetMapping(value = "/queryApplyInfomation")
+	@ResponseBody
+	public Response queryDegreeApplyInfomation(
+			@ApiParam(required = true, name = "token", value = "token信息") @RequestHeader(value = "token", required = true) String token);
+
+	/**
+	 * 学校管理和教育局管理员对学位申请情况进行审核
+	 * 
+	 * @param token
+	 *            请求token
+	 * @param applyId
+	 *            学位申请记录的id
+	 * @param applyStatus
+	 *            审批状态
+	 * @param approveOpinion
+	 *            审批意见
+	 * @return
+	 */
+	@ApiOperation(value = "学位申请情况审核", notes = "学校管理和教育局管理员对学位申请情况进行审核")
+	@PutMapping(value = "/updateApplyStatus")
+	@ResponseBody
+	public Response updateApplyStatus(
+			@ApiParam(required = true, name = "token", value = "token信息") @RequestHeader(value = "token", required = true) String token,
+			@ApiParam(required = true, name = "applyId", value = "学位申请记录的id") @RequestParam(name = "applyId", required = true) Integer applyId,
+			@ApiParam(required = true, name = "studentId", value = "学生记录的id") @RequestParam(name = "studentId", required = true) Integer studentId,
+			@ApiParam(required = true, name = "applyStatus", value = "学位申请的状态,1审核通过、2审核失败、3驳回补充材料)") @RequestParam(name = "applyStatus", required = true) Integer applyStatus,
+			@ApiParam(required = true, name = "approveOpinion", value = "审核意见") @RequestParam(name = "approveOpinion", required = true) String approveOpinion);
+
+	/**
+	 * 教育局管理员根据请求token查询出未分配学位的学生
+	 * 
+	 * @param token
+	 * @return
+	 */
+	@ApiOperation(value = "查询出未分配学位的学生", notes = "教育局管理员根据请求token查询出未分配学位的学生")
+	@GetMapping(value = "/queryUnassignedStudent")
+	@ResponseBody
+	public Response queryUnassignedStudent(
+			@ApiParam(required = true, name = "token", value = "token信息") @RequestHeader(value = "token", required = true) String token,
+			@ApiParam(required = true, name = "schoolType", value = "学校类型,1小学，2中学") @RequestParam(name = "schoolType", required = true) Integer schoolType,
+			@ApiParam(required = false, name = "studentName", value = "学生姓名") @RequestParam(name = "studentName", required = false) String studentName,
+			@ApiParam(required = false, name = "idCard", value = "学生身份证号") @RequestParam(name = "idCard", required = false) String idCard);
+
+	/**
+	 * 教育局管理员手动对未分配到学位的学生进行分配
+	 * 
+	 * @param token
+	 *            请求token
+	 * @param schoolId
+	 *            被分配的学校的id
+	 * @return
+	 */
+	@ApiOperation(value = "手动分配学生的学校", notes = "教育局管理员手动对未分配到学位的学生进行分配")
+	@PutMapping(value = "/updateApplySchool")
+	@ResponseBody
+	public Response updateApplySchool(
+			@ApiParam(required = true, name = "token", value = "token信息") @RequestHeader(value = "token", required = true) String token,
+			@ApiParam(required = true, name = "userId", value = "学生记录的Id") @RequestParam(name = "userId", required = true) Integer userId,
+			@ApiParam(required = true, name = "schoolId", value = "学校的Id") @RequestParam(name = "schoolId", required = true) Integer schoolId,
+			@ApiParam(required = true, name = "applyId", value = "申请记录的id") @RequestParam(name = "applyId", required = true) Integer applyId);
+
+	/**
+	 * 管理员查询学位申请信息
+	 * 
+	 * @param token
+	 *            请求token
+	 * @param schoolId
+	 *            学校的ID
+	 * @param studentName
+	 *            学生的名字
+	 * @param idCard
+	 *            学生的身份证号
+	 * @param applyStatu
+	 *            申请状态
+	 * @param schoolType
+	 *            学校类型
+	 * @return
+	 */
+	@ApiOperation(value = "管理员查询学位申请信息", notes = "管理员查询学位申请信息的接口，仅供管理员使用")
+	@GetMapping(value = "/queryApplyInfo")
+	@ResponseBody
+	public Response queryDegreeApplyInfo(HttpServletRequest request,
+			@ApiParam(required = true, name = "token", value = "token信息") @RequestHeader(value = "token", required = true) String token,
+			@ApiParam(required = false, name = "schoolId", value = "学校id") @RequestParam(name = "schoolId", required = false) Integer schoolId,
+			@ApiParam(required = false, name = "studentName", value = "学生姓名") @RequestParam(name = "studentName", required = false) String studentName,
+			@ApiParam(required = false, name = "idCard", value = "学生身份证号") @RequestParam(name = "idCard", required = false) String idCard,
+			@ApiParam(required = false, name = "applyStatu", value = "学生的录取状态") @RequestParam(name = "applyStatu", required = false) Integer applyStatu,
+			@ApiParam(required = false, name = "schoolType", value = "学校类型,1小学，2中学") @RequestParam(name = "schoolType", required = false) Integer schoolType);
+
+}

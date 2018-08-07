@@ -1,0 +1,71 @@
+package com.nercel.enroll.core.service.utils;
+
+import java.text.ParseException;
+import java.util.Date;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
+
+import com.nercel.enroll.common.entity.DateFormatException;
+import com.nercel.enroll.domain.common.CustomeException;
+
+/**
+ * 日期时间工具类
+ * 
+ * @author yishui
+ * @date 2018年6月13日
+ * @version 0.0.1
+ */
+public class DateUtil {
+	/**
+	 * 时间解析的形式
+	 */
+	private final static String DATE_FORMAT = "yyyymmdd";
+	/**
+	 * 时间格式化参数
+	 */
+	private final static String DATETIME_FORMAT = "yyyy-mm-dd HH:MM:ss";
+	/**
+	 * 身份证号的正则表达式
+	 */
+	private final static String REGEX_ID_CARD = "(^\\d{18}$)|(^\\d{15}$)";
+	/**
+	 * 默认身份证的长度
+	 */
+	private final static Integer DEFAULT_LENGTH = 18;
+
+	/**
+	 * 根据身份证号判断出生日期是否在指定日期之前
+	 * 
+	 * @param idCard
+	 *            身份证号
+	 * @param targetTime
+	 *            指定日期，格式为yyyyMMdd
+	 * @return 如果在这个时间之前就返回为true,否则为false
+	 * @throws ParseException
+	 * @throws CustomeException
+	 */
+	public static Boolean compare(String idCard, String targetTime) throws ParseException, CustomeException {
+		if (StringUtils.isBlank(idCard) || idCard.length() != DEFAULT_LENGTH) {
+			throw new CustomeException("身份证号不正确");
+		}
+		return (DateUtils.parseDate(IdCardUtil.getBirthByIdCard(idCard), DATE_FORMAT).getTime()
+				- DateUtils.parseDate(targetTime, DATE_FORMAT).getTime()) < 0;
+	}
+
+	/**
+	 * 将yyyy-mm-dd HH:MM:ss格式的时间转换为好描述
+	 * 
+	 * @param dateTime
+	 *            yyyy-mm-dd HH:MM:ss格式的时间
+	 * @return
+	 * @throws DateFormatException
+	 * @throws ParseException
+	 */
+	public static synchronized Date convertDateTime(String dateTime) throws DateFormatException, ParseException {
+		if (StringUtils.isBlank(dateTime)) {
+			return null;
+		}
+		return DateUtils.parseDate(dateTime, DATETIME_FORMAT);
+	}
+}

@@ -1,0 +1,264 @@
+package com.nercel.enroll.dao.impl;
+
+import com.nercel.enroll.dao.mapperInterface.UserMapper;
+import com.nercel.enroll.domain.model.beans.User;
+import com.nercel.enroll.domain.model.constants.TUser;
+import com.nercel.enroll.domain.mybatis.Criteria;
+import com.nercel.enroll.domain.mybatis.Criteria.Condition;
+
+import java.util.List;
+import javax.annotation.Resource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
+
+/**
+ * @ClassName: UserDao
+ * @Description: user表对应dao操作接口实现类
+ * @author: linyl linyuliang.85@gmail.com
+ */
+@Repository
+public class UserDao {
+	/**
+	 * @Fields LOGGER : 日志操作类
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserDao.class);
+
+	/**
+	 * @Fields User表的Mybatis Mapper操作映射类
+	 */
+	@Resource
+	private UserMapper userMapper;
+
+	/**
+	 * @Title UserDao.countByExample
+	 * @Description: 根据查询条件，计算user个数
+	 * @param example
+	 *            通用查询条件类
+	 * @return int 结果个数
+	 */
+	private int countByExample(Criteria example) {
+		int count = this.userMapper.countByExample(example);
+		LOGGER.debug("count: {}", count);
+		return count;
+	}
+
+	/**
+	 * @Title UserDao.selectByPrimaryKey
+	 * @Description: 根据主键类，返回user
+	 * @param id
+	 *            id
+	 * @return User bean对象
+	 */
+	private User selectByPrimaryKey(Integer id) {
+		return this.userMapper.selectByPrimaryKey(id);
+	}
+
+	/**
+	 * @Title UserDao.selectByExample
+	 * @Description: 根据查询条件类，返回user结果集
+	 * @param example
+	 *            通用查询条件类
+	 * @return List<User>user结果集
+	 */
+	private List<User> selectByExample(Criteria example) {
+		return this.userMapper.selectByExample(example);
+	}
+
+	/**
+	 * @Title UserDao.deleteByPrimaryKey
+	 * @Description: 根据属性名称，删除user
+	 * @param id
+	 *            id
+	 * @return int 删除个数
+	 */
+	private int deleteByPrimaryKey(Integer id) {
+		return this.userMapper.deleteByPrimaryKey(id);
+	}
+
+	/**
+	 * @Title UserDao.updateByPrimaryKeySelective
+	 * @Description: 根据主键更新user部分字段
+	 * @param record
+	 *            要更新成为的User对象
+	 * @return int 更新记录数
+	 */
+	private int updateByPrimaryKeySelective(User record) {
+		return this.userMapper.updateByPrimaryKeySelective(record);
+	}
+
+	/**
+	 * @Title UserDao.updateByPrimaryKey
+	 * @Description: 根据主键更新user全部字段
+	 * @param record
+	 *            要更新成为的User对象
+	 * @return int 更新记录数
+	 */
+	private int updateByPrimaryKey(User record) {
+		return this.userMapper.updateByPrimaryKey(record);
+	}
+
+	/**
+	 * @Title UserDao.deleteByExample
+	 * @Description: 根据查询条件，删除user
+	 * @param example
+	 *            通用查询条件类
+	 * @return int 删除个数
+	 */
+	private int deleteByExample(Criteria example) {
+		return this.userMapper.deleteByExample(example);
+	}
+
+	/**
+	 * @Title UserDao.updateByExampleSelective
+	 * @Description: 根据查询条件更新user部分字段
+	 * @param record
+	 *            要更新成为的User对象
+	 * @param example
+	 *            更新记录的查询条件
+	 * @return int 更新记录数
+	 */
+	private int updateByExampleSelective(User record, Criteria example) {
+		return this.userMapper.updateByExampleSelective(record, example);
+	}
+
+	/**
+	 * @Title UserDao.updateByExample
+	 * @Description: 根据查询条件更新user全表字段
+	 * @param record
+	 *            要更新成为的User对象
+	 * @param example
+	 *            更新记录的查询条件
+	 * @return int 更新记录数
+	 */
+	private int updateByExample(User record, Criteria example) {
+		return this.userMapper.updateByExample(record, example);
+	}
+
+	/**
+	 * @Title UserDao.insert
+	 * @Description: 插入一个user
+	 * @param record
+	 *            user的bean对象
+	 * @return int 插入个数
+	 */
+	private int insert(User record) {
+		return this.userMapper.insert(record);
+	}
+
+	/**
+	 * @Title UserDao.insertSelective
+	 * @Description: 插入一个只有部分字段的user
+	 * @param record
+	 *            只含部分字段的user的bean对象
+	 * @return int 插入个数
+	 */
+	private int insertSelective(User record) {
+		return this.userMapper.insertSelective(record);
+	}
+
+	/**
+	 * 选择性保存用户的基本信息
+	 * 
+	 * @param record
+	 *            用户的基本信息
+	 * @return 收影响的记录行数
+	 */
+	public Integer save(User record) {
+		return this.insertSelective(record);
+	}
+
+	/**
+	 * 根据ID查询出用户的信息
+	 * 
+	 * @param id
+	 *            用户id
+	 * @return 用户的信息
+	 */
+	public User queryUserById(Integer id) {
+		return this.selectByPrimaryKey(id);
+	}
+
+	/**
+	 * 根据身份证号查询用户信息
+	 * 
+	 * @param idCard
+	 *            身份证号
+	 * @return 用户信息
+	 */
+	public List<User> queryUserByIdCard(String idCard) {
+		Criteria example = new Criteria();
+		Condition condition = example.createConditon();
+		condition.andEqualTo(TUser.ID_CARD, idCard);
+		return this.selectByExample(example);
+	}
+
+	/**
+	 * 根据用户名或密码查询用户
+	 * 
+	 * @param name
+	 *            用户名或密码
+	 * @param pwd
+	 *            用户密码
+	 * @return 用户信息
+	 */
+	public List<User> qeuryUserByCardOrName(String name, String pwd) {
+
+		Criteria example = new Criteria();
+		Condition condition = example.createConditon();
+		condition.andEqualTo(TUser.ID_CARD, name).andEqualTo(TUser.PWD, pwd);
+		example.or().andEqualTo(TUser.USERNAME, name).andEqualTo(TUser.PWD, pwd);
+		return this.selectByExample(example);
+	}
+    /**
+     * 根据身份证号和密码查询用户
+     * @param idCard
+     * @param pwd
+     * @return
+     */
+	public List<User> queryUserByIdCardAndName(String idCard, String pwd) {
+		Criteria example = new Criteria();
+		Condition condition = example.createConditon();
+		condition.andEqualTo(TUser.ID_CARD, idCard).andEqualTo(TUser.PWD, pwd);
+		return this.selectByExample(example);
+
+	}
+
+	/**
+	 * 根据id更新用户信息
+	 * 
+	 * @param user
+	 *            用户id
+	 * @return
+	 */
+	public Integer updateUserById(User user) {
+		return this.updateByPrimaryKeySelective(user);
+	}
+
+	/**
+	 * 根据学生姓名和身份证号模糊查询学生信息
+	 * 
+	 * @param name
+	 *            学生姓名（模糊查询）
+	 * @param idCard
+	 *            身份证号
+	 * @return
+	 */
+	public List<User> queryUserByNameOrIdCard(String name, String idCard) {
+		Criteria example = new Criteria();
+		Condition condition = example.createConditon();
+		condition.andEqualTo(TUser.ID_CARD, idCard);
+		example.or().andLike(TUser.USERNAME, name);
+		return this.selectByExample(example);
+	}
+	/**
+	 * 查询出所有的普通学生
+	 * @return
+	 */
+	public List<User> queryAllUserExcludeManager(){
+		Criteria example = new Criteria();
+		Condition condition = example.createConditon();
+		condition.andIsNotNull(TUser.TYPE);
+		return this.selectByExample(example);
+	}
+}

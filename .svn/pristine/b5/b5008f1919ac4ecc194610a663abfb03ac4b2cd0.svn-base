@@ -1,0 +1,26 @@
+package com.nercel.enroll.core.service;
+
+import com.nercel.enroll.domain.model.beans.User;
+import com.nercel.enroll.domain.vo.UserVo;
+
+/**
+ * 学校学位分配逻辑
+ * 
+ * @author yishui
+ * @date 2018年6月14日
+ * @version 0.0.1
+ */
+public interface SchoolDegreeService {
+	/**
+	 * 保存学位申请信息
+	 * @param user 操作用户的基本信息
+	 * @param userVo 操作用提交的信息
+	 */
+	public void saveSchoolDegree(User user,UserVo userVo);
+	/**
+	 * 更新学生的虚伪申请信息
+	 * @param user 操作用户的基本信息
+	 * @param userVo 操作用提交的信息
+	 */
+	public void updateSchoolDegree(User user,UserVo userVo);
+}

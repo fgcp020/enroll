@@ -1,0 +1,29 @@
+<div id="printTemplate">
+    <div class="temp">
+        <div class="index1">
+            <img ng-src="{{ctxPath}}/res/img/notification.jpg" style="width:1024px;height:768px;">
+        </div>
+        <div class="index2">
+            <!--编号-->
+            <div class="lab_1"><div id="qrcode" ></div></div>
+            <!--学生姓名-->
+            <div class="lab_2">{{printInfo.student_name}}</div>
+            <!--几级新生-->
+            <div class="lab_3" >{{printInfo._class}}</div>
+            <!--报道日期-年-->
+            <div class="lab_4">{{printInfo._year}}</div>
+            <!--报道日期-月-->
+            <div class="lab_5">{{printInfo._month}}</div>
+            <!--报道日期-日-->
+            <div class="lab_6">{{printInfo._day}}</div>
+            <!--报道学校-->
+            <div class="lab_7">{{printInfo.school_name}}</div>
+            <!--创建日期-年-->
+            <div class="lab_8">{{printInfo.now_year}}</div>
+            <!--创建日期-月-->
+            <div class="lab_9" >{{printInfo.now_month}}</div>
+            <!--创建日期-日-->
+            <div class="lab_10" >{{printInfo.now_date}}</div>
+        </div>
+    </div>
+</div>
