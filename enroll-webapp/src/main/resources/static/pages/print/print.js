@@ -14,7 +14,7 @@ myApp.controller('notifierController', function ($rootScope, $scope, services, $
 			"width": "942"
 		},
 		paramList:[{
-				"objName":"黄小明",
+				"objName":"黄大明",
 				"left":"133",
 				"top":"189",
 				"size": "28"
