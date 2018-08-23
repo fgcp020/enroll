@@ -1,0 +1,22 @@
+#toPrint {
+	position:absolute;
+	/* background:url('/res/img/notifications.png'); */
+    left: 50%;
+    top: 50%;
+    /* margin-top: -315px;
+	width: 943px;
+    height: 631px;
+    margin-left: -472px; */
+}
+
+#toPrint div {
+	position:absolute;
+}
+
+#toPrint img {
+	position:absolute;
+	/* width:auto;
+	 height:auto;
+	 max-width:100%;
+	 max-height:100%; */
+}

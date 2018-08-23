@@ -792,14 +792,6 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $controllerProvider, 
     //查看申请资料
     $stateProvider.state("registerMsg", {
         url: "/registerMsg",
-        //templateUrl: "/pages/login/page.html",
-        /*templateUrl: "/pages/register/register.html",
-        controller: 'registerController',
-        resolve: {
-            loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                return $ocLazyLoad.load(['/pages/register/register.css', '/pages/register/register.js', '/plugins/cityData/city.data-3.js'])
-            }]
-        }*/
         templateUrl: "/pages/home/page.html",
         controller: 'homeController',
         resolve: {
@@ -812,12 +804,11 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $controllerProvider, 
     //通知书打印
     $stateProvider.state("notifier", {
         url: "/notifier",
-        //templateUrl: "/pages/login/page.html",
-        templateUrl: "/pages/home/page.html",
-        controller: 'homeController',
+        templateUrl: "/pages/print/print.html",
+        controller: 'notifierController',
         resolve: {
             loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                return $ocLazyLoad.load(['/pages/home/page.css', '/pages/home/page.js'])
+                return $ocLazyLoad.load(['/pages/print/print.css', '/pages/print/print.js', '/plugins/jquery/jquery.jqprint.js'])
             }]
         }
     });

@@ -137,11 +137,11 @@ myApp.controller('homeController', function ($rootScope, $scope, services, $sce,
         		return;
         	} else {
         		$rootScope.curentSel = url;
-        		if(-1 < url.indexOf("#notifier")) {
+        		/*if(-1 < url.indexOf("#notifier")) {
         			layer.alert("未到录取通知书打印时间");
         			window.location.href = "/pages/index_mobile.html#/home";
         			return;
-        		}
+        		}*/
         	}
     	} else {
         	if(-1 < url.indexOf("#registerMsg")) {
@@ -150,11 +150,11 @@ myApp.controller('homeController', function ($rootScope, $scope, services, $sce,
         		return;
         	} else {
         		$rootScope.curentSel = url;
-        		if(-1 < url.indexOf("#notifier")) {
+        		/*if(-1 < url.indexOf("#notifier")) {
         			layer.alert("未到录取通知书打印时间");
         			window.location.href = "/pages/index.html#/home";
         			return;
-        		}
+        		}*/
         	}
     	}
     }
