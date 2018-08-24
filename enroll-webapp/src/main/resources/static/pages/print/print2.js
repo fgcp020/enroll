@@ -1,4 +1,4 @@
-myApp.controller('notifierController', function ($rootScope, $scope, services, $sce, $stateParams, $state) {
+myApp.controller('notifierController2', function ($rootScope, $scope, services, $sce, $stateParams, $state) {
     $scope.services = services;
     
     //查询录取通知书内容
@@ -103,66 +103,82 @@ myApp.controller('notifierController', function ($rootScope, $scope, services, $
     services.getApplyStatus('token').success(function(res) {
 		if ('OK' == res.result) {
 			if(res.msg) {
+				userName = res.msg.studentName;
 				$scope.printObj.paramList[0].objName = res.msg.studentName;
 				$scope.printObj.paramList[1].objName = res.msg.applySchoolName;
 				
 			    //屏幕自适应
-			    suitScreen($scope);			    
+			    suitScreen($scope);
+			    //画图
+			    drawNotifier($scope);
 			    //组装页面
-			    assembleHtml($scope);			    
+			    //assembleHtml($scope);			    
 			    //打印
-			    printNotifier();
+			    //printNotifier();
 			}
 		} else {
 			layer.alert(res.msg);
 		}
 	});
     
-    //拖动
-    /*$(document).on("mousedown","#toPrint",function(e){
-        //webkit内核和火狐禁止文字被选中
-        $('body').addClass('select')
-        //ie浏览器禁止文字选中
-        document.body.onselectstart=document.body.ondrag=function(){
-            return false;
-            }
-        $scope.moveBegin = true;  
-        $scope.mouseStartPoint = {"left":e.pageX,"top":  e.pageY};  
-    });  
-    $(document).on("mouseup",function(e){       
-    	$scope.moveBegin = false;  
-    }); 
-    $(document).on("mousemove",function(e){
-    	if(!$scope.moveBegin) {
-    		return;
-    	}
-        $("#toPrint").css("margin-left", e.pageX - $scope.mouseStartPoint.left - 454 + "px");
-        $("#toPrint").css("margin-top", e.pageY - $scope.mouseStartPoint.top - 315 + "px");
-    });*/
 });
 
-function printNotifier() {   
+var userName;
+
+function saveNotifier1() {
+	//一样需要先转化为图片后保存
+	var type = 'png';//格式可以自定义
+	var imgData = $("#toPrint")[0].toDataURL(type);
+	// 加工image data，替换mime type
+	imgData = imgData.replace(_fixType(type),'image/octet-stream');
+	//可以直接用以下下载，但是下载的文件名没有后缀
+	//window.location.href=image; // it will save locally
+	//文件名可以自定义
+	var filename = '录取通知书_' + userName + '.' + type;
+	saveFile(imgData,filename);
+}
+
+function _fixType(type) {
+	//imgData是一串string，base64
+    type = type.toLowerCase().replace(/jpg/i, 'jpeg');
+    var r = type.match(/png|jpeg|bmp|gif/)[0];
+    return 'image/' + r;
+}
+
+function saveFile(data, filename) {
+	//命名空间
+	var save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
+    save_link.href = data;
+    save_link.download = filename;
+   
+    //window.location = save_link;//此方法可下载但是文件名无效
+    //下载
+    var event = document.createEvent('MouseEvents');
+    event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    save_link.dispatchEvent(event);
+}
+
+function printNotifier() {
 	try{
-        print.portrait = false;//横向打印 
+        print.portrait = false;//横向打印 ,去掉页眉页脚
     }catch(e){
         //alert("不支持此方法");
     }
-    var HKEY_RootPath="HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\PageSetup\\";
-   /*try{
-	   var WSc=new ActiveXObject("WScript.Shell"); 
-	   HKEY_Key="header"; 
-	   WSc.RegWrite(HKEY_RootPath+HKEY_Key,""); 
-	   HKEY_Key="footer"; 
-	   WSc.RegWrite(HKEY_RootPath+HKEY_Key,"");
-  }catch(e){
-	  
-  }*/
-	$("#printArea").jqprint();   
+
+	//canvas无法直接打印，需先转换成img
+    $(convertCanvasToImage($("#toPrint")[0])).jqprint();   
+}
+
+function convertCanvasToImage(canvas) {
+    var image = new Image();
+    image.src = canvas.toDataURL("image/png");
+    return image;
 }
 
 function suitScreen($scope) {
-    var effectiveHeight = findParam("#toPrint", "height");
-    var effectiveWidth = findParam("#toPrint","width");
+	//下方留30放按钮
+    var effectiveHeight = findParam("#printArea", "height") - 30;
+    var effectiveWidth = findParam("#printArea","width");
     if($scope.printObj.notifierObj.width/effectiveWidth > $scope.printObj.notifierObj.height/effectiveHeight) {
     	//取最接近的一个属性进行自适应，并适当调小一些
     	var suitTimes = $scope.printObj.notifierObj.width/effectiveWidth*1.2;
@@ -176,6 +192,31 @@ function suitScreen($scope) {
     	$scope.printObj.paramList[i].left = $scope.printObj.paramList[i].left/suitTimes;
     	$scope.printObj.paramList[i].top = $scope.printObj.paramList[i].top/suitTimes;
     }
+}
+
+function drawNotifier($scope) {
+	//canvas需要先定位好，否则画好再动就清除了
+	$("#toPrint").css("margin-left", (0-$scope.printObj.notifierObj.width)/2+"px");
+	//上移30放按钮
+	$("#toPrint").css("margin-top", (0-$scope.printObj.notifierObj.height-60)/2+"px");
+	var canvas = document.getElementById("toPrint");
+	canvas.width = $scope.printObj.notifierObj.width;
+	canvas.height = $scope.printObj.notifierObj.height;
+	var ctx = canvas.getContext("2d");
+	var img=new Image();
+	img.src = $scope.printObj.notifierObj.url;
+	img.onload=function() {
+		//需要onload方法接收，否则画不出
+		ctx.drawImage(img, 0, 0, $scope.printObj.notifierObj.width, $scope.printObj.notifierObj.height);
+		//写文字，且要在画好图片之后写，否则会被图片覆盖
+		$.each($scope.printObj.paramList, function(index, e) {
+			//canvas的字体不会有12px的兼容性问题
+			ctx.font = "bold "+e.size+"px KaiTi";
+			//canvas写字以字体的左下角为基准，因而要再加一个字体大小的高度
+			ctx.fillText(e.objName,e.left, e.top+e.size);
+		});
+	}
+	
 }
 
 function assembleHtml($scope) {
@@ -193,7 +234,8 @@ function assembleHtml($scope) {
 		}
 	}
 	$("#toPrint").css("margin-left", (0-$scope.printObj.notifierObj.width)/2+"px");
-	$("#toPrint").css("margin-top", (0-$scope.printObj.notifierObj.height)/2+"px");
+	//上移30放按钮
+	$("#toPrint").css("margin-top", (0-$scope.printObj.notifierObj.height-60)/2+"px");
 	$("#toPrint").css("height", $scope.printObj.notifierObj.height+"px");
 	$("#toPrint").css("width", $scope.printObj.notifierObj.width+"px");
 	$("#toPrint").append(htmlStr);

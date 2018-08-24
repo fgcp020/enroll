@@ -1,0 +1,13 @@
+#toPrint {
+	position:absolute;
+    left: 50%;
+    top: 50%;
+}
+
+#bottom_btns {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    /* 按钮宽度加缩进 */
+    margin-left: -70px;
+}

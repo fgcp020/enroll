@@ -11,6 +11,8 @@
 
 #toPrint div {
 	position:absolute;
+	    font-family: KaiTi;
+    font-weight: bold;
 }
 
 #toPrint img {
