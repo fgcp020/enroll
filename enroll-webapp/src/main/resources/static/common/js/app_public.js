@@ -808,7 +808,8 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $controllerProvider, 
         controller: 'notifierController',
         resolve: {
             loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                return $ocLazyLoad.load(['/pages/print/print.css', '/pages/print/print.js', '/plugins/jquery/jquery.jqprint.js'])
+                return $ocLazyLoad.load(['/pages/print/print.css', '/pages/print/print.js', '/plugins/print/jquery.jqprint-0.3.js', 
+                	'/plugins/print/html2canvas.min.js', '/plugins/print/jqbrowser.js'])
             }]
         }
     });

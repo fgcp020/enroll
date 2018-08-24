@@ -103,6 +103,7 @@ myApp.controller('notifierController', function ($rootScope, $scope, services, $
     services.getApplyStatus('token').success(function(res) {
 		if ('OK' == res.result) {
 			if(res.msg) {
+				userName = res.msg.studentName;
 				$scope.printObj.paramList[0].objName = res.msg.studentName;
 				$scope.printObj.paramList[1].objName = res.msg.applySchoolName;
 				
@@ -111,7 +112,7 @@ myApp.controller('notifierController', function ($rootScope, $scope, services, $
 			    //组装页面
 			    assembleHtml($scope);			    
 			    //打印
-			    printNotifier();
+			    //printNotifier();
 			}
 		} else {
 			layer.alert(res.msg);
@@ -141,27 +142,61 @@ myApp.controller('notifierController', function ($rootScope, $scope, services, $
     });*/
 });
 
+var userName;
+
+function saveNotifier() {
+	//先转化为canvas,再转化为图片后保存
+	html2canvas(document.querySelector("#toPrint")).then(canvas => {
+	    //document.body.appendChild(canvas);
+		var type = 'png';//格式可以自定义
+		var imgData = canvas.toDataURL(type);
+		// 加工image data，替换mime type
+		imgData = imgData.replace(_fixType(type),'image/octet-stream');
+		//可以直接用以下下载，但是下载的文件名没有后缀
+		//window.location.href=image; // it will save locally
+		//文件名可以自定义
+		var filename = '录取通知书_' + userName + '.' + type;
+		saveFile(imgData,filename);
+	});
+}
+
+function _fixType(type) {
+	//imgData是一串string，base64
+    type = type.toLowerCase().replace(/jpg/i, 'jpeg');
+    var r = type.match(/png|jpeg|bmp|gif/)[0];
+    return 'image/' + r;
+}
+
+function saveFile(data, filename) {
+	//命名空间
+	var save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
+    save_link.href = data;
+    save_link.download = filename;
+   
+    //window.location = save_link;//此方法可下载但是文件名无效
+    //下载
+    var event = document.createEvent('MouseEvents');
+    event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    save_link.dispatchEvent(event);
+}
+
+function convertCanvasToImage(canvas) {
+    var image = new Image();
+    image.src = canvas.toDataURL("image/png");
+    return image;
+}
+
 function printNotifier() {   
 	try{
         print.portrait = false;//横向打印 
     }catch(e){
         //alert("不支持此方法");
     }
-    var HKEY_RootPath="HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\PageSetup\\";
-   /*try{
-	   var WSc=new ActiveXObject("WScript.Shell"); 
-	   HKEY_Key="header"; 
-	   WSc.RegWrite(HKEY_RootPath+HKEY_Key,""); 
-	   HKEY_Key="footer"; 
-	   WSc.RegWrite(HKEY_RootPath+HKEY_Key,"");
-  }catch(e){
-	  
-  }*/
 	$("#printArea").jqprint();   
 }
 
 function suitScreen($scope) {
-    var effectiveHeight = findParam("#toPrint", "height");
+    var effectiveHeight = findParam("#toPrint", "height") -30;
     var effectiveWidth = findParam("#toPrint","width");
     if($scope.printObj.notifierObj.width/effectiveWidth > $scope.printObj.notifierObj.height/effectiveHeight) {
     	//取最接近的一个属性进行自适应，并适当调小一些
@@ -193,7 +228,7 @@ function assembleHtml($scope) {
 		}
 	}
 	$("#toPrint").css("margin-left", (0-$scope.printObj.notifierObj.width)/2+"px");
-	$("#toPrint").css("margin-top", (0-$scope.printObj.notifierObj.height)/2+"px");
+	$("#toPrint").css("margin-top", (0-$scope.printObj.notifierObj.height-60)/2+"px");
 	$("#toPrint").css("height", $scope.printObj.notifierObj.height+"px");
 	$("#toPrint").css("width", $scope.printObj.notifierObj.width+"px");
 	$("#toPrint").append(htmlStr);

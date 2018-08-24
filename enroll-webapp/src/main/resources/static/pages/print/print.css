@@ -3,10 +3,6 @@
 	/* background:url('/res/img/notifications.png'); */
     left: 50%;
     top: 50%;
-    /* margin-top: -315px;
-	width: 943px;
-    height: 631px;
-    margin-left: -472px; */
 }
 
 #toPrint div {
@@ -17,8 +13,12 @@
 
 #toPrint img {
 	position:absolute;
-	/* width:auto;
-	 height:auto;
-	 max-width:100%;
-	 max-height:100%; */
+}
+
+#bottom_btns {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    /* 按钮宽度加缩进 */
+    margin-left: -70px;
 }
