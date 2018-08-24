@@ -90,13 +90,12 @@ myApp.controller('homeController', function ($rootScope, $scope, services, $sce,
     		}];
         } else if(1 == $rootScope._USERINFO.role || 2 == $rootScope._USERINFO.role) {
         	if($scope.mobile) {
-            	/*$rootScope._ALLMENU = [{
+        		$rootScope._ALLMENU = [{
         			children: [{
         				res_name: "查看审核状态",
         				res_url: "#status_mobile",
         				res_id: "#status_mobile"
-        			}
-        			,{
+        			},{
         				res_name: "查看修改申请资料",
         				res_url: "#registerMsg#review",
         				res_id: "#registerMsg#review"
@@ -104,9 +103,8 @@ myApp.controller('homeController', function ($rootScope, $scope, services, $sce,
         				res_name: "打印录取通知书",
         				res_url: "#notifier",
         				res_id: "#notifier"
-        			}
-        			]
-        		}];*/
+        			}]
+        		}];
         		$state.go("status_mobile");
         	} else {
             	$rootScope._ALLMENU = [{

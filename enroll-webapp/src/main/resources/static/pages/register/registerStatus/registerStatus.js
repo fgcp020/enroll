@@ -10,7 +10,7 @@ myApp.controller('registerStatusController', function ($rootScope, $scope, servi
     $scope.mobile = /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent);
     if(1 == $rootScope._USERINFO.role || 2 == $rootScope._USERINFO.role) {
     	if($scope.mobile) {
-        	/*$rootScope._ALLMENU = [{
+        	$rootScope._ALLMENU = [{
     			children: [{
     				res_name: "查看审核状态",
     				res_url: "#status_mobile",
@@ -24,8 +24,9 @@ myApp.controller('registerStatusController', function ($rootScope, $scope, servi
     				res_url: "#notifier",
     				res_id: "#notifier"
     			}]
-    		}];*/
-    		$rootScope.mobile_regstatus = true;
+    		}];
+    		//$rootScope.mobile_regstatus = true;
+    	    $rootScope.curentSel = "#status_mobile";
     	} else {
         	$rootScope._ALLMENU = [{
     			children: [{
@@ -43,8 +44,8 @@ myApp.controller('registerStatusController', function ($rootScope, $scope, servi
     			}]
     		}];
     	}
+        $rootScope.curentSel = "#status";
     }
-    $rootScope.curentSel = "#status";
     $rootScope.setContent = function(url) {
     	if($scope.mobile) {
         	$('#main-layout').removeClass('hide-side');
@@ -54,11 +55,11 @@ myApp.controller('registerStatusController', function ($rootScope, $scope, servi
         		return;
         	} else {
         		$rootScope.curentSel = url;
-        		if(-1 < url.indexOf("#notifier")) {
+        		/*if(-1 < url.indexOf("#notifier")) {
         			layer.alert("未到录取通知书打印时间");
         			window.location.href = "/pages/index_mobile.html#/home";
         			return;
-        		}
+        		}*/
         	}
     	} else {
         	if(-1 < url.indexOf("#registerMsg")) {
@@ -67,11 +68,11 @@ myApp.controller('registerStatusController', function ($rootScope, $scope, servi
         		return;
         	} else {
         		$rootScope.curentSel = url;
-        		if(-1 < url.indexOf("#notifier")) {
+        		/*if(-1 < url.indexOf("#notifier")) {
         			layer.alert("未到录取通知书打印时间");
         			window.location.href = "/pages/index.html#/home";
         			return;
-        		}
+        		}*/
         	}
     	}
     }

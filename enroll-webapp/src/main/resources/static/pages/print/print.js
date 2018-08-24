@@ -6,6 +6,65 @@ myApp.controller('notifierController', function ($rootScope, $scope, services, $
         return $rootScope.serverAction('/apply/queryDegreeApplyInfo', param, "GET");
     };
     
+    $scope.mobile = /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent);
+    if(1 == $rootScope._USERINFO.role || 2 == $rootScope._USERINFO.role) {
+    	if($scope.mobile) {
+        	$rootScope._ALLMENU = [{
+    			children: [{
+    				res_name: "查看审核状态",
+    				res_url: "#status_mobile",
+    				res_id: "#status_mobile"
+    			},{
+    				res_name: "查看修改申请资料",
+    				res_url: "#registerMsg#review",
+    				res_id: "#registerMsg#review"
+    			},{
+    				res_name: "打印录取通知书",
+    				res_url: "#notifier",
+    				res_id: "#notifier"
+    			}]
+    		}];
+    		//$rootScope.mobile_regstatus = true;
+    	} else {
+        	$rootScope._ALLMENU = [{
+    			children: [{
+    				res_name: "查看审核状态",
+    				res_url: "#status",
+    				res_id: "#status"
+    			},{
+    				res_name: "查看修改申请资料",
+    				res_url: "#registerMsg#review",
+    				res_id: "#registerMsg#review"
+    			},{
+    				res_name: "打印录取通知书",
+    				res_url: "#notifier",
+    				res_id: "#notifier"
+    			}]
+    		}];
+    	}
+    }
+    $rootScope.curentSel = "#notifier";
+    $rootScope.setContent = function(url) {
+    	if($scope.mobile) {
+        	$('#main-layout').removeClass('hide-side');
+        	if(-1 < url.indexOf("#registerMsg")) {
+        		window.open(encodeURI(encodeURI('/pages/index_mobile.html#/registers#review?id=' + $rootScope._USERINFO.id)));
+        		window.location.href = "/pages/index_mobile.html#/home";
+        		return;
+        	} else {
+        		$rootScope.curentSel = url;
+        	}
+    	} else {
+        	if(-1 < url.indexOf("#registerMsg")) {
+        		window.open(encodeURI(encodeURI('/pages/index.html#/registers#review?id=' + $rootScope._USERINFO.id)));
+        		window.location.href = "/pages/index.html#/home";
+        		return;
+        	} else {
+        		$rootScope.curentSel = url;
+        	}
+    	}
+    }
+    
     //模板
     $scope.printObj = {
 		notifierObj:{
@@ -124,7 +183,14 @@ function assembleHtml($scope) {
 		$scope.printObj.notifierObj.height+"px'>";
 	for(i=0;i<$scope.printObj.paramList.length;i++) {
 		var nowObj = $scope.printObj.paramList[i];
-		htmlStr += "<div style='font-size:"+nowObj.size+"px;top:"+nowObj.top+"px;left:"+nowObj.left+"px'>"+nowObj.objName+"</div>";
+		if(nowObj.size < 12) {
+			htmlStr += "<div style='font-size:"+nowObj.size+"px;top:"+nowObj.top+"px;left:"+nowObj.left+
+			//谷歌浏览器字体小于12px时会不再变小，使用-webkit-transform兼容，并设置已左上角作为变换原点
+				"px;-webkit-transform:scale("+nowObj.size/12+","+nowObj.size/12+");transform-origin:0 0'>"+nowObj.objName+"</div>";
+		} else {
+			htmlStr += "<div style='font-size:"+nowObj.size+"px;top:"+nowObj.top+"px;left:"+nowObj.left+
+				"px'>"+nowObj.objName+"</div>";
+		}
 	}
 	$("#toPrint").css("margin-left", (0-$scope.printObj.notifierObj.width)/2+"px");
 	$("#toPrint").css("margin-top", (0-$scope.printObj.notifierObj.height)/2+"px");
