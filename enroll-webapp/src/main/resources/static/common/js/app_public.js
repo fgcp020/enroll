@@ -813,6 +813,18 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $controllerProvider, 
         }
     });
 
+    //通知书打印--备用方案
+    $stateProvider.state("notifier2", {
+        url: "/notifier2",
+        templateUrl: "/pages/print/print2.html",
+        controller: 'notifierController2',
+        resolve: {
+            loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load(['/pages/print/print2.css', '/pages/print/print2.js', '/plugins/jquery/jquery.jqprint.js'])
+            }]
+        }
+    });
+    
     //登录(管理员)
     $stateProvider.state("login", {
         url: "/login",
