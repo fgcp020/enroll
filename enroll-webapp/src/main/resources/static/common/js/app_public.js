@@ -826,6 +826,18 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $controllerProvider, 
         }
     });
     
+    //通知书打印--批量
+    $stateProvider.state("notifierBatch", {
+        url: "/notifierBatch",
+        //templateUrl: "/pages/print/printBatch.html",
+        //controller: 'notifierBatchController',
+        resolve: {
+            loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load(['/pages/print/print.css', '/pages/print/printBatch.js'])
+            }]
+        }
+    });
+    
     //登录(管理员)
     $stateProvider.state("login", {
         url: "/login",
@@ -872,7 +884,11 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $controllerProvider, 
         controller: 'instructorController',
         resolve: {
             loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                return $ocLazyLoad.load(['/pages/instructor/instructor.css', '/pages/instructor/instructor.js'])
+                return $ocLazyLoad.load(['/pages/instructor/instructor.css', '/pages/instructor/instructor.js',
+                	//证书批量操作新增
+                	'/plugins/print/html2canvas.min.js', '/plugins/print/jqbrowser.js',
+                	//打包下载新增
+                	'/plugins/print/jszip.min.js', '/plugins/print/FileSaver.js'])
             }]
         }
     });

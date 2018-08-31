@@ -131,3 +131,62 @@
 .table_pager {
 	min-width: 900px;
 }
+
+.progress_stitistics_cls {
+	display: inline-block;
+    left: 50%;
+    position: absolute;
+    margin-left: -50px;
+        font-size: 16px;
+            margin-top: 10px;
+}
+
+.progress_cls {
+	z-index: 2147483648;
+    width: 500px;
+    height: 180px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -250px;
+    margin-top: -90px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.progress_cls button {
+	    margin-top: 90px;
+    margin-left: 180px;
+}
+
+#toPrint {
+	position:absolute;
+    left: 10000px;
+    top: 50%;
+}
+
+#toPrint div {
+	position:absolute;
+    font-weight: bold;
+}
+
+#toPrint img {
+	position:absolute;
+}
+
+#textArea {
+	width: 100%;
+    height: 100%;
+}
+
+.printCanvas {
+	display:inline-block;
+}
+
+#toPrint3 {
+	position:absolute;
+    left: 10000px;
+    top: 50%;
+    display: inline-flex;
+}

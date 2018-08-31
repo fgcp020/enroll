@@ -21,6 +21,7 @@ myApp.controller('instructorController', function ($rootScope, $scope, services,
     services["get_all_school"] = function (param) {
         return $rootScope.serverAction('/basic/school', "token", "GET");
     };
+    
     //根据类型查询学校
     services["get_school_by_type"] = function (param) {
         return $rootScope.serverAction('/basic/schoolType', param, "GET");
@@ -569,10 +570,406 @@ myApp.controller('instructorController', function ($rootScope, $scope, services,
     
     /*
      导出数据
-     
+     */
     $scope.derive = function () {
-        var iframe = $('<iframe style="display: none" src="' + $rootScope.ctxPath + '/admin/exportKindergartenStudent"></iframe>');
-        layer.close($scope.layer_export);
-        $("#preAdmissionPreview").append(iframe);
-    }*/
+    	var toSendList = [];
+    	var passList = [];
+    	for(var i=0;i<$scope.tableControl.rows.length;i++) {
+    		if($scope.tableControl.rows[i].select) {
+    			toSendList.push($scope.tableControl.allData[i]);
+    			//没有数据，原5，现先1
+    			if(1 == $scope.tableControl.allData[i].applyStatus) {
+    				passList.push($scope.tableControl.allData[i]);
+    			}
+    		}
+    	}
+    	if(1 > toSendList.length) {
+    		layer.alert("请选择需要生成证书的记录");
+    		return;
+    	}
+    	if(toSendList.length != passList.length) {
+    		layer.alert("只能对审核通过的记录进行证书生成");
+    		return;
+    	}
+    	layer.confirm("是否确认生成证书？", {
+            btn: ['确定', '取消'] 
+        }, function () {
+        	$scope.progressTotal = toSendList.length;
+        	$scope.doneNum = 0;
+        	$scope.failedNum = 0;
+
+    		layer.closeAll();
+    		var maskLoad = layer.load(1, {shade: [0.8, '#393D49']});
+        	//打开进度
+        	$scope.curProgress = "0%";
+        	$scope.progressShow = true;
+        	$.each(toSendList, function(index, e){
+        		var url = location.origin+"/pages/print/printBatch.html?"+encodeURIComponent(e.studentName)+"&&"+encodeURIComponent(e.applySchoolName);
+            	//services.save_notifier(url).success(function (res) {
+        		$.ajax({
+					url: location.origin+'/basic/school',
+					headers: {'token': $rootScope.token},
+					type: 'get',
+					dataType: 'json',
+					contentType: 'application/json;charset=UTF-8',
+					async: true,
+				}).success(function (res) {
+                	if ('OK' == res.result) {
+                		$scope.doneNum++;
+                	} else {
+                		$scope.failedNum++;
+                	}
+                }).error(function (res) {
+                	$scope.failedNum++;
+    	        }).always(function () {
+    	        	//刷新成功和失败数量
+    	        	if(($scope.doneNum + $scope.failedNum) < $scope.progressTotal) {
+        	        	//更新进度
+    	        		//$scope.curProgress = Math.round(($scope.doneNum + $scope.failedNum) / $scope.progressTotal * 100) + "%";
+    	        		element.progress('notifierProgress', Math.round(($scope.doneNum + $scope.failedNum) / $scope.progressTotal * 100) + "%")
+    	        	} else {
+    	        		//完成
+    	        		$scope.curProgress = "100%";
+    	        		////进度条渲染需要时间？？数据较少时执行完成还没渲染出来--改用定时器
+    	        		var finishInterval = setInterval(function() {
+    	        			if($(".layui-progress")[0]) {
+    	    	        		element.progress('notifierProgress', "100%");
+    	    	        		clearInterval(finishInterval);
+    	        			}
+    	        		}, 200);
+    	        		$scope.progressDone = true;
+    	        		//去掉转圈
+    	        		$(".layui-layer-loading").hide();
+    	        		//layer.closeAll();
+    	        	}
+				});
+        	});
+        	
+        });
+    }
+    
+    //方案2
+    $scope.derive2 = function () {
+    	//先单线程
+    	var toSendList = [];
+    	var passList = [];
+    	for(var i=0;i<$scope.tableControl.rows.length;i++) {
+    		if($scope.tableControl.rows[i].select) {
+    			toSendList.push($scope.tableControl.allData[i]);
+    			//没有数据，原5，现先1
+    			if(1 == $scope.tableControl.allData[i].applyStatus) {
+    				passList.push($scope.tableControl.allData[i]);
+    			}
+    		}
+    	}
+    	if(1 > toSendList.length) {
+    		layer.alert("请选择需要生成证书的记录");
+    		return;
+    	}
+    	if(toSendList.length != passList.length) {
+    		layer.alert("只能对审核通过的记录进行证书生成");
+    		return;
+    	}
+    	layer.confirm("是否确认生成证书？", {
+            btn: ['确定', '取消'] 
+        }, function () {
+        	$scope.progressTotal = toSendList.length;
+        	$scope.doneNum = 0;
+        	$scope.failedNum = 0;
+
+    		layer.closeAll();
+    		var maskLoad = layer.load(1, {shade: [0.8, '#393D49']});
+        	//打开进度
+        	$scope.curProgress = "0%";
+        	$scope.progressShow2 = true;
+        	
+        	//弹出隐藏绘图层
+        	$("#printArea").remove();
+        	$("body").append("<div id='printArea'><div id='toPrint'></div></div>");
+        	
+        	//绘制证书
+        	suitScreen($scope);
+        	var imgStr = "<img src='" + $scope.printObj.notifierObj.url+"' style='width:"+$scope.printObj.notifierObj.width+"px;height:"+
+    		$scope.printObj.notifierObj.height+"px'><div id='textArea'></div>";
+        	$("#toPrint").append(imgStr);
+        	$("#toPrint").css("margin-top", (0-$scope.printObj.notifierObj.height-60)/2+"px");
+        	$("#toPrint").css("height", $scope.printObj.notifierObj.height+"px");
+        	$("#toPrint").css("width", $scope.printObj.notifierObj.width+"px");
+        	
+        	//填充文字
+        	$.each(toSendList, function(index, e){
+        		$("#textArea").empty();
+        		$scope.printObj.paramList[0].objName = e.studentName;
+        		$scope.printObj.paramList[1].objName = e.applySchoolName;
+        		var htmlStr = "";
+        		for(i=0;i<$scope.printObj.paramList.length;i++) {
+            		var nowObj = $scope.printObj.paramList[i];
+            		if(nowObj.fontSize < 12) {
+            			htmlStr += "<div style='font-family:"+nowObj.fontFamily+";font-size:"+nowObj.fontSize+"px;top:"+nowObj.top+"px;left:"+nowObj.left+
+            			//谷歌浏览器字体小于12px时会不再变小，使用-webkit-transform兼容，并设置已左上角作为变换原点
+            				"px;-webkit-transform:scale("+nowObj.fontSize/12+","+nowObj.fontSize/12+");transform-origin:0 0'>"+nowObj.objName+"</div>";
+            		} else {
+            			htmlStr += "<div style='font-family:"+nowObj.fontFamily+";font-size:"+nowObj.fontSize+"px;top:"+nowObj.top+"px;left:"+nowObj.left+
+            				"px'>"+nowObj.objName+"</div>";
+            		}
+            	}
+            	//$("#toPrint").css("margin-left", (0-$scope.printObj.notifierObj.width)/2+"px");
+            	$("#textArea").append(htmlStr);
+            	
+            	//保存
+            	html2canvas(document.querySelector("#toPrint")).then(function(canvas) {
+            		var type = 'png';//格式可以自定义
+            		var imgData = canvas.toDataURL(type);
+            		imgData = imgData.replace(_fixType(type),'image/octet-stream');
+            		//文件名可以自定义
+            		var filename = '录取通知书_' + e.studentName + '.' + type;
+            		saveFile(imgData,filename);
+            		$scope.doneNum++;
+            		//刷新成功和失败数量
+    	        	if(($scope.doneNum + $scope.failedNum) < $scope.progressTotal) {
+        	        	//更新进度
+    	        		//$scope.curProgress = Math.round(($scope.doneNum + $scope.failedNum) / $scope.progressTotal * 100) + "%";
+    	        		element.progress('notifierProgress2', Math.round(($scope.doneNum + $scope.failedNum) / $scope.progressTotal * 100) + "%")
+    	        	} else {
+    	        		//完成
+    	        		$scope.curProgress = "100%";
+    	        		////进度条渲染需要时间？？数据较少时执行完成还没渲染出来--改用定时器
+    	        		var finishInterval = setInterval(function() {
+    	        			if($(".layui-progress")[0]) {
+    	    	        		element.progress('notifierProgress2', "100%");
+    	    	        		clearInterval(finishInterval);
+    	        			}
+    	        		}, 200);
+    	        		$scope.progressDone2 = true;
+    	        		//去掉转圈
+    	        		$(".layui-layer-loading").hide();
+    	        	}
+            	});
+        	});
+        	
+        });
+    }
+    
+    //方案3
+    $scope.derive3 = function () {
+    	//先单线程
+    	var toSendList = [];
+    	var passList = [];
+    	for(var i=0;i<$scope.tableControl.rows.length;i++) {
+    		if($scope.tableControl.rows[i].select) {
+    			toSendList.push($scope.tableControl.allData[i]);
+    			//没有数据，原5，现先1
+    			if(1 == $scope.tableControl.allData[i].applyStatus) {
+    				passList.push($scope.tableControl.allData[i]);
+    			}
+    		}
+    	}
+    	if(1 > toSendList.length) {
+    		layer.alert("请选择需要生成证书的记录");
+    		return;
+    	}
+    	if(toSendList.length != passList.length) {
+    		layer.alert("只能对审核通过的记录进行证书生成");
+    		return;
+    	}
+    	layer.confirm("是否确认生成证书？", {
+            btn: ['确定', '取消'] 
+        }, function () {
+        	$scope.progressTotal = toSendList.length;
+        	$scope.doneNum = 0;
+        	$scope.failedNum = 0;
+
+    		layer.closeAll();
+    		var maskLoad = layer.load(1, {shade: [0.8, '#393D49']});
+        	//打开进度
+        	$scope.curProgress = "0%";
+        	$scope.progressShow3 = true;
+        	
+        	//弹出隐藏绘图层
+        	$("#toPrint3").remove();
+        	$("body").append("<div id='toPrint3'></div>");
+        	
+        	suitScreen($scope);
+
+    		var allCanvas = $("canvas");
+        	var zip = new JSZip();
+    	    //zip.file("readme.txt", "证书\n");
+    	    var img = zip.folder("images");
+
+    	    //图片加载是异步，所有用递归来做，否则前边生成的都会被最后一个覆盖
+        	(function loop(n) {
+        		if (n>=toSendList.length) return;
+        		
+                var image = new Image();
+                image.src = $scope.printObj.notifierObj.url;
+                image.onload = function () { //为异步函数,所以将创建canvas放在onload中.
+
+            		$("#toPrint3").empty();
+            		$("#toPrint3").append("<canvas id='toPrint_' class='printCanvas'></canvas>");
+            		$scope.printObj.paramList[0].objName = toSendList[n].studentName;
+            		$scope.printObj.paramList[1].objName = toSendList[n].applySchoolName;
+            		
+                    
+            		$("#toPrint_").css("margin-top", (0-$scope.printObj.notifierObj.height)/2+"px");
+                	var canvas = document.getElementById("toPrint_");
+                	canvas.width = $scope.printObj.notifierObj.width;
+                	canvas.height = $scope.printObj.notifierObj.height;
+                	var ctx = canvas.getContext("2d");
+                	ctx.drawImage(image, 0, 0, $scope.printObj.notifierObj.width, $scope.printObj.notifierObj.height);
+                	$.each($scope.printObj.paramList, function(index, e) {
+            			//canvas的字体不会有12px的兼容性问题
+            			ctx.font = "bold "+e.fontSize+"px "+e.fontFamily;
+            			//canvas写字以字体的左下角为基准，因而要再加一个字体大小的高度
+            			ctx.fillText(e.objName, e.left, e.top+e.fontSize);
+            		});
+                	img.file('录取通知书_' + toSendList[n].studentName + '.png', canvas.toDataURL().substring(22), {base64: true});
+            		$scope.doneNum++;
+            		//刷新成功和失败数量
+    	        	if(($scope.doneNum + $scope.failedNum) < $scope.progressTotal) {
+        	        	//更新进度
+    	        		//$scope.curProgress = Math.round(($scope.doneNum + $scope.failedNum) / $scope.progressTotal * 100) + "%";
+    	        		element.progress('notifierProgress3', Math.round(($scope.doneNum + $scope.failedNum) / $scope.progressTotal * 100) + "%")
+    	        	} else {
+    	        		//完成
+    	        		$scope.curProgress = "100%";
+    	        		var finishInterval = setInterval(function() {
+    	        			if($(".layui-progress")[0]) {
+    	    	        		element.progress('notifierProgress3', "100%");
+    	    	        		clearInterval(finishInterval);
+    	        			}
+    	        		}, 200);
+    	        		$scope.progressDone3 = true;
+    	        		//去掉转圈
+    	        		$(".layui-layer-loading").hide();
+    	        		
+    	            	zip.generateAsync({type:"blob"}).then(function(content) {
+    	        	        saveAs(content, "证书.zip");
+    	        	    });
+    	        	}
+                	
+                    loop(n+1);
+                }
+          })(0);
+
+
+        });
+    }
+    
+    $scope.closeProgress = function () {
+    	$scope.progressShow = false;
+    	$scope.progressDone = false;
+    	$scope.progressShow2 = false;
+    	$scope.progressDone2 = false;
+    	$scope.progressShow3 = false;
+    	$scope.progressDone3 = false;
+    	layer.closeAll();
+    }
+    
+  //模板
+    $scope.printObj = {
+		notifierObj:{
+			"url": "/res/img/notifications.png",
+			"height": "631",
+			"width": "942"
+		},
+		paramList:[{
+				"objName":"黄大明",
+				"left":"133",
+				"top":"191",
+				"fontSize": "28",
+				"fontFamily": "KaiTi"
+			},{
+				"objName":"SXXX小学",
+				"left":"460",
+				"top":"272",
+				"fontSize": "28",
+				"fontFamily": "KaiTi"
+			},{
+				"objName":"2018",
+				"left":"195",
+				"top":"312",
+				"fontSize": "28",
+				"fontFamily": "KaiTi"
+			},{
+				"objName":"8",
+				"left":"325",
+				"top":"312",
+				"fontSize": "28",
+				"fontFamily": "KaiTi"
+			},{
+				"objName":"31",
+				"left":"405",
+				"top":"312",
+				"fontSize": "28",
+				"fontFamily": "KaiTi"
+			}]
+    }
+    
+    function suitScreen($scope) {
+    	//A4横向标准
+    	var effectiveHeight = 1240;
+    	var effectiveWidth = 1754;
+        if($scope.printObj.notifierObj.width/effectiveWidth > $scope.printObj.notifierObj.height/effectiveHeight) {
+        	//取最接近的一个属性进行自适应，并适当调小一些
+        	var suitTimes = $scope.printObj.notifierObj.width/effectiveWidth*1.2;
+        } else {
+        	var suitTimes = $scope.printObj.notifierObj.height/effectiveHeight*1.2;
+        }
+        $scope.printObj.notifierObj.width = $scope.printObj.notifierObj.width/suitTimes;
+        $scope.printObj.notifierObj.height = $scope.printObj.notifierObj.height/suitTimes;
+        for(i=0;i<$scope.printObj.paramList.length;i++) {
+        	$scope.printObj.paramList[i].fontSize = $scope.printObj.paramList[i].fontSize/suitTimes;
+        	$scope.printObj.paramList[i].left = $scope.printObj.paramList[i].left/suitTimes;
+        	$scope.printObj.paramList[i].top = $scope.printObj.paramList[i].top/suitTimes;
+        }
+    }
+    
+    function _fixType(type) {
+    	//imgData是一串string，base64
+        type = type.toLowerCase().replace(/jpg/i, 'jpeg');
+        var r = type.match(/png|jpeg|bmp|gif/)[0];
+        return 'image/' + r;
+    }
+
+    function saveFile(data, filename) {
+    	var save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
+        save_link.href = data;
+        save_link.download = filename;
+       
+        //下载
+        var event = document.createEvent('MouseEvents');
+        event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        save_link.dispatchEvent(event);
+    }
+    
+    //方案3使用canvas先画好，然后批量打包保存
+    function drawNotifier($scope, id, img) {
+    	//canvas需要先定位好，否则画好再动就清除了
+    	//$("#toPrint").css("margin-left", (0-$scope.printObj.notifierObj.width)/2+"px");不可见元素，同样不考虑其左右缩进
+    	$(id).css("margin-top", (0-$scope.printObj.notifierObj.height)/2+"px");
+    	var canvas = document.getElementById(id.substring(1));
+    	canvas.width = $scope.printObj.notifierObj.width;
+    	canvas.height = $scope.printObj.notifierObj.height;
+    	var ctx = canvas.getContext("2d");
+    	var img=new Image();
+    	img.src = $scope.printObj.notifierObj.url;
+    	var deferred=$.Deferred();
+    	var thisObj = $scope.printObj;
+    	//img.onload=function() {
+    	requestAnimationFrame(function() {
+    		//需要onload方法接收，否则画不出
+    		ctx.drawImage(img, 0, 0, thisObj.notifierObj.width, thisObj.notifierObj.height);
+    		//写文字，且要在画好图片之后写，否则会被图片覆盖
+    		$.each(thisObj.paramList, function(index, e) {
+    			//canvas的字体不会有12px的兼容性问题
+    			ctx.font = "bold "+e.fontSize+"px "+e.fontFamily;
+    			//canvas写字以字体的左下角为基准，因而要再加一个字体大小的高度
+    			ctx.fillText(e.objName, e.left, e.top+e.fontSize);
+    		});
+			deferred.resolve(canvas.toDataURL().substring(22));
+    	})
+    	//}
+    	return deferred.promise();
+    	
+    }
 });

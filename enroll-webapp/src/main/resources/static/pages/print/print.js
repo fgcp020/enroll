@@ -146,7 +146,8 @@ var userName;
 
 function saveNotifier() {
 	//先转化为canvas,再转化为图片后保存
-	html2canvas(document.querySelector("#toPrint")).then(canvas => {
+	//html2canvas(document.querySelector("#toPrint")).then(canvas => {兼容IE
+	html2canvas(document.querySelector("#toPrint")).then(function(canvas) {
 	    //document.body.appendChild(canvas);
 		var type = 'png';//格式可以自定义
 		var imgData = canvas.toDataURL(type);

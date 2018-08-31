@@ -52,35 +52,6 @@
                             </div>
                         </div>
                     </div>
-                <!-- </div>
-                <div class="list_bar_row"> -->
-                    <!-- <div class="col-xs-3">
-                        <label class="layui-form-label">证件类型:</label>
-
-                        <div class="layui-input-block">
-                            <div class="layui-unselect layui-form-select">
-                                <div class="layui-select-title">
-                                    <input type="text" class="layui-input layui-unselect" readonly="readonly"
-                                           value=""
-                                           placeholder="全部" ng-model="param.certificates_type_name"/>
-                                    <i class="layui-edge"></i>
-                                </div>
-                                <dl class="layui-anim layui-anim-upbit">
-                                    <dd ng-repeat="item in [{'text':'居民身份证','id':1},{'text':'香港特区护照/身份证明','id':2},
-                                    {'text':'澳门特区护照/身份证明','id':3},
-                                    {'text':'台湾居民来往大陆通行证','id':4},
-                                    {'text':'境外永久居住证','id':5},
-                                    {'text':'护照','id':6},
-                                    {'text':'其他','id':7}]"
-                                        ng-click="param.certificates_type=item.id;param.certificates_type_name=item.text"
-                                        ng-class="{'layui-this':param.certificates_type_name == item.text}">
-                                        {{item.text}}
-                                    </dd>
-                                </dl>
-                            </div>
-                        </div>
-
-                    </div> -->
 
                     <div class="col-xs-2 search_item_min_wit">
                         <label class="layui-form-label search_label_min_wit">证件号码:</label>
@@ -102,11 +73,57 @@
                     <button class="btn btn-primary" ng-click="form_empty()">重置</button>
                     <button class="btn btn-primary" ng-click="toggleSwitch()" ng-if="superAdmin">{{switchText}}</button>
                     <button class="btn btn-primary" ng-click="sendMsg()" ng-if="superAdmin">发送短信</button>
-                    <!-- <button class="btn btn-primary" ng-click="derive()">导出学籍信息</button> -->
+                    <br>
+                    <button class="btn btn-primary" ng-click="derive()" style="margin-top: 20px;">生成证书（方案1）</button>
+                    <button class="btn btn-primary" ng-click="derive2()" style="margin-top: 20px;">生成证书（方案2）</button>
+                    <button class="btn btn-primary" ng-click="derive3()" style="margin-top: 20px;">生成证书（方案3）</button>
                 </div>
             </div>
         </div>
         <grid-table data-control="tableControl"></grid-table>
+        <!-- 进度 -->
+        <div class="progress_cls" ng-if="progressShow">
+	        <div class="layui-progress layui-progress-big" lay-filter="notifierProgress" lay-showpercent="yes">
+				<div class="layui-progress-bar" lay-percent="0%">
+				<!-- 解决数字不出来问题 -->
+					<span class="layui-progress-text">0%</span>
+				</div>
+			</div>
+			<div class="progress_stitistics_cls">
+				<div>总数：<span>{{progressTotal}}</span></div>
+				<div>成功：<span>{{doneNum}}</span></div>
+				<div>失败：<span>{{failedNum}}</span></div>
+			</div>
+			<button class="btn btn-primary" ng-click="closeProgress()" ng-if="progressDone">确定</button>
+        </div>
+        <!-- 进度2 -->
+        <div class="progress_cls" ng-if="progressShow2">
+	        <div class="layui-progress layui-progress-big" lay-filter="notifierProgress2" lay-showpercent="yes">
+				<div class="layui-progress-bar" lay-percent="0%">
+				<!-- 解决数字不出来问题 -->
+					<span class="layui-progress-text">0%</span>
+				</div>
+			</div>
+			<div class="progress_stitistics_cls">
+				<div>总数：<span>{{progressTotal}}</span></div>
+				<div>当前完成：<span>{{doneNum}}</span></div>
+			</div>
+			<button class="btn btn-primary" ng-click="closeProgress()" ng-if="progressDone2">确定</button>
+        </div>
+        <!-- 进度3 -->
+        <div class="progress_cls" ng-if="progressShow3">
+	        <div class="layui-progress layui-progress-big" lay-filter="notifierProgress3" lay-showpercent="yes">
+				<div class="layui-progress-bar" lay-percent="0%">
+				<!-- 解决数字不出来问题 -->
+					<span class="layui-progress-text">0%</span>
+				</div>
+			</div>
+			<div class="progress_stitistics_cls">
+				<div>总数：<span>{{progressTotal}}</span></div>
+				<div>当前完成：<span>{{doneNum}}</span></div>
+			</div>
+			<button class="btn btn-primary" ng-click="closeProgress()" ng-if="progressDone3">确定</button>
+        </div>
     </div>
     
     <!-- layer弹窗 -->
